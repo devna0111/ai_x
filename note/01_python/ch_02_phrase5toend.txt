@@ -95,7 +95,10 @@
 	: strip(), split(), replace()는 정말 손발보다 많이 사용하더라.
 	: replace(old, new, 횟수) 이것도 진짜 알면 쓸모가 많은 듯
 
-7절 시간, 날짜, 날짜시간 다루기
+7절 시간, 날짜, 날짜시간 다루기 datetime, date, time
 	: datetime 라이브러리의 datetime 함수를 사용해 strftime으로...
+	datetime(년, 월, 일, 시, 분, 초)
+	지금 : datetime.now()
+	: 연산을 통해 시간의 흐름을 표현할 수 있음!
 
 
