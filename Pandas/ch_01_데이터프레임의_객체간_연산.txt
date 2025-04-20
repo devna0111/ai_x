@@ -1,0 +1,20 @@
+pandas
+
+DataFrame 구조를 사용할 수 있다.
+df = pandas.DataFrame(data=data,index=[row],column=['col'])
+
+크게 7가지 종류의 연산을 지원한다.
+
+1. 덧셈 df.add(df2)
+2. 뺄셈 df.sub(df2)
+3. 곱셈 df.mul(df2)
+4. 나눗셈 df.div(df2)
+5. 나머지 df.mod(df2)
+6. 거듭제곱 df.pow(df2)
+7. 행렬곱 df.dot(df2)
+
+특이한 점으로
+1 - 6 까지는 인수 자리가 맞지 않는 구조의 연산 시 fill_value를 통해 원하는 자리의 값만 연산시키는 등의 행동이 가능하다.
+
+행렬곱은 수학적 의미와 동일하며
+(i * j) 8 (j * k) = i*k 형태로 반환된다.
