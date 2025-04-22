@@ -1,0 +1,34 @@
+1. *.txt
+	김회원, 33, 아무동9
+	이회원, 22, 무시기동8
+
+2. pickle 파일 (*.data) : 객체 리스트 저장, 머신러닝 모델을 저장할 수 있음. 
+=> 학습된 모델을 저장하고 필요 시 마다 모델을 불러와서 사용하기  위함
+
+3. *.csv
+	name,age,address
+	'김회원',33,'아무동9'
+	'이회원',22,'무시기동8' 
+
+-> pandas 의 DataFrame과 정말 비슷하다
+
+4. *.json
+	딕셔너리 타입의 정보를 리스트에 담아서 사용하는 javascript식 파일 ↓
+[ {"name": "홍길동","age": 20,"email": "h@h.com","address": "서울"},
+ {"name": "김길동","age": 30,"email": "k@h.com","address": "부산"},
+ {"name": "신길동","age": 40,"email": "s@h.com","address": "안양"}]
+
+5. *.h5 혹은 *.hdf5 (=> 딥러닝 모델 저장용, keras형태도 가능하다..)
+	HDVview로 읽을 수 있음 : 실제로 확인을 하는 경우는 드물지만 잘 저장되어있는 지 체크용
+
+6. *.xml
+	<customer>
+		<name>김회원</name>
+		<age>33</age>
+		<address>아무동9</address>
+	</customer>
+	<customer>
+		<name>이회원</name>
+		<age>22</age>
+		<address>아무동9</address>
+	</customer>
