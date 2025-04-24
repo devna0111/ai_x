@@ -1,3 +1,4 @@
+name,phone,email,age,grade,etc
 홍길동,010-1111-9999,hong@naver.com,23,5,-
 홍길동,010-2222-9999,hongs@naver.com,27,5,-
 홍길동,010-3333-9999,hongs@naver.com,27,5,-
@@ -5,4 +6,3 @@
 신길동,010-2244-6688,kims@naver.com,37,2,없음
 신길동,010-3344-6688,kims@naver.com,37,2,없음
 신림동,010-1133-5577,sims@naver.com,73,4,까칠해
-정종혁,010-7621-5728,whdgur@naver.com,30,3,없음
