@@ -1,0 +1,8 @@
+1. 판다스 패키지 
+    - 데이터 분석을 위해 반드시 알아야 할 패키지. numpy 기반으로 여러 라이브러리와 호환성이 좋음.
+    
+2. DataFrame 활용
+    1) 딕셔너리 데이터 -> DataFrame(데이터)
+    2) 리스트 데이터 -> DataFrame(데이터, columns = 컬럼리스트)
+    3) pd.read_csv(파일주소, encoding = 인코딩 정보, comment = '#주석날리기', skiprows=[스킵할 로우 리스트], nrows = n n개만 가져오기, sep = ',', parse_date = [컬럼명] # 컬럼명 속 데이터가 datetime64[ns] 변환이 가능하면 변환해라)
+    4) 패키지에서 가져오기
