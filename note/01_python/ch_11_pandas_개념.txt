@@ -1,0 +1,37 @@
+1. 판다스 패키지 
+    - 데이터 분석을 위해 반드시 알아야 할 패키지. numpy 기반으로 여러 라이브러리와 호환성이 좋음.
+    
+2. DataFrame 활용
+    1) 딕셔너리 데이터 -> DataFrame(데이터) {'col' : [cols], 'col' : [cols]} 형태
+    2) 리스트 데이터 -> DataFrame(데이터, columns = 컬럼리스트) [{한 행씩 딕셔너리 형태}]
+    3) pd.read_csv(파일주소, encoding = 인코딩 정보, comment = '#주석날리기', skiprows=[스킵할 로우 리스트], nrows = n n개만 가져오기, sep = ',', parse_date = [컬럼명] # 컬럼명 속 데이터가 datetime64[ns] 변환이 가능하면 변환해라)
+    4) 패키지에서 가져오기
+    
+3. df.columns = [컬럼들 이름] ** 컬럼들 이름은 개수가 맞아야 변경이 가능하다. (index 버젼은 columns 대신 index 사용하면 그대로 사용 가능)
+    -> df.columns.name = 'name' : 컬럼들 목록의 이름
+    -> df.columns = [[1차 속성 부여], [속성 이름 부여]]
+    -> df.columns.names = [1차속성부여 구분, 속성이름부여 구분]
+    
+4. 데이터 조회하기
+    - member['열 이름'] 특정열 => 여러줄 조회는 [ [열1, 열2...] ]
+    - member[조건] ** 이중조건 삼중조건은 | 혹은 & 연산으로 가능(and, or는 불가)
+    - member.loc[행 이름, 열 이름:열이름] 슬라이싱 가능
+    - member.iloc[행 번호(인덱스), 열 번호(인덱스)]
+
+5. 데이터프레임 추가
+    ** 열
+    - 방법1 : df[추가할열이름] = [추가할 내용] * 개수 일치 중요
+    - 방법2 : 시리즈 추가 : df[추가할열이름] = pd.Series([데이터], index=[붙일 인덱스 설정])
+    
+    ** 행
+    - concat 후 reset_index(drop =True)
+    
+6. 데이터프레임 삭제
+    df.drop(label, axis) => 연습 필요
+
+7. df1.merge(df2, axis, how = 'inner') : 공통 특성에 따라 데이터를 axis = 0 축 또는 axis=1 축으로 병합(공통부분) _ left, right에 따라 기준값 달라짐
+    => 인덱스 넘버를 설정하지 않았으면 인덱스 넘버로 붙여주는 게 더 깔끔함(df.merge(df2, left_on='',right_on='') == pd.concat(df,df1,axis=1)
+    
+8. sort_index(axis) index,column에 따라 정렬
+    sort_values(by=[1차조건, 2차조건], ascending=[T(오름차순),F(내림차순)] => 조건에 따른 T,F)
+    
