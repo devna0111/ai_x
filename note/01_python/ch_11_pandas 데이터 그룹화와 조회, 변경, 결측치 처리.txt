@@ -1,0 +1,29 @@
+1. 데이터 그룹화
+    1) df.groupby(by = [그룹핑할열])[[함수를 적용해서 출력할 열의 이름들]].기초통계함수()
+    2) df.pivot_table(index = [그룹핑할열], values = [함수를 적용해서 출력할 열들], aggfunc = 함수(기본값:mean), columns = [행에서 열로 고정할 도메인])
+
+2. 레이블 인코딩
+      sklearn의 LabelEncoder 객체를 사용하여 fit_transform함수를 이용, 자동 생성
+      
+      from sklearn.preprocessing import LabelEncoder
+        le = LabelEncoder() # 객체 생성
+        iris['target'] = le.fit_transform(iris.species)
+        iris.iloc[::25]
+        
+3. 데이터 구조 변경(롱이 피벗테이블)
+    1) melt()로 언피벗팅 => 와이드포멧을 롱포멧으로
+        airquality_melted = airquality.melt(id_vars = [고정할 열], var_name='변수명', # default variable, value_name='값') # default : value
+    2) pivot_table() 을 이용한 피벗팅 => 롱포멧을 와이드포멧으로
+        df.pivot_table(index = [그룹핑할열],
+                  values = [함수를 적용해서 출력할 열들],
+                  columns = ['기존 행에서 열로 묶을 기준'], 
+                   aggfunc = 함수(기본값:mean))
+
+4. 데이터프레임에 함수 적용시키기
+    1) apply(func, axis) : map과 동일한 형태로 1차원에서 활용이 가능하다. 현재 차원에서 1개 낮은 차원에서 적용한다고 이해
+    2) applymap(func) : 모든 요소 하나하나 func를 적용
+
+5. 일괄 변경하기(결측치, 특정값)
+    1) fillna(method, value, limit) : value => 결측치를 바꿀 값(딕셔너리 형태로 작동 가능, df.mean(axis=0)으로 데이터프레임의 기초통계연산결과도 적용,
+        method = 'ffill' or 'bfill' 결측치를 ffill 이전값 bfill 이후값, limit 바꿀 결측치 개수
+    2) 특정값 대체 : replace(old, new) 사용 가능
