@@ -1,0 +1,28 @@
+1. matplotlib : 시각화 패키지의 가장 기초 토대로 활용 가능
+    %matplotlib inline => 구버젼에서 쥬피터 노트북 자체에서 그래프가 출력되지 않을 때 
+    %config InlineBackend.figure_format='retina' => 이미지를 저장할 때 고화질로 활용하기 위해
+    한글설정 : plt.rc('font' , family = 'Malgun Gothic') => 폰트는 영문명이 맞으면 사용할 수 있음
+    
+    1) 그래프 그리기
+        데이터 준비 -> 그래프 객체 생성 -> 그래프 함수로 그리기(plot, scatter, hist, boxplot, bar, barh, violinplot) -> 그래프 커스터마이징 -> 출력
+     
+    2) 그래프 영역 나누기
+         -1) subplot() 함수 활용 :: subplot(전체화면 가로개수, 전체화면 세로개수, 위치 할당)
+             plt.figure(figsize=(8,6))
+             # subplot(전체화면 가로개수, 전체화면 세로개수, 위치 할당)
+             plt.subplot(2,1,1) ; plt.plot(x, np.sin(x))
+             plt.subplot(2,2,3) ; plt.plot(x, np.cos(x))
+             plt.subplot(2,2,4) ; plt.plot(x, np.sin(x)*np.cos(x))
+             
+         -2) subplots() 함수 활용 :: fig, axes = plt.subplots(nrows = n, ncols = n, figsize=(10,10))
+             아래와 같이 활용 가능
+             axes[0,0].plot(x,y) # 0,0 자리에 x,y로 구성된 plot을 그려라
+             axes[0,1].scatter(x,y) # 0,1 자리에 산점도를 그려라
+             axes[1,0].hist(x) # 1,0 자리에 히스토그램(도수분포표) 그려라
+             axes[1,1].boxplot(x) # 1,1 자리에 박스플롯을 그려라
+             
+     3) 그래프에 수평선, 수직선 그리기
+          수평선 : plt객체.axhline(좌표, 커스터마이징)
+          수직선 : plt객체.axvline(좌표, 커스터마이징)
+          
+     4) 커스터마이징 함수활용(text(), annotate()... 등등)
