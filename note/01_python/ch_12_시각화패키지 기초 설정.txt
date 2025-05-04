@@ -1,0 +1,20 @@
+
+    # 시작전 설정
+    import matplotlib.pyplot as plt
+    import numpy as np
+    %matplotlib inline
+    %config InlineBackend.figure_format='retina'
+    #한글설정
+    plt.rc('font', family='Hancom Gothic') #plt.rc('font', family='AppleGothic') #mac
+    # plt.rcParams['font.fammily'] = 'Malgun Gothic'
+    
+    # 축의 '-'' 글자가 깨질 때 사용 ↓
+    plt.rc('axes', unicode_minus=False)
+    
+    # 개별 폰트 설정을 위한 방법
+    from matplotlib.font_manager import FontProperties
+    font_path = r'C:\Windows\Fonts\YES24MyoungjoR.ttf' # 폰트 파일 주소
+    font_prop = FontProperties(fname=font_path)
+
+    # 위 객체 font_prop을 텍스트 객체,함수(text,annotate)의 fontproperties = 할당
+    

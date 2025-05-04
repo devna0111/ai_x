@@ -1,0 +1,14 @@
+2. seaborn : matplotlib 기반의 2세대 시각화 패키지. pandas 내부에 포함되어 있어 df.plot(kind='') 형태로 그래프를 그릴 수 있다.
+
+    - 그래프 속성 설정 : sns.set()
+        1. style = white, dark, whitegrid, darkgrid, ticks 등 그래프 기본 형태를 결정
+        2. context = notebook, poster, papaer, talk 비율을 설정. notebook(기본값) or paper(0.8), talk(1.3)
+        3. palette = 'Dark2', 'Set1' 등 공식 홈페이지 팔레트 설정 활용 => 그래프의 색 속성 추가 가능
+        
+    - 그래프의 종류 :
+        1. 관계형 그래프 : scatterplot, lineplot => x축이 수치형 데이터
+        2. 범주형 그래프 : x축이 범주(종류)형 데이터
+        3. 쌍관계 그래프 : pairplot => 데이터프레임에 포함된 모든 수치형 변수 쌍에 대해 산점도(scatter)와 도수분포표(histogram)
+        4. 밀도 그래프 : histplot 도수분포표
+        5. 회귀 그래프 : regplot, lmplot => 점산도에서 가장 적합한 회귀선형 그래프 도출
+        6. Facelet : 밀도, strip 그래프를 표현
