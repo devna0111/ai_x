@@ -8,6 +8,10 @@ ch_12_seaborn_기본함수들
 
 3) 그래프 함수
 	- a. 관계형 그래프 : scatterplot, lineplot => relplot(서브플롯) : 
+        sns.relplot(data = df_map, x = '연도', y = '평당분양가격', hue = '지역명', kind = 'line', col = '지역명', col_wrap=4,  facet_kws = {'sharex' : False, 'sharey' : True}) => 그리는 방법
+        ax.fig.set_size_inches(10,10) => 사이즈 조절하기
+        plt.tight_layout() # 서브플롯 레이아웃 타이트하게 조정
+        
 		relplot은 겹쳐그리기가 되지 않음. map_dataframe을 사용해서 흉내는 낼 수 있지만 그래프 색 등의 세부 설정이 몹시 까다로움
 
 	- b. 범주형 그래프
