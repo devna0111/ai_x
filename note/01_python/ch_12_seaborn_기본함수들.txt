@@ -28,7 +28,11 @@ ch_12_seaborn_기본함수들
 
 
 	- c. 쌍관계 그래프 : 모든 수치형 변수에 대해 산점도(iris 기준 petal_length, petal_width, sepal_length, sepal_width)
-	- d. 밀도 그래프 : histplot(), displot()
+	- d. 밀도 그래프 : 
+    histplot() : sns.histplot(data = df_map, x = '평당분양가격')
+    displot() : sns.displot(data = df_map, x = '평당분양가격', kde = True, rug = True)
 	- e. 회귀 그래프 : regplot => lmplot(서브플롯)
 
 4) 다중 그래프를 위한 FacetGrid 클래스
+
+ax.fig.set_size_inches(10,10)
