@@ -1,0 +1,46 @@
+<head> : meta, title, style, script... 1장 1번 파일 체크
+=> 홈페이지 이름 정도..
+<style>
+	table{background-color : 원하는색 ;
+	padding{}
+</style>
+
+<body> : script
+=> 본문 작성.
+
+<br /> 줄 바꿈
+&nbsp; 스페이스
+
+<h></h> 제목 태그
+<del></del> 취소선 태그
+<i></i> 이태릭체 태그
+<b></b> 볼드체 태그
+<p></p> 단락 구분 태그
+<pre></pre> 태그 속 내용을 그대로 출력
+<a href = 'http://www.naver.com'> </a> href로 이동
+	1. http:// 사용 시 인터넷 경로
+	2. 특정 파일은 파일 주소를 기입하면 가능
+	3. id 부여 후 #id를 기입해 이동이 가능
+
+=> 큰 덩어리의 head, body, script를 나누어서 활용.
+
+<!-- --!> : HTML 주석
+// 자바스크립트 주석
+/**/ 자바스크립트 다문장 주석
+
+css 파일 가져오기 : <link href = '이름'> 1장 2번 파일 체크
+
+    <style>
+        span {color : red;}
+    </style>
+
+span => 스타일 태그 만드는 방법
+
+순서가 있는 목록 태그
+<ol></ol>
+<li></li>
+
+순서가 중요하지 않는 목록 태그
+<ul></ul>
+<li></li>
+

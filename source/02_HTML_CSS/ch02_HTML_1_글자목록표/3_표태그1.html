@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>표태그1</title>
+    <style>
+        table {background-color : #000000 ;}
+        tr {background-color : #FFFFFF}
+        td {
+            padding: 5px 10px /* 안여백 지정 : 위쪽 오른쪽 아래쪽 왼쪽 */ ;
+            width : 150px; /* 가로사이즈 */
+            text-align : center ; /* 글씨 셀 가운데로 */
+        }
+    </style>
+</head>
+<body>
+    <table border="0">
+        <!-- 기본 값은 칸이 없음-->
+        <caption><b>병합이 없는 기본 테이블</b></caption> <!-- 표 이름 설정 -->
+        <tr>
+            <td>
+                1행 1열
+            </td>
+            <td>
+                1행 2열
+            </td>
+            <td>
+                1행 3열
+            </td>
+            <td>
+                1행 4열
+            </td>
+        </tr>
+        <tr>
+            <td>
+                2행 1열
+            </td>
+            <td>
+                2행 2열
+            </td>
+            <td>
+                2행 3열
+            </td>
+            <td>
+                2행 4열
+            </td>
+        </tr>
+        <tr>
+            <td>
+                3행 1열
+            </td>
+            <td>
+                3행 2열
+            </td>
+            <td>
+                3행 3열
+            </td>
+            <td>
+                3행 4열
+            </td>
+        </tr>
+    </table>
+
+
+    <table border="0">
+        <!-- 기본 값은 칸이 없음-->
+        <caption><b>병합이 있는  테이블</b></caption> <!-- 표 이름 설정 -->
+        <tr>
+            <td rowspan="2"><b>1행1열<br /> 2행 1열</b></td>
+            <td>1행2열</td>
+            <td>1행3열</td>
+            <td>1행4열</td>
+        </tr>
+        <tr>
+            <td colspan="2">2행2열, 2행 3열</td> <!-- colspan : 열 병합 -->
+            <td>2행4열</td>
+        </tr>
+        <tr>
+            <td>3행1열</td>
+            <td>3행2열</td>
+            <td>3행3열</td>
+            <td>3행4열</td>
+        </tr>
+    </table>
+</body>
+</html>
