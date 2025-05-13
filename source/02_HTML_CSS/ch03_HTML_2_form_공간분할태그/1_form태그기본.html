@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>form 태그 기본</title>
+    <style>
+        td{text-align : center ;
+               padding : 5px 10px;
+               
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="memo" /> <!-- 전달될 파라미터 input은 form 안에 있어야 전달된다.-->
+    <form action="http://www.daum.net" method="get">
+        <!-- method="get"  : 256문자 이하, 공개적인 정보 전달 시 활용-->
+        <!-- method="post"  : 256문자 이상, 정보를 숨겨서 전달 시 활용-->
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td> <input type="text" name="uid" /> </td> <!-- name 파라미터 네임이 없으면 action으로 전달이 되지 않는다-->
+                <!-- value : 화면에 보여줄 값 지정 가능-->
+            </tr>
+            <tr>
+                <td>패스워드</td>
+                <td> <input type="password" name="upw" /> </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="로그인" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

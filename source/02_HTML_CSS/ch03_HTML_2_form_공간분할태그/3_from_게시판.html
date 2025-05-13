@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>게시판</title>
+    <style>
+        table { border-collapse : collapse ;} /* 전체 표의 각 선 성분을 끊어서 보기위한 속성 부여 */
+        td, th{background-color : white;
+               padding: 5px 10px;
+        }
+        tr {
+            border-top: 1px solid green;
+            border-bottom: 1px solid green;
+        }
+    </style>
+    <script>
+        /*def chk() : */
+        function chk() {
+            // submit이 안일어나는 조건 : name.value.length < 2, title.value가 빈 스트링
+            if (!frm.title.value.length) {
+                alert('제목을 반드시 기입하세요.');
+                frm.title.focus();
+                return false; // submit 이벤트 제한
+            } else if (frm.name.value.length < 2) {
+                alert('작성자명은 2글자 이상 기입하셔야합니다.');
+                frm.name.focus();
+                return false; // submit 이벤트 제한
+            } else if (frm.contents.value.length < 10) {
+                alert('본문은 10글자 이상 기입하셔야합니다.');
+                frm.contents.focus();
+                return false; // submit 이벤트 제한
+            }
+            return true; 
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return chk()" name="frm">
+        <table>
+            <caption><h1>게시판</h1></caption>
+            <tr>
+                <td>제목</td>
+                <td>
+                    <input type="text" name="title" placeholder="필수 입력 사항" /> <!-- required="required"-->
+                </td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="name" placeholder="2글자 이상 필수 입력" /></td>
+            </tr>
+            <tr>
+                <td>본문내용</td>
+                <td><textarea name="contents" rows="5"  cols="22" placeholder="본문은 최소 10글자 이상 작성" ></textarea></td>
+            </tr>
+            <tr>
+                <td>첨부파일</td>
+                <td>
+                    <input type="file" name="file" />
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                <input type="submit" value="글쓰기" /> 
+                <input type="reset" value="초기화" />
+                </th>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

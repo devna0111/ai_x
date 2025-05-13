@@ -1,0 +1,7 @@
+ch03_ form태그, 공간분할태그 HTML_II 교안 확인 
+
+<div></div> 를 활용해서 홈페이지의 header, contents, footer로 나누어서 보통 활용
+<div id='header> </div> 형태로 활용
+
+# 시멘틱 태그
+header, nav, section, footer, article(글 많을 때 쓰는), aside(사이드바)

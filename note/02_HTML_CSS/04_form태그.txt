@@ -1,0 +1,57 @@
+ch03_ form태그, 공간분할태그 HTML_II 교안 확인
+
+CSS 표 속성 부여 예시 1
+<style>
+    table { border-collapse : collapse ;} => 전체 표의 각 선 성분을 끊어서 보기위한 속성 부여
+    td, th{background-color : white; => 배경 색깔 부여
+           padding: 5px 10px; => 여백(마진) 부여
+    }
+    tr { => tr(열 기준) 박스의 위 아래 라인에 색 부여
+        border-top: 1px solid green;
+        border-bottom: 1px solid green;
+    }
+</style>
+
+
+조건문을 포함한 함수의 정의 자바스크립트 버젼
+<script>
+    function chk() {
+        if (frm.id.value.length < 3) {
+            alert('아이디는 3글자 이상 필요합니다.');
+            frm.id.focus();
+            return false;
+        } else if (frm.pw.value != frm.pwChk.value) {
+            alert('비밀번호가 동일하지 않습니다.');
+            frm.pwChk.focus();
+            return false;
+        } return true;
+    }
+</script>
+
+
+form 태그와 fieldset으로 멋지게 엮어내기
+
+    <form name="frm"> => 함수 적용을 위해 이름 부여
+        <fieldset> => 필드를 묶어서 멋지게 보여줌
+            <legend>필수입력</legend> => 멋진 필드 설명(caption인데 멋진 caption)
+            <table>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="name" placeholder="이름은 2글자 이상"
+                               autofocus="autofocus"/></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+
+
+if 연락처.name = tel :
+<label for="tel">연락처</label>
+
+<label for="tel">연락처</label> : <input type="tel" name='tel' id="tel"
+                         required="required" placeholder="000-0000-0000/xx-xxx-xxxx"
+                          pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" => 정규표현식을 사용해서 판별 가능
+                          title="전화번호 형식은 000-0000-0000" => 잘못된 기입 시 title 내용 출력
+                          autofocus="autofocus"/> => 화면 활성화 시 자동 포커스
+                        </li>

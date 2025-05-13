@@ -1,0 +1,31 @@
+ch03_ form태그, 공간분할태그 HTML_II 교안 확인
+-form, input
+
+<body>
+    <form action="목적지" method="get"> => "목적지" 로 결과 전달 // method : get, post
+	<input type="password" name="upw" /> => 입력받는 칸 생성, type 과 name이 있어야 form 활용가능
+	<input type="text" name="id" size="9" required="required" placeholder="필수입력사항(입력전에 보이는 도움말)"/>
+	<input type="button" value="중복체크" />
+	<input type="submit" value="로그인" /> => form의 액션 제출 시행
+</body>
+
+
+input type
+text, number, tel, password, file, email, radio, checkbox, date, color, range(슬라이드바)
+
+select 방식 1. 단일 값
+<select name='nation'>
+	<option>옵션값1 설정</option>
+	<option>옵션값2 설정</option>
+</select>
+
+select 방식 2. 복수 값
+<select name='nation' multiple = 'multiple'>
+	<option>다중옵션값1 설정</option>
+	<option>다중옵션값2 설정</option>
+	<option>다중옵션값3 설정</option>
+	<option>다중옵션값4 설정</option>
+</select>
+
+textarea 방식 : 텍스트박스 생성
+ <textarea name="intro" rows="3" cols="25"></textarea>

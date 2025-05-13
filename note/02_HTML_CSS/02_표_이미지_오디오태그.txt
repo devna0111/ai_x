@@ -17,3 +17,8 @@ img 태그
 	3. width, height 설정 가능
 
 audio 태그
+<audio src = '주소' preload='오디오를 재생하기 전에 모두 불러올지' controls = '오디오 재생 도구를 출력할 지 지정' loop = '오디오를 반복할 지 지정'></audio>
+
+loop = 'loop' 설정 시 정지할 때 까지 오디오 무한 반복
+
+<audio controls = '오디오 재생 도구를 출력할 지 지정' loop = '오디오를 반복할 지 지정'><source src = '주소지정'/><audio>
