@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta charset="utf-8" />
+        <title>혼합 선택자</title>
+        <style>
+                div {
+                        border: 1px solid gray;
+                }
+
+                div#header { /* 혼합선택자는 태그선택자와 id 선택자를 혼합 */
+                        width: 600px;
+                        margin: 0 auto;
+                        background-color: #FFD800;
+                        text-align: center;
+                }
+
+                #wrap {
+                        text-align: center; /* 글씨나 img 모두 가운데 정렬*/
+                        width: 600px;
+                        margin: 0 auto;
+                        overflow: hidden; /* 내 자식 태그에만 float 기능을 활성화 하겠다 */
+                }
+
+                        #wrap #contents {
+                                float: left;
+                                width: 348px; /* contents 영역 600px 중 350px 사용, border 1px씩 체크 => 350 - 2*/
+                                height: 230px;
+                                background-color: #66DBF6;
+                        }
+
+                        #wrap #banner {
+                                float: left;
+                                width: 248px; /* contents 영역 전체 600px 중 250px 사용, border 1px씩 체크 => 250 - 2*/
+                                height: 230px;
+                                background-color: #66DBF6;
+                        }
+
+                        #wrap #contents li.odd { /* 태그 선택자와 class선택자를 같이 */
+                                font-size: 1.2em; /* 글자를 1.2배 */
+                        }
+
+                        #wrap #contents li.menu1, li.menu2 {
+                                font-weight: bold;
+                        }
+
+                        #wrap #banner img {
+                                height: 100px;
+                                width: 200px
+                        }
+
+                #footer {
+                        clear: both; /* float 기능(div,시멘틱태그 전부 무시하고 붙어버림) clear하기 */
+                        width: 600px;
+                        margin: 0 auto;
+                        background-color: #FFD800;
+                        text-align: center;
+                }
+        </style>
+</head>
+<body>
+        <div id="header">
+                <h1>HEADER</h1>
+        </div>
+        <div id="wrap">
+                <div id="contents">
+                        <h2>content</h2>
+                        <ul>
+                                <li class="menu1 odd">menu1</li>
+                                <li class="menu2 even">menu2</li>
+                                <li class="menu3 odd">menu3</li>
+                                <li class="menu4 even">menu4</li>
+                                <li class="menu5 odd">menu5</li>
+                        </ul>
+                </div>
+                <div id="banner">
+                        <h2>BANNER</h2>
+                        <img src="ch04/logo.png" / alt="고용노동부 로고">
+                </div>
+        </div>
+        <div id="footer">
+                <h1>FOOTER</h1>
+        </div>
+</body>
+</html>

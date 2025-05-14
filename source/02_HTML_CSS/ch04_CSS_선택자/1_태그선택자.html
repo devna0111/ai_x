@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>태그선택자</title>
+        <style> /* CSS는 위에서부터 아래로 차례차례 적용 */
+                header, footer {
+                        color : blue; /* 글자색 */
+                        border : 1px solid gray; /* border 1px짜리 회색 외곽선*/
+                }
+                h1{
+                        border : 1px solid red;
+                        margin : 1px; /* 밖 여백 : 위 오른쪽 아래 왼쪽 모두 0px*/
+                }
+                li, p {
+                        color : red; /* 글자색 */
+                        background-color : pink ;
+                        font-weight : bold ; /* 글씨 두껍게 */
+                        margin : 5px;
+                }
+                p{
+                        color:gray;
+                }
+        </style>
+</head>
+<body> <!-- 사이트를 만들 때는 프레임을 먼저 잡고 내용을 채워가는 것이 편리 -->
+        <header>
+                <h1> ** 주식회사 </h1>
+        </header>
+        <nav>
+                <ul>
+                        <li>회사소개</li>
+                        <li>서비스소개</li>
+                        <li>고객센터</li>
+                        <li>공지사항</li>
+                </ul>
+        </nav>
+        <section>
+                <p>
+                        0. 선택자란? HTML 문서 중 특정 부분을 선택하여, 해당 부분의 속성을 변경하는 목적으로 사용(CSS를 사용하는 이유, Javascript, jQuery등에서도 사용)1.	tag 선택자란? 특정 태그를 선택하여 CSS속성을 적용할 수 있다2.	* 선택자? 전체라는 의미의 * 선택자를 사용하면 문서 전체를 선택하는 의미가 있다3.	id(#)와 class(.) : 태그의 id와 clas를 이용하여 CSS에 속성을 설정할 수 있다
+                </p>
+        </section>
+        <footer>
+                <p>서울시 땡떙구 뭐뭐로 99 무슨빌딩 901호</p>
+        </footer>
+</body>
+</html>

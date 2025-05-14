@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>객실안내</title>
+        <style>
+                div#wrap {
+                        width : 400px ;
+                        margin : 10px auto ;
+                }
+                #wrap #header {
+                        color:#FFA100;
+                        text-align : center;
+                        border-bottom : 2px solid #CECECE ;
+                }
+                div#section h4[title^='남자']{
+                        background : url('ch04/man.png') no-repeat;
+                        padding : 0 0 0 33px;
+                }
+                div#section h4[title^='여자'] {
+                        background: url('ch04/woman.png') no-repeat;
+                        padding-left: 33px;
+                }
+                #wrap a[href$='docx'], #wrap a[href$='doc'] {
+                        background:url('ch04/word.png') right no-repeat ;
+                        padding-right : 33px;
+                }
+                #wrap a[href$='xlsx'], #wrap a[href$='xls'] {
+                        background: url('ch04/excel.png') right no-repeat;
+                        padding-right: 33px;
+                }
+                #wrap #section ul.다운로드 {
+                        list-style: none;
+                        padding: 5px 15px;
+                        text-decoration: none; /* a 태그 밑줄 없애기*/
+                }
+                        #wrap #section ul.다운로드 li {
+                                padding: 5px;
+                        }
+                #wrap #footer{
+                        text-align : center;
+                        padding-top : 25px ;
+                        color: #a5a3a5;
+                        border-top : 1.5px solid #CECECE;
+                        font-size : .8em;
+                }
+
+        </style>
+</head>
+<body>
+        <div id="wrap">
+                <div id="header"><h1>객실안내</h1></div>
+                <div id="section">
+                        <h4 title="남자도미토리"> 남자 도미토리 </h4>
+                        <ul>
+                                <li>공동 취사실 및 욕실(화장실) 사용</li>
+                                <li>1인 20,000원(비수기), 25,000원(성수기)</li>
+                        </ul>
+                        <h4 title="여자도미토리"> 여자 도미토리 </h4>
+                        <ul>
+                                <li>취사 기구 완비 실내 욕실(화장실) 사용</li>
+                                <li>1인 30,000원(비수기), 40,000원(성수기)</li>
+                        </ul>
+                        <ul class="다운로드">
+                                <li><a href="ch04/intro.docx" class="docx">유의사항 다운로드</a></li>
+                                <li><a href="ch04/intro.xlsx" class="xlsx">객실자료 다운로드</a></li>
+                        </ul>
+                </div>
+                <div id="footer">
+                        서울시 마포구 노고산동 그랜드빌딩 704호
+                </div>
+        </div>
+</body>
+</html>

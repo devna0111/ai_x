@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta charset="utf-8" />
+        <title>문자선택자</title>
+        <style>
+                #wrap {
+                        margin: 0 auto;
+                        width: 600px;
+                }
+
+                #header {
+                        text-align: center;
+                }
+
+                #contents {
+                        border-block: 2px solid lightgray;
+                        font-size: 12px;
+                }
+                #contents ul li a{
+                        text-decoration : none;
+                        color :blueviolet;
+                        font-size: 24px;
+                }
+                #contents ul li a:after{
+                        content:'-' attr(href);
+                }
+                #contents li:not(.shop){/* 부정선택자 */
+                                       background-color : yellow;
+                }
+                #footer {
+                        overflow: hidden;
+                }
+
+                        #footer ul li {
+                                list-style: none;
+                                float: left;
+                                padding: 15px;
+                        }
+
+                                #footer ul li:first-child {
+                                        padding-top: 20px
+                                }
+        </style>
+</head>
+<body>
+        <div id="wrap">
+                <div id="header"><h2>제목이나 회사명</h2></div>
+                <div id="contents">
+                        <ul>
+                                <li><a href="http://www.naver.com" target="_blank">네이버</a></li>
+                                <li><a href="http://www.google.com" target="_blank">구글</a></li>
+                                <li class="shop"><a href="http://www.coupang.com" target="_blank">쿠팡</a></li>
+                                <li><a href="http://www.jobplanet.com" target="_blank">잡플래닛</a></li>
+                                <li><a href="http://www.daum.net" target="_blank">다음</a></li>
+                        </ul>
+                </div>
+                <div id="footer">
+                        <ul>
+                                <li><img src="ch04/logo.png" width="100" /></li>
+                                <li><img src="ch04/add.png" width="350" /></li>
+                        </ul>
+                </div>
+        </div>
+</body>
+</html>

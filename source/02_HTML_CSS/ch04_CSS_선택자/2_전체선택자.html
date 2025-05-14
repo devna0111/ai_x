@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>전체선택자</title>
+        <style>
+                * { /* * 전체선택자==페이지 전체 태그 : 페이지 초기화 */
+                        font-family: YES24;
+                        margin: 0px; /* 밖 여백 : 상 우 하 좌*/
+                        padding: 0px; /* 안 여백 : 상 우 하 좌*/
+                        color : saddlebrown ;  /* 글자 색깔 */
+                }
+                header, nav, section, footer {
+                        width : 500px ; /* 가로 사이즈 (지정 하지 않을 시 부모 width를 상속) */
+                        border : 1px solid gray ;
+                        margin : 10px auto 0px auto ;
+                }
+                nav ul { /* 수평으로 하고픈태그의 부모 */
+                        overflow : hidden ; /* 자식태그(li)를 수평으로 하겠다(정상적인 float 전제 조건) */
+                }
+                nav ul li { /* 수평으로 할 태그 */
+                            float : left ; /* 좌/우로 태그를 띄워서 붙인다*/
+                            list-style : none ; /* - 표시들을 지우겠다 */
+                            /*border : 1px solid red;  border는 width + a로 추가됨*/
+                            /* margin : 10px 5%;  리스트 간격 생성 : 비추 */ 
+                            width : 125px ; /* 간격을 개수로 나눠 넓이를 나눠 할당*/
+                            text-align : center ; 
+                            margin : 10px 0px;
+                }       
+                section {/* 수평 속성을 지우고 싶은 태그*/
+                         clear : both; /* float 태그를 clear(left, right both)*/
+                }
+        </style>
+</head>
+<body>
+        <header>
+                <h1> ** 주식회사 </h1>
+        </header>
+        <nav>
+                <ul>
+                        <li>회사소개</li>
+                        <li>서비스소개</li>
+                        <li>고객센터</li>
+                        <li>공지사항</li>
+                </ul>
+        </nav>
+        <section>
+                <p>
+                        0. 선택자란? HTML 문서 중 특정 부분을 선택하여, 해당 부분의 속성을 변경하는 목적으로 사용(CSS를 사용하는 이유, Javascript, jQuery등에서도 사용)1.	tag 선택자란? 특정 태그를 선택하여 CSS속성을 적용할 수 있다2.	* 선택자? 전체라는 의미의 * 선택자를 사용하면 문서 전체를 선택하는 의미가 있다3.	id(#)와 class(.) : 태그의 id와 clas를 이용하여 CSS에 속성을 설정할 수 있다
+                </p>
+        </section>
+        <footer>
+                <p>서울시 땡떙구 뭐뭐로 99 무슨빌딩 901호</p>
+        </footer>
+</body>
+</html>

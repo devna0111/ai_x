@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>후손자손선택자</title>
+        <style>
+                #wrap{ /* 가운데 정렬 */
+                        width : 600px ;
+                        margin : 0 auto ;
+                        border : 5px solid #EEEEEE;
+                }
+                #wrap > #header {/* > : 자손선택자 */
+                                 overflow:hidden; /* 수평으로 하고 싶은 태그 부모단 */
+                }
+                #wrap .logo {/* space : 후손선택자 */
+                             float:left;
+                             padding : 10px 30px ;
+                }
+                #wrap .title {
+                        float:left;
+                        padding : 15px 85px ;
+                }
+                div p {/* 후손 선택자(자손선택자 포함) */
+                       font-size : 24px ; /* default 16px */
+                }
+                div > p {/* 자손선택자 */
+                         color : red;
+                }
+        </style>
+</head>
+<body>
+        <div id="wrap">
+                <div id="header">
+                        <div class="logo"><h1>LOGO</h1></div>
+                        <div class="title"><h2>00주식회사</h2></div>
+                </div>
+                <div id="content">
+                        <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+                        </p>
+                        <ul>
+                                <li><p>여기 content 밑에ul 밑에 li 밑에 p</p></li>
+                                <li><p>여기 content 밑에ul 밑에 li 밑에 p</p></li>
+                                <li><p>여기 content 밑에ul 밑에 li 밑에 p</p></li>
+                        </ul>
+                </div>
+                <div id="footer">
+                        <p>
+                                주소 들어갑니다
+                        </p>
+                </div>
+                
+        </div>
+</body>
+</html>

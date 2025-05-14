@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>CSS선택자</title>
+        <style>
+                /* 페이지 초기화를 우선하면 더 편리하게 할 수 있었을 듯 */
+                #header, #content, #footer{width : 1000px ; margin : 0 auto;overflow : hidden;}
+                .left , .right{float:left;width: 145px; height:150px; background-color:lightgray;border: 1px solid gray;}
+                .center {float:left;width: 693px; height : 150px ;background-color:lightgray;border: 1px solid gray;}
+                #header .left{border-radius : 20px 0px 20px 0px; }
+                #header .center{border-radius : 0px 0px 20px 20px; }
+                #header .right{border-radius : 0px 20px 0px 20px; }
+                #content .left, #content .right {height: 300px;background-color: lightgray;border: 1px solid gray;}
+                #content .center {height: 300px;background-color: lightgray;border: 1px solid gray;padding:0;}
+                #content .left{border-radius : 0 20px 20px 0;}
+                #content .center{border-radius : 20px 20px 20px 20px;overflow:hidden;}
+                #content .center ul{padding:0px}
+                #content .center ul li{list-style:none; margin : 0px; width : 33.33%;padding:0; float:left;font-size:2em;font-weight:bold;text-align:center;}
+                #content .center h1{clear:both; text-align:center;margin:50px;padding:40px 0 0 0;}
+                #content .center p{font-size:1em; padding:10px 10px ;}
+                #content .right{border-radius : 20px 0 0 20px;}
+                #content .right ol {padding:0 0 0 40px;}
+                #footer .left{border-radius : 0 20px 0 20px;}
+                #footer .center{border-radius : 20px 20px 0 0; }
+                #footer .right{border-radius : 20px 0 20px 0;}
+                #content .right ol li:nth-child(9) ~ li {color : red;}
+                /* #content .right li:nth-last-child(-n+3){color:red} */
+                /*.useless {color : red;} */
+        </style>
+</head>
+<body>
+        <div id="wrap">
+                <div id="header">
+                        <div class="left"></div>
+                        <div class="center"></div>
+                        <div class="right"></div>
+                </div>
+                <div id="content">
+                        <div class="left"></div>
+                        <div class="center">
+                                <ul>
+                                        <li>menu1</li>
+                                        <li>menu2</li>
+                                        <li>menu3</li>
+                                </ul>
+                                <h1>AI 개발자 양성과정</h1>
+                                <p>그들의 위하여서, 들어 인생을 사막이다. 커다란 대고, 타오르고 무엇을 못하다 트고, 풍부하게 그리하였는가? 보내는 힘차게 간에 위하여 넣는 것이다.</p>
+                        </div>
+                        <div class="right">
+                                <ol>
+                                        <li>태그</li>
+                                        <li>전체(*)</li>
+                                        <li>id, class</li>
+                                        <li>속성</li>
+                                        <li>후손, 자손(>)</li>
+                                        <li>동위</li>
+                                        <li>반응</li>
+                                        <li>상태</li>
+                                        <li>구조</li>
+                                        <li class="useless">문자</li>
+                                        <li class="useless">링크</li>
+                                        <li class="useless">부정</li>
+                                </ol>
+                        </div>
+                </div>
+                <div id='footer'>
+                        <div class="left"></div>
+                        <div class="center"></div>
+                        <div class="right"></div>
+                </div>
+        </div>
+</body>
+</html>
