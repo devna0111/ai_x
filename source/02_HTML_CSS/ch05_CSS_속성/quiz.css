@@ -1,0 +1,65 @@
+﻿/* quizz.css */
+*{margin:0;padding:0;font-weight:bold}
+#wrap{width:1000px; margin:0 auto;text-align:center;
+      padding:6px;border:10px solid gray;position:relative;
+}
+#wrap #back {
+    width:1010px;height:1160px; 
+    background : url(ch05/sulhyun.jpg) center;
+    background-size : 115%;
+    border:1px solid red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity:0.2;
+    z-index:-1;
+}
+#header {
+    height: 100px;
+    margin-bottom: 10px;
+    background-color: yellow;
+    border: 1px solid gray;
+    line-height: 100px;
+    box-sizing:border-box;
+}
+#nav {
+    height: 120px;
+    border: 1px solid gray;
+    padding: 10px;
+    box-sizing: border-box;
+}
+    #nav ul {
+        overflow: hidden;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+        #nav ul li {
+            width: 18.5%;
+            height: 50px;
+            float: left;
+            list-style: none;
+            border: 1px solid gray;
+            margin: 5px;
+            line-height: 50px;
+            background-color: hotpink;
+            color: antiquewhite;
+            font-size: 1.5em;
+            box-sizing: border-box;
+        }
+            #nav ul li a {
+                color: purple;
+                text-decoration: none;
+                font-weight: bold;
+            }
+#nav ul li.first{border-radius:20px 0 0 20px}
+#nav ul li.last{border-radius:0 20px 20px 0}
+#contain {height:800px; overflow:hidden;margin-top:10px;
+          border:1px solid gray;box-sizing:border-box;}
+#contain #content{border:1px solid gray;width:68%;box-sizing:border-box
+                  ;float:left; height:98%;margin:1%}
+#contain #banner{border:1px solid gray;width:28%;box-sizing:border-box
+                     ;float:left; height:98%; margin:1%}
+#footer {height:100px;
+    background-color:yellow;border:1px solid gray;
+    line-height:100px;margin-top:10px;box-sizing:border-box}

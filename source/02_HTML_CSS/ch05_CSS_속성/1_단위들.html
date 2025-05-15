@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>CSS 단위</title>
+    <style>
+        #wrap{width : 600px ; margin : 0 auto; border:1px solid gray;text-align:justify;padding:10px;}
+        #wrap p:nth-child(2n){background-color:lightblue;}
+        /* em : (원 글씨 크기의) 배율 => font 전용 
+            % : 글씨 크기 및 width, height... 등에 적용 가능 배율
+            px : 픽셀 (참고_pxtoem https://pxtoem.com.au/ pxtopt https://pixelsconverter.com/px-to-pt#google_vignette)
+            pt : 글씨크기 포인트 => 3pt == 4px
+        */
+        #wrap p > span{
+            display:block; /* span태그 display 기본값 inline을 block으로 수정해 block형 태그 전환 */
+            color:gray;
+            font-size:.5em;
+        }
+        #wrap p:nth-child(1){
+            font-size:.8em; /* 본래 사이즈의 0.8배 */
+        }
+        #wrap p:nth-child(2){
+            font-size:100%; /* 문자의 경우 본래 사이즈의 몇 % , width, height, padding, margin 등 다양한 분야에서 활용 */
+        }
+        #wrap p:nth-child(3){
+            font-size:32px ; /* p태그의 기본사이즈가 16px*/
+        }
+        #wrap p:nth-child(4){
+            font-size:11pt; /* 3pt == 4px */
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p>
+            소설 &lt;hongGilDongJun&gt;의 주인공으로 초능력을 부리는 인물이다.
+            승상 홍문과 몸종 춘섬 사이에서 태어난[1] 얼자이며 작가 허균이 동기로 삼은,
+            연산군 통치기에 활동한 도적인 홍길동과는 발음이 같지만 한자가 다르다.
+            이것은 저자인 허균이 두 사람을 분리하기 위한 장치인 듯 하다.
+            <span>입력2025.05.14 오전 9:46</span>
+        </p>
+        <p>
+            소설 &lt;hongGilDongJun&gt;의 주인공으로 초능력을 부리는 인물이다.
+            승상 홍문과 몸종 춘섬 사이에서 태어난[1] 얼자이며 작가 허균이 동기로 삼은,
+            연산군 통치기에 활동한 도적인 홍길동과는 발음이 같지만 한자가 다르다.
+            이것은 저자인 허균이 두 사람을 분리하기 위한 장치인 듯 하다.
+            <span>입력2025.05.14 오전 9:46</span>
+        </p>
+        <p>
+            소설 &lt;hongGilDongJun&gt;의 주인공으로 초능력을 부리는 인물이다.
+            승상 홍문과 몸종 춘섬 사이에서 태어난[1] 얼자이며 작가 허균이 동기로 삼은,
+            연산군 통치기에 활동한 도적인 홍길동과는 발음이 같지만 한자가 다르다.
+            이것은 저자인 허균이 두 사람을 분리하기 위한 장치인 듯 하다.
+            <span>입력2025.05.14 오전 9:46</span>
+        </p>
+        <p>
+            소설 &lt;hongGilDongJun&gt;의 주인공으로 초능력을 부리는 인물이다.
+            승상 홍문과 몸종 춘섬 사이에서 태어난[1] 얼자이며 작가 허균이 동기로 삼은,
+            연산군 통치기에 활동한 도적인 홍길동과는 발음이 같지만 한자가 다르다.
+            이것은 저자인 허균이 두 사람을 분리하기 위한 장치인 듯 하다.
+            <span>입력2025.05.14 오전 9:46</span>
+        </p>
+    </div>
+</body>
+</html>

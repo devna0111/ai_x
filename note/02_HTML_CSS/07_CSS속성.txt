@@ -1,0 +1,38 @@
+0515.5_CSS 속성들
+
+1. CSS 단위 : em(배율), %, px, pt
+	각종 사이트 잘 활용하기(pxto**)
+
+2. url()함수를 이용한 background-image, 로컬폰트 속성
+	@font-face{
+		font-family : '지정할 이름';
+		src : url(저장주소) }
+	* { font-family : '지정한 이름'} 으로 로컬 폰트 설정
+
+3. display 속성 : 화면에 출력하는 여러 속성을 아래와 같이 설정할 수 있음 :inline, nine, block, inline-block
+	span {
+		display : block; }
+
+4. visibility와 display:none.
+	=> visibility:hidden는 공간 확보하면서 안보이게
+	=> display:none은 공간 없이 안보이게
+
+5. opacity : 0 ~ 1(불투명으로) => 투명도 조절
+
+6. margin,padding,border => 마진과 패딩과 외곽선의 두께를 고려해야함...
+
+7. box-sizing => 마진과 패딩은 여전히 고려사항이지만 이 속성으로 외곽선 두께를 width에 포함시킬수있다
+	div { box-sizing:border-box; }
+
+9. line-height : height값 => 표나 그림에서 수직정렬(기존 글상자 박스의 행간격을 부여해서 맞춰주는 방식) => 행간격!!
+
+10. 웹폰트 => @ㅇㅇㅇㅇ HTML 규칙을 생성하는 명령어
+	text-decoration : 각종 폰트 꾸미기
+	웹폰트 : => fonts.google.com 가서 시키는 데로 하나씩 하면 된다
+
+11. position ★★★★★
+	position : absolute; top : 000px; left:000px => 좌표 웹페이지에 고정 => auto와 만나면 디자인 무너짐
+	position : fixed; top : 000px; left:000px => 좌표 시선에 고정
+	position : relative; top : 000px; left:000px => 부모에서 시행해서 자식의 absol 좌표를 부모 좌상단에서 고정
+
+12. float 속성

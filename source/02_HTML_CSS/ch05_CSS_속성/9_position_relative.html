@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>position_relative</title>
+    <style>
+        #yellow {
+            width:300px; height:300px; margin:0 auto;
+            background-color:yellow;
+            position:relative; /* 자식이 갖는 좌표를 부모의 좌상단으로 고정함 */
+            box-sizing:border-box;
+        }
+        #yellow > div {
+            width:100px;height:100px;border:1px solid gray;
+        }
+        #yellow #green {background-color:green;
+            position:absolute;
+            top:50px;left:50px;
+            box-sizing:border-box;
+        }
+        #yellow #red{background-color:red;
+            position:absolute;
+            top:40px;right:80px;
+            box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="yellow">
+        yellow
+        <div id="green">green</div>
+        <div id="red">red</div>
+    </div>
+</body>
+</html>

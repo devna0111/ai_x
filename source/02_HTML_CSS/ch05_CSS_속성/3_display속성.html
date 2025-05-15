@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>display 설정</title>
+    <style>
+        div{width:100px ; height:100px ; border:1px solid black;font-weight:bold;}
+        /* display 속성에 올 수 있는 것들 : block, inline, inline-block, none*/
+        div:nth-child(1){display:block;background-color:red;}
+        div:nth-child(2){display:block;background-color:antiquewhite;margin:10px;}
+        div:nth-child(3){display:none;background-color:aquamarine;} /* 안보이게(공간도 없어짐) */
+        div:nth-child(4){display:block;background-color:blue;}
+        div:nth-child(5){display:inline;margin:10px} /* inline은 위아래 여백 무시*/
+        div:nth-child(6){display:inline-block;} /* inline은 위아래 여백 무시*/
+        div:nth-child(7){display:inline-block;} /* inline은 위아래 여백 무시*/
+    </style>
+</head>
+<body>
+    <div>div1</div><div>div2</div><div>div3</div><div>div4</div><div>div5</div><div>div6</div><div>div7</div><div>div8</div>
+</body>
+</html>

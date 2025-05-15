@@ -1,0 +1,55 @@
+﻿*{margin:0 ; padding:0;}
+li{list-style:none;}
+a{text-decoration:none;color:black;display:block;padding:0;margin:0}
+
+#header{text-align:center;}
+#header .gnb{height:30px;background-color:black;}
+#header .gnb ul {overflow:hidden;width:1000px;margin:0 auto;}
+#header .gnb ul li{float:left;width:100px;}
+#header .gnb ul li a{color:lightgray;}
+
+#header .logo{border:1px solid black;width:200px;margin:100px auto;
+              font-size:3em;font-family:'Pyunji R';height:100px;
+              line-height:100px;}
+
+#header .hitmenu{font-size:1.5em; width:1000px;margin:0 auto;}
+#header .hitmenu ul{overflow:hidden;}
+#header .hitmenu ul li {float:right; width:100px;border:1px solid black;
+                        height:50px;line-height:50px;margin-bottom:10px;}
+#header .hitmenu ul li.first{border-radius:0px 20px 20px 0px}
+#header .hitmenu ul li.last{border-radius:20px 0px 0px 20px}
+
+#header .lnb{height:30px;border-top:1px dashed black;
+             border-bottom:1px dashed black;box-sizing:border-box;}
+
+#header .lnb ul {width:1000px;margin:0 auto;overflow:hidden;}
+#header .lnb ul li{float:left;width:125px;font-weight:bold;}
+
+#content{width:1000px ; margin:0 auto;text-align:center;box-sizing:border-box;}
+#content #section1{height:400px;overflow:hidden}
+#content #section1 #slide_banner{width:699px;height:100%;border-right:1px solid gray;
+                                 float:left;line-height:400px;}
+#content #section1 #side_banner{width:298px;height:100%;border-left:1px solid gray;
+                                 float:left;line-height:400px;}
+
+#content #section2{overflow:hidden;}
+#content #section2 #hit_product {height:400px;border:1px solid gray;}
+
+#content #section2 #hit_product ul{overflow:hidden;}
+#content #section2 #hit_product ul li{float:left; width:230px;margin:0 8px;
+                                      line-height:400px;border:1px solid gray;
+}
+
+#content #section2 #md_product {height:400px;border:1px solid gray;margin-block:10px}
+
+#content #section2 #md_product ul{overflow:hidden;}
+#content #section2 #md_product ul li{float:left; width:230px;margin:0 8px;
+                                      line-height:400px;border:1px solid gray;
+}
+#footer {width:1000px; margin:0 auto;}
+#footer #part {overflow:hidden;margin-bottom:5px;}
+#footer #office_logo{float:left;width:330px;height:100px;border:1px solid gray;}
+#footer #offic_address{float:left;width:330px;height:100px;border:1px solid gray;}
+#footer #shopping_info{float:left;width:330px;height:100px;border:1px solid gray;}
+#footer #copyright{clear:both;text-align:center;width:996.66px;
+                   background-color:black;color:white;height:30px;}

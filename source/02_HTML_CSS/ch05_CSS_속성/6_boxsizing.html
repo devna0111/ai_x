@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>BOXSIZING</title>
+    <style>
+        *{margin:0px;padding:0px;}
+        div:nth-child(1), div:nth-child(2), div:nth-child(3) {
+            width:100px; height:100px;border:10px solid red;
+            background-color:yellow;}
+        div:nth-child(2){box-sizing:border-box;/* border를 width와 height에 편입*/}
+        div:nth-child(3){border:0;}
+        div#smartphone-layout{
+            /* width :700px; margin:0,auto;*/
+
+        }
+        ul{overflow:hidden;}
+        ul li{float:left;list-style:none;margin-inline:1%;width:31.3%;border:1px solid gray ;
+              box-sizing:border-box;text-align:center;}
+
+        ul li a{
+            text-decoration:none;
+            color:black;
+            border:1px solid red;
+            padding:25px;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <div>111</div><div>222</div><div>333</div>
+    <div id="smartphone-layout">
+        <ul>
+            <li><a href="#m1">menu1</a></li>
+            <li><a href="#m2">menu2</a></li>
+            <li><a href="#m3">menu3</a></li>
+        </ul>
+    </div>
+</body>
+</html>

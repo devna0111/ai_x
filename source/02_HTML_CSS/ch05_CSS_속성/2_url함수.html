@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>url()함수를 이용한 BG-img, 로컬폰트 지정</title>
+    <style>
+        @font-face { /* 로컬 폰트 지정하는 방법 : @font-face를 통해 font를 시스템화*/
+            font-family: 'NanumGN';
+            src: url('ch05/NanumGgocNaeEum.ttf')
+        }
+        * {
+            font-family: 'NanumGN'
+        }
+        #wrap {
+            width:600px;
+            margin:0 auto;
+            border:1px solid gray;
+            height:400px;
+            text-align:center;
+        }
+        #wrap #content {
+            border : 1px solid red;
+            width:80%;
+            height:100%;
+            margin: 0 auto;
+            background:url('ch05/sulhyun.jpg') center no-repeat;
+            background-size:120%; /* div 가로 사이즈 기준으로 맞춤*/
+            font-size : 3em;
+            color : green;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content">
+            설현?
+        </div>
+    </div>
+</body>
+</html>

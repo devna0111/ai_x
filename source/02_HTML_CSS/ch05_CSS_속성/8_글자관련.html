@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>웹폰트와 position</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Diphylleia&family=Yeon+Sung&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'SongMyung';
+            src: url('ch05/SongMyung-Regular.ttf')
+        }
+
+        p.localfont {
+            font-family: SongMyung, Batang, Gulim;
+            line-height: 40px /* 행간격 늘리기*/;
+            text-decoration: dashed underline /* 밑줄 */;
+            font-style: oblique;
+        }
+
+        p.webfont {
+            font-family: "Yeon Sung", system-ui;
+            font-weight: 400;
+        }
+
+        p.webfont2 {
+            font-family: "Diphylleia", serif;
+            font-weight: 400;
+        }
+        p.webfont3 {
+            font-family: "Bagel Fat One", system-ui;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <p class="localfont">
+        다운로드 받은 ttf파일을 내 경로안에 넣고 font-face설정한 후 사용 : 케이뱅크는 올 1분기 총 161억원의 당기순이익을 기록했다고 15일 밝혔다. 이는 전년 동기(507억원) 대비 68% 감소한 수치다. 가상자산 예치금 이용료율 급증과 인공지능(AI)분야 투자 증가에 따른 영향으로 해석된다.
+        케이뱅크의 1분기 말 고객은 1363만명으로 지난해 같은 기간보다 32% 증가했다. 1분기 말 수신 잔액은 27조8000억원, 여신 잔액은 16조9000억원으로 지난해 같은 기간과 비교해 각각 15.9%, 14.8% 성장했다.
+    </p>
+
+    <p class="webfont">
+        fonts.google.com의 인터넷 폰트 : 케이뱅크는 올 1분기 총 161억원의 당기순이익을 기록했다고 15일 밝혔다. 이는 전년 동기(507억원) 대비 68% 감소한 수치다. 가상자산 예치금 이용료율 급증과 인공지능(AI)분야 투자 증가에 따른 영향으로 해석된다.
+        케이뱅크의 1분기 말 고객은 1363만명으로 지난해 같은 기간보다 32% 증가했다. 1분기 말 수신 잔액은 27조8000억원, 여신 잔액은 16조9000억원으로 지난해 같은 기간과 비교해 각각 15.9%, 14.8% 성장했다.
+    </p>
+
+    <p class="webfont2">
+        fonts.google.com의 인터넷 폰트 : 케이뱅크는 올 1분기 총 161억원의 당기순이익을 기록했다고 15일 밝혔다. 이는 전년 동기(507억원) 대비 68% 감소한 수치다. 가상자산 예치금 이용료율 급증과 인공지능(AI)분야 투자 증가에 따른 영향으로 해석된다.
+        케이뱅크의 1분기 말 고객은 1363만명으로 지난해 같은 기간보다 32% 증가했다. 1분기 말 수신 잔액은 27조8000억원, 여신 잔액은 16조9000억원으로 지난해 같은 기간과 비교해 각각 15.9%, 14.8% 성장했다.
+    </p>
+
+    <p class="webfont3">
+        fonts.google.com의 인터넷 폰트 : 케이뱅크는 올 1분기 총 161억원의 당기순이익을 기록했다고 15일 밝혔다. 이는 전년 동기(507억원) 대비 68% 감소한 수치다. 가상자산 예치금 이용료율 급증과 인공지능(AI)분야 투자 증가에 따른 영향으로 해석된다.
+        케이뱅크의 1분기 말 고객은 1363만명으로 지난해 같은 기간보다 32% 증가했다. 1분기 말 수신 잔액은 27조8000억원, 여신 잔액은 16조9000억원으로 지난해 같은 기간과 비교해 각각 15.9%, 14.8% 성장했다.
+    </p>
+</body>
+</html>
