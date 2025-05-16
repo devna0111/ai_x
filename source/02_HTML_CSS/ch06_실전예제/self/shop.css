@@ -9,7 +9,7 @@ a{text-decoration:none;color:black;display:block;padding:0;margin:0}
 #header .gnb ul li a{color:lightgray;}
 
 #header .logo{border:1px solid black;width:200px;margin:100px auto;
-              font-size:3em;font-family:'Pyunji R';height:100px;
+              font-size:3em;font-family:Batang;height:100px;
               line-height:100px;}
 
 #header .hitmenu{font-size:1.5em; width:1000px;margin:0 auto;}
@@ -26,7 +26,7 @@ a{text-decoration:none;color:black;display:block;padding:0;margin:0}
 #header .lnb ul li{float:left;width:125px;font-weight:bold;}
 
 #content{width:1000px ; margin:0 auto;text-align:center;box-sizing:border-box;}
-#content #section1{height:400px;overflow:hidden}
+#content #section1{height:400px;overflow:hidden;}
 #content #section1 #slide_banner{width:699px;height:100%;border-right:1px solid gray;
                                  float:left;line-height:400px;}
 #content #section1 #side_banner{width:298px;height:100%;border-left:1px solid gray;
