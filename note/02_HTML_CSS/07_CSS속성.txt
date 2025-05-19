@@ -35,4 +35,4 @@
 	position : fixed; top : 000px; left:000px => 좌표 시선에 고정
 	position : relative; top : 000px; left:000px => 부모에서 시행해서 자식의 absol 좌표를 부모 좌상단에서 고정
 
-12. float 속성
+12. float 속성 : 어려울 것 없음

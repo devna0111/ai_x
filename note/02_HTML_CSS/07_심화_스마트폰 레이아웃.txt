@@ -1,0 +1,17 @@
+** 컴퓨터용 브라우져 => 스마트폰용 브라우져
+head에 아래 내용을 추가한다.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+: width:1000px;margin : 0 auto; 대신 전체를 활용하는 방식으로 제작하며 %형태로 제작. => 비율에 따라 변경되도록
+=> 반드시 필요한 내부 디자인 이미지는 사이즈와 위치를 고정해서 사용한다.
+
+메뉴창은 보통 input type=checkbox를 만들고 라벨링을 통해 체크박스가 작동하게 유도한 후 display = none과 display:block을
+활용해서 사용한다.(input:checked 속성을 활용한다.)
+
+이후 토글용 체크박스를 display=none을 통해 가려서 완성시킨다.
+
+img를 사용할 때 width 혹은 height를 기준으로 한다면 이후
+object-fit:fill 속성을 더해 부여한 사이즈에 맞출 수 있다.
+
+
+어떠한 사이즈가 고정된 태그 속에 줄글을 ...으로 줄이기 위해선 아래의 속성을 추가 부여한다.
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis

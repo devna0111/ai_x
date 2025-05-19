@@ -1,0 +1,25 @@
+vscode를 활용하여 html파일을 만들 때 아래 확장팩을 설치하여 활용하면 용이하다.
+
+korean (한글팩설치 후 resart해줘야 함)
+Prettier - Code formatter(prettier로 검색 ; 코드 포맷팅)
+open in browser (브라우저로 볼 수 있는 프로그램 Alt+B)
+indent-rainbow(indent - 들여쓰기 레벨을 보기 쉽게 색으로 구별)
+Auto Rename Tag(rename - 여는 태그를 바꾸면 닫는 태그도 자동 변경)
+Live Server(Alt + L O ) - Open with Live Server => 저장과 동시에 홈페이지 최신화기능
+
+빈 화면에서 !+enter를 통해 초기값 format이 세팅 가능하다. => 사용자 정의 포멧 설정으로 더 편하게
+=> htmlex 설정
+
+vscode에서 동일 코드 추가 => alt+shift+화살표
+
+<lenk href='주소' rel='stylesheet' media='all print, screen'> => media 설정을 통해 용지 출력본, 화면 출력본에 따라 다른 CSS 적용이 가능하다.
+
+=> @ 방식으로도 적용이 가능하다
+
+@iport url(css주소)
+@media print/screen선택{
+		CSS 기입{}
+}
+@media screen and (min-device-width:1900px){} =>이 문법으로 PC용/태블릿용/스마트폰용 반응형
+설정이 가능하다
+-> min-device-width에서 min-width를 활용하여도 어느 정도는 구현이 가능

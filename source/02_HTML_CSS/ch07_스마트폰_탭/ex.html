@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,
         maximum-scale=2.0, minimum-scale=0.7, user-scalable=yes" />
-    <title>예시</title>
+    <title>ex</title>
     <style>
             /* user-scalable=no의 확대방지가 100% 보장되지 않음*/
             /*body{
@@ -13,148 +13,56 @@
           overflow:hidden;
         }*/
             /* * * 페이지 초기화 * * */
-            * {
-                margin: 0;
-                padding: 0;
-                font-family: 'Franklin Gothic Medium', sans-serif;
-            }
-
-            li {
-                list-style: none;
-            }
-
-            a {
-                text-decoration: none;
-                display: block;
-                color: navy;
-            }
+            *{margin:0;padding:0;}
+            li{list-style:none;}
+            a{color:navy;text-decoration:none;display:block;}
+            input#toggle{display:none;}
             /* * * header * * */
-            header {
-                background-color: #ea8f00;
-                height: 100px;
-            }
-                /* * * header의 #logo_wrap * * */
-                header #logo_wrap {
-                    height: 50px;
-                    line-height: 50px;
-                    text-align: center;
-                    position: relative;
-                }
-
-                    header #logo_wrap .menu {
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                    }
-
-                    header #logo_wrap a.logo {
-                        color: white;
-                        font-size: 1.5em;
-                        font-weight: bold;
-                    }
-
-                    header #logo_wrap .myinfo {
-                        position: absolute;
-                        right: 0;
-                        top: 0;
-                    }
-                /* * * header의 #search * * */
-                header #search {
-                    height: 50px;
-                    position: relative;
-                }
-
-                    header #search input[type='text'] {
-                        width: 100%;
-                        height: 50px;
-                        border: 3px solid #ea8f00;
-                        outline: 0;
-                        box-sizing: border-box;
-                        font-size: 1.2em;
-                        padding: 5px 55px 5px 5px;
-                    }
-
-                    header #search input[type='submit'] {
-                        width: 50px;
-                        height: 50px;
-                        background: url('img/search.png');
-                        position: absolute;
-                        right: 0;
-                        top: 0;
-                        border: 0;
-                    }
-            /* * * #lnb(checkbox가 checked일 때만 보이게 * * */
-            #toggle {
-                display: none;
-            }
-
-                #toggle:checked ~ #lnb {
-                    display: block;
-                }
-
-            #lnb {
-                margin: 7px 0;
-                overflow: hidden;
-                display: none;
-            }
-
-                #lnb ul li {
-                    float: left;
-                    width: 16.66%;
-                    border-right: 2px solid #ea8f00;
-                    box-sizing: border-box;
-                    line-height: 30px;
-                    text-align: center;
-                }
-
-                    #lnb ul li:last-child {
-                        border: 0;
-                    }
+            header {background-color: #ea8f00;}
+            /* * * header의 #logo_wrap * * */
+            header #logo_wrap{height:50px;line-height:50px;text-align:center;position:relative;}
+            header #logo_wrap .menu{position:absolute;left:0;top:0;}
+            header #logo_wrap .menu:hover{border:1px solid gray;box-sizing:border-box;}
+            header #logo_wrap a.logo{color:white;font-size:1.5em;font-weight:bold;}
+            header #logo_wrap .myinfo{position:absolute;right:0;top:0;}
+            /* * * header의 #search * * */
+            header #search{position:relative;height:50px;}
+            header #search input[type='text']{width:100%;height:50px;font-size:1.2em;border:3px solid#ea8f00;box-sizing:border-box;
+                                              padding:5px 55px 5px 5px;outline:none}
+            /*header #search input[type='text']:focus{outline:none} 포커스 되었을 때 커서 위치 표기 기능 X */
+            header #search input[type='submit']{position:absolute;right:0;top:0;background:url('img/search.png') no-repeat;width:50px;height:50px;
+                                                border:0;}
+            header #search input[type='submit']:focus{border:1px solid gray;}
+            /* * * #lnb (checkbox가 checked일 때 보이기)* * */
+            #toggle:checked ~ #lnb{display:block;}
+            #lnb {margin:7px 0;overflow:hidden;display:none}
+            #lnb ul li{float:left;width:16.66666667%;border-right:2px solid #ea8f00;box-sizing:border-box;text-align:center;line-height:30px;}
+            #lnb ul li:last-child{border:0;}
             /* * * #section1 * * */
-            #section1 {
-                margin: 7px 0;
-            }
-
-                #section1 .row1,
-                #section1 .row2,
-                #section1 .row3 {
-                    overflow: hidden;
-                }
-
-                    #section1 .row1 > div,
-                    #section1 .row2 > div,
-                    #section1 .row3 > div {
-                        float: left;
-                        width: 50%;
-                        height: 120px;
-                        border: 2px solid white;
-                        box-sizing: border-box;
-                    }
-
-                #section1 img {
-                    width: 100%;
-                    height: 120px;
-                    object-fit: fill; /* 높이가 120px이하일 경우 120px을 다 채워*/
-                }
+            #section1{margin:7px 0;}
+            #section1 .row1,
+            #section1 .row2,
+            #section1 .row3{overflow:hidden}
+            #section1 .row1 > div,
+            #section1 .row2 > div,
+            #section1 .row3 > div{float:left;width:50%;height:120px;border:2px solid white;box-sizing:border-box;}
+            #section1 img{width:100%;height:120px;object-fit:fill/*높이가 120px이하일 경우 120px을 다 채워라*/}
             /* * * #section2 * * */
-            #section2 {
-                margin: 7px;
+            #section2{margin:7px;}
+            #section2 ul li a{border:1px solid gray;padding:7px;
+                              white-space:nowrap;overflow:hidden;text-overflow:ellipsis;/* 말줄임을 위한 3종 세트: block형에서만 가능; */
+                              color:black;
             }
-
-                #section2 ul li a {
-                    border: 1px solid gray;
-                    padding: 7px;
-                    /* 말줄임 태그(ellipsis)-block형 태그 */
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
+            #section2 ul li a:hover{border:2px solid black;font-weight:bold;}
             /* * * #section3 * * */
+            #section3{margin:5px 0;}
+            #section3 ul li{border:1px solid gray;margin:5px;padding:10px;position:relative;padding-left:120px;height:110px;}
+            #section3 ul li p.img{/*position으로 배치 */position:absolute;left:10px;top:10px;}
+            #section3 ul li p.txt{/* width : 100% 사용, 부모태그에서 padding-left:110px를 통해 위치 체크*/width:100%;}
+            #section3 ul li p.txt span:first-child{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:navy;font-size:1.3em;}
+            #section3 ul li p.txt span:last-child{display:block;padding-bottom:10px;font-size:.8em;color:#222222;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
             /* * * footer * * */
-            footer {
-                background-color: #ea8f00;
-                text-align: center;
-            }
+            footer {background-color: #ea8f00;text-align: center;}
     </style>
 </head>
 <body>
@@ -170,7 +78,7 @@
         <div id="search">
             <form>
                 <input type="text" name="query_word" />
-                <input type="submit" value="" />
+                <input type="submit" value="" title="검색"/>
             </form>
         </div>
     </header><!-- header 끝 -->
@@ -263,7 +171,7 @@
                             말줄임 태그를 위해 block타입으로 전환할 예정입니다
                         </span>
                         <span>
-                            두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용
+                            두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용두번째 span은 말줄임 안 할 예정입니다. inline 타입 그대로 적용
                         </span>
                     </p>
                 </li>
@@ -287,3 +195,4 @@
         <p>서울시 XX구 XX동 XX빌딩 901호</p>
     </footer>
 </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <script>
+        al_pha = 20;
+        alert(1); // submit이 이루어진 이후라서 f12를 눌러도 에러를 체크할 수 없을 때 사용
+        alert('al_pha 값은'+al-pha); // 고의적인 error => 이후 같은 태그 속 코드는 아무것도 실행하지 않음
+        alert(2);
+        al_pha = 'Hello';
+        alert(3);
+        alert('al_pha 값은'+al_pha);
+        alert(4);
+    </script>
+</head>
+<body>
+    <script>document.write('윗 스크립트에서 선언된 변수 al_pha값은 '+ al_pha +'입니다.');</script>
+</body>
+</html>

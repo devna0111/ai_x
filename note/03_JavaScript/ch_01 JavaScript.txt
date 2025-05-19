@@ -1,0 +1,26 @@
+ch_01 JavaScript
+
+JavaScript는 HTML 종속적인 언어(HTML을 동적으로 바꿔주는 기능)
+브라우저마다 JavaScript 해석 엔진 보유 ex) 크롬의 V8엔진
+V8 + a => Node.js
+
+document.write() => document 기본 객체 : 문서객체모델
+<script>는 head, html 바깥, body 순으로 보통 부여
+
+f12 개발자 도구에서 console창에서 JavaScript 체크 가능 => 불편함
+
+* 오류 찾기
+- script에서 error가 발생하면 그 코드부터 같은 태그 속 코드는 전부 무시
+=> 이럴 때 html에서 개발자 도구 중 console 탭을 들어가서 체크가 가능함.
+위 방법으로 체크가 불가능하다면 script 중간에 alert를 잔뜩 넣어서 체크해야한다.....
+
+=> node를 잘 설치했다면
+000.js 파일을 cmd창에서 node 000.js 명령어를 통해 실행이 가능하다.
+
+변수 선언 : let 지역변수 var 전역변수 const 상수
+
+for문의 경우
+
+for(최초변수;범위조건;변수수정값){
+for문이 참인 조건일 경우 실행할 블록;
+}

@@ -1,0 +1,15 @@
+/* title.css */
+#wrap{
+    width:600px;margin:0 auto;border:1px solid gray;
+    padding:10px;
+}
+#wrap .title{
+    text-align:center;
+    text-decoration: underline;
+    margin:30px;
+    font-family: "Gochi Hand", cursive;
+    font-weight: 400;
+}
+#wrap hr{
+    border:2px dashed red;
+}
