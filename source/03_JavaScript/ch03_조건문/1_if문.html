@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>if문</title>
+    <style>
+        img{width:150px;}
+    </style>
+    <script>
+        const hour = new Date().getHours();
+        // new Date().getHours() => 24시간 시간 표현계
+        result = (hour>18)? '<h1>즐거운 저녁입니다</h1><br><img src="https://th.bing.com/th/id/OIP.KstjZBtZ2YQcLUqg3lXesQAAAA?w=249&h=202&c=7&r=0&o=5&pid=1.7">':(hour>12)?'<h1>지쳐가는 오후입니다</h1><br><img src="https://th.bing.com/th/id/OIP.uhPlsNK7s7N7jUy_jm31HAHaHa?w=209&h=209&c=7&r=0&o=5&pid=1.7">':(hour>6)?'<h1>활기찬 오전입니다</h1><br><img src="https://th.bing.com/th/id/OIP.C4y2h9bxe76P8UboPcjTGgHaHa?w=196&h=196&c=7&r=0&o=5&pid=1.7">':'<h1>조용한 새벽입니다</h1><br><img src="https://th.bing.com/th/id/OIP.RsvsX8sQwHbsg5IBoYnPPwHaEK?w=315&h=180&c=7&r=0&o=5&pid=1.7">';
+        document.write(result);
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

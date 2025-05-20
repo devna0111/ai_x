@@ -5,7 +5,7 @@ JavaScript는 HTML 종속적인 언어(HTML을 동적으로 바꿔주는 기능)
 V8 + a => Node.js
 
 document.write() => document 기본 객체 : 문서객체모델
-<script>는 head, html 바깥, body 순으로 보통 부여
+<script>는 head, html 바깥, body 순으로 보통 부여 => 절차지향적 해석
 
 f12 개발자 도구에서 console창에서 JavaScript 체크 가능 => 불편함
 

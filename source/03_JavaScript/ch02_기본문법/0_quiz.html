@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz</title>
+    <style>
+        
+    </style>
+    <script>
+        let score_kor; // 이 스크립트에서 변수로 사용한다.
+        let score_eng;
+        do{
+            kor = parseFloat(prompt('국어 점수(0~100)를 입력하세요', '점수'));
+        }while(isNaN(kor)||kor<0||kor>100); // 조건에 부합하지 않으면 무한 반복
+        do{
+            eng = parseFloat(prompt('영어 점수(0~100)를 입력하세요', '점수'));
+        }while(isNaN(eng)||eng<0||eng>100);
+        var score_avg = ((kor + eng) /2);
+        document.writeln('국어성적 : ', kor,' 영어성적 : ',eng, ' 평균 점수 : ',score_avg);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

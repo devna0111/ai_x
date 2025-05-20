@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+        table{border : 1px solid gray;padding: 10px 20px;}
+    </style>
+    <script>
+        function sub(){
+            first = parseFloat(frm.first.value);
+            second = parseFloat(frm.second.value);
+            result = (first>second)?'첫번째 수가 '+(first-second)+'만큼 크다':'두번째 수가 '+(second-first)+'만큼 크다';
+            alert(result);
+            document.body.innerHTML += result;
+        }
+    </script>
+</head>
+<body>
+    <form id="frm" onsubmit="return sub()">
+        <table>
+            <tr>
+                <td>첫번째 수</td><td><input type="text" name='first' id="first"></td>
+            </tr>
+            <tr>
+                <td>두번째 수</td><td><input type="text" name='second' id="second"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><center><input type="submit" id='result' name='result' value="결과"></center></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

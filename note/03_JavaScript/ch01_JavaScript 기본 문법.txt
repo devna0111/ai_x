@@ -1,0 +1,42 @@
+ch01_JavaScript 기본 문법
+=> https://www.w3schools.com/jsref/ 자바스크립트나 HTML 공부할 때 참고하기 좋은 사이트
+
+** 파이썬 f스트링 같은 기법 : console.log(`안녕, ${name}! 너는 ${age}살이구나.`);
+
+var x = 00 ; 전역변수 x // let x = 00 ; 지역변수 x // const C = 00 ; 상수 [ ] => 배열
+i++,++i,i--,--i 후위연산 전위연산 개념
+
+1. 자료형 : string, boolean, number, function, object(array), undefinded
+2. 복합대입연산 : 파이썬과 동일하게 작동함.
+3. 비교연산자 : 파이썬과 동일하게 작동하나 ===연산자가 있음.
+	=== : 타입과 값이 같은 지 여부
+4. confirm : 변수에 true/false를 버튼형식으로 받을 수 있음.
+5. prompt : 사용자로부터 값을 입력받아 변수로 사용할 수 있음. 입력값은 항상 문자형이고 취소 시 null(object) => 파이썬 input과 비슷한  형식
+	** 형변환 함수 : => 숫자형 : Number() / parseInt() / parseFloat()
+
+** 파이썬에 있는 함수 대부분 사용 가능 : isNaN(변수) 등
+** 조건표현식 => 삼항연산자로 대체 가능
+	파이썬에서 라면
+	result = 조건참일때 if 조건 else 조건 거짓일 때 를
+	result = (조건) ? 조건참이면 : 조건거짓이면 ;
+
+6. false들
+	null, '', NaN(Not a Number),0,undefined,false
+
+7. 숫자로 표현 안되는 숫자들 => NaN(Not a Number), 10/0(infinity), 
+
+** while문, do while문
+/* 
+i=0;sum=0;
+while(i<=100){
+    sum +=i;
+    i++
+    } => 조건을 보고 반복(0번 이상 반복)
+
+    do{
+    반복할 명령어들;
+    }while(조건); => 반복을 하고 조건을 체크(1번 이상 반복)
+*/
+
+** JavaScript 에서 시간 객체(datetime) => var 변수명 = new Date(); // 새로운 시간 객체 생성방법
+	=> 궁금한 사항은 https://www.w3schools.com/jsref/에서 체크

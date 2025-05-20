@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz</title>
+    <style>
+        table{border : 1px solid #596C7B;padding: 10px 20px; height:150px}
+        input{border-radius: 0;border:1px solid #596C7B;font-size: 1.2em;text-align: center;}
+        input[type='submit']{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 1.2em;
+            font-weight: bold;background-color: darkgray;padding: 0px 20px;box-sizing: border-box;}
+        input[type='submit']:hover{border:1px solid lightblue;}
+        input[type='text']:focus{border:1px solid lightblue;border-radius: 0;}
+        input[type='text']:hover{border:1px solid lightblue;border-radius: 0;}
+        #result {margin-top:20px;}
+    </style>
+    <script>
+        function sub(){
+            var first = parseInt(frm.first.value);
+            var second = parseInt(frm.second.value);
+            if(isNaN(first)){
+                alert('올바르지 않은 접근입니다. 첫번째 수를 입력하세요');
+                frm.first.focus();
+                return false;
+            }
+            if(isNaN(second)){
+                alert('올바르지 않은 접근입니다. 두번째 수를 입력하세요');
+                frm.second.focus()
+                return false;
+            }
+            result = (first>second)?'첫번째 수가 '+(first-second)+'만큼 크다':(second>first)?'두번째 수가 '+(second-first)+'만큼 크다':'두 수가 같다';
+            alert(result);
+            document.body.innerHTML +='<h2 id="temp">'+result+'</h2>';
+            frm.first.value=first;
+            frm.second.value=second;
+            // var result_share = document.getElementById('resultShare');
+            // result_share.innerHTML = '<h2 id="temp">'+result+'</h2>';
+        }
+    </script>
+</head>
+<body>
+    <form id="frm" onsubmit="return sub()">
+        <table>
+            <tr>
+                <td>첫번째 수</td><td><input type="text" name='first' id="first" required="required"/></td>
+            </tr>
+            <tr>
+                <td>두번째 수</td><td><input type="text" name='second' id="second" required="required"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><center><input type="submit" id='result' name='result' value="결과"/></center></td>
+            </tr>
+        </table>
+    </form>
+    <div id="resultShare"></div>
+</body>
+</html>
