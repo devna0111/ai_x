@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>배열의출력</title>
+    <style>
+        
+    </style>
+    <script>
+        var arr = [273, 32, '홍길동'];// {0:273, 1:32, 2:'홍길동'}
+        // var person = {'name':'홍길동','age':20}; object는 내일 다시
+        for(i in arr){ // key에 접근 => python dict().keys() 느낌으로 접근
+            document.write(i,'<br>')
+        }
+        for(i of arr){ // key에 접근 => python dict().values() 느낌으로 접근
+            document.write(i,'<br>')
+        }
+        // 1. 일반 for문
+        document.write('<h3>1. 일반 for문 이용 </h3>')
+        for(let i=0; i<arr.length;i++){
+            document.write(i,'번째 : ',arr[i],'<br>')
+        }
+        // 2. for-in문 이용 : 배열이나 객체에서 이용 가능
+        document.write('<h3>2. for-in문 이용 </h3>');
+        for(let idx in arr){ // for-in : index 참조
+            document.write(idx,'번째 : ',arr[idx],'<br>');
+        };
+        // 3. for-of문 이용 : 배열이나 객체에서 이용 가능
+        document.write('<h3>3. for-of문 이용 </h3>');
+        for(let data of arr){ // for-of : data 참조
+            document.write(arr.indexOf(data),'번째 : ',data,'<br>');
+        };
+        // 4. forEach 함수 1
+        document.write('<h3>4. forEach문 함수 이용 </h3>');
+        // 배열변수 arr
+        // data : 273, 32, '홍길동'
+        // idx : 0, 1, 2
+        arr.forEach(function(data, idx){
+            document.write(idx,'번째 : ',data,'<br>');
+        });
+        // 5. forEach 함수 2
+        document.write('<h3>5. forEach문 함수 이용(idx 미활용) </h3>');
+        arr.forEach(function(data){
+            document.write(arr.indexOf(data),'번째 : ',data,'<br>');
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

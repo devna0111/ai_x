@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <script>
+        var set_img = ['background:url("img/img01.png") no-repeat center center;background-size: 120%;color:lightgreen',
+            'background:url("img/img02.png") no-repeat center center;background-size: 120%;color:red',
+            'background:url("img/img03.png") no-repeat center center;background-size: 120%;color:white'
+        ]
+        start = new Date().getSeconds();
+        var id = setInterval(()=>{
+            now_time = new Date().getSeconds();
+            document.body.innerHTML = new Date() + '<br>' + (now_time-start) +'초 경과';
+            switch(now_time%3){
+                case 0 : document.body.style=set_img[0];break;
+                case 1 : document.body.style=set_img[1];break;
+                case 2 : document.body.style=set_img[2];break;
+            }
+        },1000);
+        setTimeout(()=>{clearInterval(id)},15000);
+    </script>
+</body>
+</html>

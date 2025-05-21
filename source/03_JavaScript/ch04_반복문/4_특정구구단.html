@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>특정 구구단</title>
+    <style>
+        table{margin: 0 auto;font-size: 3em;}
+        td.value{text-align: right;}
+    </style>
+    <script>
+        // prompt함수를 이용하여 원하는 구구단을 입력받아 해당 구구단을 출력
+        do{
+            var key_numb = Number(prompt('원하는 구구단의 수를 입력하세요.','2'));
+        }while(isNaN(key_numb) || key_numb < 2 || key_numb > 9)
+        document.write('<table>');
+        for(i=1;i<10;i++){
+            document.write('<tr>','<td>',key_numb, ' x ', i, ' = ','</td>',        '<td class="value">',i*key_numb,'<td>','</tr>');
+        }
+        document.write('</table>');
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

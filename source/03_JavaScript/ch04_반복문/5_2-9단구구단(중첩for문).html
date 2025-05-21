@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>구구단</title>
+    <style>
+        td.value{text-align: right;padding-right: 15px;}
+        td.name{text-align: center;font-size: 1.5em;font-weight: bold;padding-right: 15px;}
+    </style>
+    <script>
+        document.write('<table>');
+        document.write('<tr>')
+        for(let i = 2;i<10;i++){
+            document.write('<td colspan="2" class = "name">',i,'단</td>')
+        }
+        document.write('</tr>')
+        for(i=1;i<10;i++){
+            document.write('<tr>')
+            for(j=2;j<10;j++){
+                document.write('<td>',j, ' x ', i, ' = ','</td>','<td class="value">',i*j, '</td>')
+    }
+    document.write('</tr>')
+}
+        document.write('</table>')
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
