@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://127.0.0.1:5501/0_quiz.html -->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>quiz</title>
+    <style>
+        
+    </style>
+    <script>
+        let cnt=0; // 누적 횟수
+        let score=0; // 유효한 점수의 합
+        let ok_cnt=0; // 점수를 제대로 입력한 횟수
+        let no_cnt = 0; // 점수를 잘못 입력한 횟수수
+        while(confirm('누적할래?')){
+                cnt +=1;
+                key_numb = parseFloat(prompt('누적할 점수?'));
+                if(isNaN(key_numb)){
+                    no_cnt +=1
+                }else{
+                    score += key_numb;
+                    ok_cnt +=1;
+                }
+        }
+        document.write(cnt,'번 입력','<br>');
+        document.write('누적 점수 : ',score,'<br>');
+        document.write('점수를 제대로 입력한 횟수 : ',ok_cnt,'<br>');
+        document.write('점수를 잘못 입력한 횟수 : ',no_cnt,'<br>');
+        
+    </script></head><body>0번 입력<br>누적 점수 : 0<br>점수를 제대로 입력한 횟수 : 0<br>점수를 잘못 입력한 횟수 : 0<br>
+
+
+    
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

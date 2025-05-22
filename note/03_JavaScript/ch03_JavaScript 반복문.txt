@@ -12,3 +12,4 @@ ch03_반복문 => 어려울 문제 없음
 	4. arr.forEach(function(data, idx)){
 		for문에 따라 활용할 방안;
 		}
+		=> arr.forEach( (data, idx) => {} ) 사용 가능

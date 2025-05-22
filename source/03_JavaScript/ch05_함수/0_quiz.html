@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <title></title>
+    <title>quiz</title>
     <style>
-        
+        body{background: ;}
     </style>
 </head>
 <body>
     <script>
-        var set_img = ['background:url("img/img01.png") no-repeat center center;background-size: 120%;color:lightgreen',
-            'background:url("img/img02.png") no-repeat center center;background-size: 120%;color:red',
-            'background:url("img/img03.png") no-repeat center center;background-size: 120%;color:white'
+        var set_img = [
+            'background:url("img/img01.png") no-repeat;background-size: 100%;color:#01E403',
+            'background:url("img/img02.png") no-repeat;background-size: 100%;color:yellow',
+            'background:url("img/img03.png") no-repeat;background-size: 100%;color:white'
         ]
-        start = new Date().getSeconds();
+        let start = new Date().getSeconds();
         var id = setInterval(()=>{
             now_time = new Date().getSeconds();
-            document.body.innerHTML = new Date() + '<br>' + (now_time-start) +'초 경과';
+            document.body.innerHTML = '<h1>' + new Date() + '<br>' + (now_time-start) +'초 경과' + '</h1>';
             switch(now_time%3){
                 case 0 : document.body.style=set_img[0];break;
                 case 1 : document.body.style=set_img[1];break;

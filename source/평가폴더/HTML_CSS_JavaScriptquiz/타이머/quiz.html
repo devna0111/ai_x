@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz</title>
+</head>
+<body>
+    <script>
+        var arr = [
+            'background : url("img/img01.png") no-repeat;background-size:100%;color:lightpink;',
+            'background : url("img/img02.png") no-repeat;background-size:100%;color:lightgreen;',
+            'background : url("img/img03.png") no-repeat;background-size:100%;color:aqua;'
+        ];
+        let time_flow = 0;
+        var id = setInterval(()=>{
+            var now = new Date().getSeconds();
+            time_flow +=1;
+            document.body.innerHTML = '<h3>' + new Date() + '<br>' + (time_flow) + '초 경과</h3>';
+        switch(time_flow%3){
+            case 0 : document.body.style=arr[0] ; break;
+            case 1 : document.body.style=arr[1] ; break;
+            case 2 : document.body.style=arr[2] ; break;
+        };
+    },1000);
+        setTimeout(()=>{clearInterval(id)},20000);
+    </script>
+</body>
+</html>

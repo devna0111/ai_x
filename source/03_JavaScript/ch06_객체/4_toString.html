@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <script>
+        let person = {
+            name : '이순신',  // 속성변수
+            age : 20, 
+            eat : function(food){ // 메소드 내에서 파이썬 self는 this로 대신 하며 this, food 식으로 기입할 필요가 없음.화살표함수 불가.
+                var msg = this.age + '살 ' + this.name +'님이 '+ food +'를 먹는다' ;
+                alert(msg);
+            }, // eat 함수
+            toString : function(){ // 파이썬에서의 __str__ 역할
+                let output = ''; // toStriong 메소드가 return할 문자열
+                for(let key in this){
+                    if( (key!='eat') && (key != 'toString') ){
+                        output += key + ' : ' + this[key] + '<br>';
+                    } // if절 끝
+                } // for문 끝
+                return output;
+            }, // 함수 끝
+        } // 객체 속에 변수형 함수를 부여 가능. person 객체
+        // document.write(person);
+        person.address = '서울시';
+        // document.write(person + '<br>');
+        person.hobby = '열공';
+        person.toStringTest = function(){};
+        alert(person.toString().replaceAll('<br>','\n')); // replace : 1번만 => replaceAll : 전부다 
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

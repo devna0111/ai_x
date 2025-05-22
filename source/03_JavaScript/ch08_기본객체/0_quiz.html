@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>quiz</title>
+<style>
+    table {width:350px; margin:20px auto; padding:20px 10px;}
+    table, input[type='text'], input[type='password'] {
+        border: 1px solid #385d81;
+outline: 1px solid #385d81;
+        padding: 2px;
+    }
+    input[type='submit'], input[type='reset'], input[type='button'], button{
+        background-color: #385d81;
+        border:0; outline:0;
+        color:white; 
+        border-radius: 3px;
+        padding:10px 20px;
+        margin:5px;
+    }
+    td, th { padding:5px 10px; text-align:center;}
+</style>
+<script>
+    var patternNum = /[0-9]/; /* /정규표현식/ : 정규표현식 리터럴 */
+    var patternENG = /[A-Z]/;
+    var patterneng = /[a-z]/;
+    var patternName = /[a-zA-Z가-힣]{2,}/ ;
+    var patternSpc = /[~`!@#$%^&*()_\-+=\|\\\[\]{}'":;?\/<>,\.]/;
+    var patternEmail = /\w{1,}[@][가-힣a-zA-Z0-9]+([.]\w*){1,2}/;
+    function joinCheck(){
+        if(frm.name.value.length<2){
+            alert('이름은 2글자 이상 넣어라');
+            frm.name.focus();
+            return false;
+        }else if(!frm.name.value.match(patternName)){
+            alert('이름 제대로 입력해라라');
+            frm.name.focus();
+            return false;
+        }else if(!frm.mail.value){
+            alert('메일 비었다다');
+            frm.mail.focus();
+            return false;
+        }else if(!frm.mail.value.match(patternEmail)){
+            alert('메일은 id@domain.com 형식을 잘 맞춰와라');
+            frm.mail.focus();
+            return false;
+        }else if(!frm.pw.value){
+            alert('비밀번호 입력해라');
+            frm.pw.focus();
+            return false
+        }else if(frm.pw.value.length<4){
+            alert('비밀번호 4자리 이상이다');
+            frm.pw.focus();
+            return false
+        }else if(!(patternENG.test(frm.pw.value)&&patternNum.test(frm.pw.value)&&patternSpc.test(frm.pw.value)&&patterneng.test(frm.pw.value))){
+            alert('비밀번호 대문자 소문자 숫자 특수문자 하나씩 섞어야지');
+            frm.pw.focus();
+            return false
+        }else if(frm.pw.value != frm.pwChk.value){
+            alert('비번 두개 다르다');
+            frm.pwChk.focus();
+            return false
+        };
+        alert('회원가입 완료')
+    };
+</script>
+</head>
+<body>
+<form action="#" name="frm" onsubmit="return joinCheck()">
+    <table>
+    <tr>
+        <th>이름</th>
+        <td>
+        <input type="text" name="name" placeholder="특수문자와 숫자 못 와" 
+                        autofocus="autofocus"/>
+        </td>
+    </tr>
+    <tr>
+        <th>메일</th>
+        <td><input type="text" name="mail" placeholder="메일 형식에 맞추세요" /></td>
+    </tr>
+    <tr>
+        <th>비밀번호</th>
+        <td><input type="password" name="pw" placeholder="특수문자,알파벳,숫자 포함" /></td>
+    </tr>
+    <tr>
+        <th>비밀번호</th>
+        <td><input type="password" name="pwChk" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <input type="submit" value="회원가입" />
+        <input type="reset" value="취소" />
+        <input type="button" value="로그인" />
+        </td>
+    </tr>
+    </table>
+</form>
+
+</body>
+</html>

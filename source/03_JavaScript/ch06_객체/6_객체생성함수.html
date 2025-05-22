@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>객체생성함수</title>
+    <script>
+        // 객체 생성 -> return 하는 함수
+        // st = makeStudent('홍',90, 99, 80, 95); // => {'name':'홍','kor':90 ... 형태로 만드는 함수}
+        function makeStudent(name, kor, mat, eng, sci){
+            let resultObj = {
+                name:name,
+                kor:kor,
+                mat:mat,
+                sci:sci,
+                eng:eng,
+                getSum : function(){
+                    return this.kor + this.eng + this.mat + this.sci;
+                }, // ------------- getSum
+                getAvg : function(){
+                    return this.getSum()/4
+                }, // ------------- getAvg
+                toString : function(){
+                    let output = '';
+                    for(let key in this){
+                        if(key!='toString' && key!= 'getSum' && key!='getAvg'){
+                            output += key + ' : ' + this[key] + ' ' ;
+                        }else if(key == 'getSum'){
+                            output += key.substring(3).toLowerCase() +' : '+ this[key]() + ' ';
+                        }else if(key == 'getAvg'){
+                            output += key.substring(3).toLowerCase() + ' : ' + this[key]() + '\n';
+                        }//if
+                    }; // for문
+                    return output;
+                }, // -------------toString
+            };// resultObh 객체 생성
+            return resultObj;
+        };// makeStudent 객체생성함수 끝 
+
+        students = [makeStudent('홍',90, 99, 80, 95),makeStudent('김',99, 95, 88, 75),makeStudent('유',90, 95, 88, 70),];
+        // a = new makeStudent(); 리턴값이 있는 일반 함수에서도 작동은 한다...
+        // document.writeln(a);
+        students.forEach((data, idx) =>{
+            document.write(idx + '.' + data + '<br>')
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
