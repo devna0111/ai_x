@@ -4,26 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <title>quiz</title>
+    <style>
+        body{background-image : url("img/img01.png");background-size:100%;color:#FFFF00;font-size:1.5em;font-weight:bold;}
+    </style>
+    <script>
+        // 사용할 변수 우선 선언
+        let time_flow = 0; // 시간 경과를 저장할 변수
+        let colors = ['#FFFF00', '#00FFBE', 'white']; // 글자색 부여할 배열
+        let images = [
+            'url(img/img01.png)',
+            'url(img/img02.png)',
+            'url(img/img03.png)',
+        ];
+        document.writeln(new Date().toLocaleString());
+        let timerID = setInterval(()=>{
+            document.body.innerHTML = new Date().toLocaleString();
+            time_flow++;
+            document.body.innerHTML += '<p>' + time_flow +'초 지남</p>';
+            document.body.style.backgroundImage = images[time_flow%images.length];
+            document.body.style.color = colors[time_flow%colors.length];
+        },1000);
+        setTimeout(()=>{clearInterval(timerID)},10000);
+    </script>
 </head>
 <body>
     <script>
-        var arr = [
-            'background : url("img/img01.png") no-repeat;background-size:100%;color:lightpink;',
-            'background : url("img/img02.png") no-repeat;background-size:100%;color:lightgreen;',
-            'background : url("img/img03.png") no-repeat;background-size:100%;color:aqua;'
+        //  내 풀이 => 최초 body에 아무런 값을 주지 않고 load하면 에러가 발생함.
+        // 그러나 선생님 풀이는 body에 CSS를 부여하여 load할 때 body태그를 생성하도록 함
+        // => 빈 CSS와 HTML에서 script를 먼저 짜면 작동하지 않음.
+        /*
+        let time_flow = 0; // 시간 경과를 저장할 변수 
+        var img_default = [
+            'background-image : url("img/img01.png");background-size:100%;color:lightpink;',
+            'background-image : url("img/img02.png");background-size:100%;color:lightgreen;',
+            'background-image : url("img/img03.png");background-size:100%;color:aqua;'
         ];
-        let time_flow = 0;
         var id = setInterval(()=>{
-            var now = new Date().getSeconds();
             time_flow +=1;
-            document.body.innerHTML = '<h3>' + new Date() + '<br>' + (time_flow) + '초 경과</h3>';
-        switch(time_flow%3){
-            case 0 : document.body.style=arr[0] ; break;
-            case 1 : document.body.style=arr[1] ; break;
-            case 2 : document.body.style=arr[2] ; break;
-        };
-    },1000);
+            document.body.innerHTML = '<h3>' + new Date().toLocaleString() + '<br>' + (time_flow) + '초 경과</h3>';
+            switch(time_flow%3){
+                case 0 : document.body.style=img_default[0] ; break;
+                case 1 : document.body.style=img_default[1] ; break;
+                case 2 : document.body.style=img_default[2] ; break;
+            };
+        },1000);
         setTimeout(()=>{clearInterval(id)},20000);
+        document.body.innerHTML = '<h3>' + new Date().toLocaleString() + '<br>' + (time_flow) + '초 경과</h3>'; */
     </script>
 </body>
 </html>

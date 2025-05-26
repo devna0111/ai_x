@@ -1,0 +1,33 @@
+ch10 문서객체모델
+document. 여러 메소드
+
+1. 텍스트 노드가 필요한 태그 추가하기 : append 메소드 이용하기
+	문서객체추가방법 1 : 1) h1태그 생성 2) textNode 생성 3) textNode를 h1에 연결 4) h1을 바디에 연결
+2. 텍스트 노드가 필요없는 태그 추가하기
+	문서객체추가방법 2 : 1)img태그 생성 2)img태그 속성변경 3)img를 body에 연결
+**예시
+    <script>
+        window.onload = ()=>{
+            var h1 = document.createElement('h1'); 
+            var textNode = document.createTextNode('추가함');
+            h1.appendChild(textNode);
+            document.body.appendChild(h1);
+        };
+    </script>
+
+3. 종합방안
+	// 문서객체추가방법 3 : innerHTML 이용!
+
+=> 태그를 자바스크립트에서 지정하기
+1. var X = document.getElementById( "태그의 ID" ) ; 
+2. getElementsByClassName
+....
+등등 많으며 주의할 것으로는
+document.querySelector( 'CSS선택자' ) => 제일 처음 선택자 것
+document.querySelectorAll( 'CSS선택자' ) => 모든 선택자
+
+모든 경우 body가 로딩이 된 후를 노려야하므로
+window.onload = ()=>{} 활용
+
+4. 요소의 삭제 : document.타겟위치.removeChild('삭제할 내용')
+삭제할 내용은 보통 var h1 = document.getElementsById('h1') 형태로 만들어서 사용

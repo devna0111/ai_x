@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>dayInterval</title>
+    <script src="dayInterval.js"></script><!-- js파일을 그대로 옮겨오는 기능.. 따라서 절차지향적 해석으로 순서에 주의 -->
+    <script>
+        var now = new Date();
+        document.writeln(now +'<br>')
+        document.writeln(now.toLocaleString() +'<br>');
+        document.writeln(now.toLocaleDateString() +'<br>');
+        document.writeln(now.toLocaleTimeString() +'<br>');
+        var openday = new Date(2025,3,7,9,30,0);//월은 0,1,2,3,~11 (index) 그런데 일은 왜 31일 기준을 안만들었는가.
+        document.writeln('개강일 : ' + openday.toLocaleString() + '<br>');
+        // 몇일 차이 인지
+        var day = now.getIntervalDay(openday);
+        // day = openday.getIntervalDay(now);
+        document.writeln(day + '일 지났고 ' + (day+1) +'일차 입니다.<br>')
+        // document.writeln(now.valueOf()); // 1970.01.01로부터 milsec변화 == getTime()
+        // document.writeln(now.valueOf());
+        document.writeln('생후 ' + now.getIntervalDay(new Date(1997,0,11,0,0,0,0)) + '일 지났습니다.')
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

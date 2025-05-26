@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz03</title>
+    <style>
+        
+    </style>
+    <script>
+        var img;
+        window.onload =()=>{
+            var img = document.getElementsByTagName('img')[0];
+            img.onmousedown = function(){
+                this.setAttribute('src','img/but2.gif')};
+            img.onmouseout = function(){
+                this.setAttribute('src','img/but1.gif')};
+    };
+    </script>
+</head>
+<body>
+    <img src="img/but1.gif" alt="mouse up" />
+</body>
+</html>

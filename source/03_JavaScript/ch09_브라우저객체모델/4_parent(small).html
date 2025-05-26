@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>미리보기 열기</title>
+    <style>
+        
+    </style>
+    <script>
+        // 새창 열기
+        let child;
+        function openChild(){
+            child = open('4_child(large).html','','width=450,height=600,left=150px,top=100px',);
+            if(!child){
+                alert('팝업 차단 해지가 필요합니다!');
+            }
+        };
+        // 열린 창 닫기
+        function closeChild(){
+            child.close()
+        };
+    </script>
+</head>
+<body>
+    <h2>작은 그림의 parent창</h2>
+    <img src="img/small.jpg" alt="작은그림" title="작은그림" onmouseover="openChild()" onmouseout="closeChild()"/>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz_01</title>
+    <style>
+        table {width:280px; height: 100px; margin: 10px auto;} h3{text-align:center;}
+        td{border: 1px solid gray;}
+    </style>
+    <script>
+        var colors = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple', 'white']
+        window.onload = ()=>{
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple']
+            var tds = document.querySelectorAll('td');
+            for(idx=0;idx<tds.length;idx++){
+                tds[idx].style.backgroundColor = colors[idx];
+            }
+        }
+        function bgcolorChange(i){
+            var bgcolor = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple', 'white']
+            document.body.style.backgroundColor = bgcolor[i];
+            }
+    </script>
+</head>
+<body>
+    <table> <center><h1>quiz1 : 마우스를 올리면 바탕화면도 해당색상으로</h1></center>
+        <tr onmouseout="bgcolorChange(7)"><!-- tr에서 마우스를 빼면 바탕화면이 하얀색-->
+            <td onmouseover="bgcolorChange(0)"></td>
+            <td onmouseover="bgcolorChange(1)"></td>
+            <td onmouseover="bgcolorChange(2)"></td>
+            <td onmouseover="bgcolorChange(3)"></td>
+            <td onmouseover="bgcolorChange(4)"></td>
+            <td onmouseover="bgcolorChange(5)"></td>
+            <td onmouseover="bgcolorChange(6)"></td>
+        </tr>
+    </table>
+</body>
+</html>

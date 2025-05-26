@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+        h1{cursor: pointer;/* 커서가 올라가면 클릭하는 형태로 바뀜 */} 
+    </style>
+    <script>
+        const whenClick = ()=>{
+            alert('클릭했네');
+            var h1 = document.querySelector('h1'); // 클릭을 하고 나서 자동으로 h1태그를 선택하는 게 아니라 내가 직접 선택해야 스타일 등 변경 가능
+            h1.innerHTML = 'Click 했네' ;
+            h1.style = 'color:red';
+            // h1.style.color = 'gray'
+        }
+    </script>
+</head>
+<body>
+    <h1 onclick="whenClick()">Click 해봐</h1>
+</body>
+</html>

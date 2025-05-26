@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>페이지 이동</title>
+    <style>
+    </style>
+    <script>
+        cnt = 3;
+        id = setInterval(()=>{
+            document.body.innerHTML = '<h1> 잠시 후 페이지 이동이 있겠습니다 </h1>' +'<h3>'+cnt-- +'초'+'</h3>';
+        },1000)
+        setTimeout(()=>{
+            clearInterval(id); // 타이머 중지
+            // 페이지 변경
+            location.href = '6_history.html';
+            // location.href = 'http://www.naver.com';
+            // location = 'http://www.naver.com';
+            
+        },100);
+    </script>
+</head>
+<body>
+    <h1>잠시 후 페이지 이동이 있겠습니다</h1>
+</body>
+</html>

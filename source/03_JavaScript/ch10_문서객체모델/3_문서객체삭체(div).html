@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>span{color:red;}</style>
+    <script>
+        var div;
+        window.onload = ()=>{ // 브라우저 창이 전부 로드된 후에 시행
+            div = document.getElementById('wrap');
+            div = document.getElementsByClassName('content')[0];
+            div = document.getElementsByName('name')[0]; // 동적 list. 내부 값이 변동되면 인덱스값 변동
+            div = document.querySelector('div#wrap');
+            div = document.querySelectorAll('div.content')[0]; // 정적 list. 내부 값을 removeChild해도 인덱스값 동일!
+            div = document.getElementsByTagName('div')[0];
+        };
+        // 선언적 함수 정의
+        function removeAll(){
+            var h1 = document.getElementsByTagName('h1');
+            cnt = h1.length;
+            for(let i = 0;i<cnt;i++){
+                div.removeChild(h1[0]);
+            };
+        };
+        // 익명함수 정의(변수에 할당)
+        const remove= function(){
+            let h1 = document.querySelector('h1');
+            if(h1){
+                div.removeChild(h1); // 마지막 h1을 지우려면 querySelectorAll의 마지막 요소부터 지우면 됨.
+            }else{
+                alert('지울 h1태그가 없습니다.')
+            };
+        };
+        // 익명함수 정의(화살표 함수 변수에 할당)
+        const append= () => {
+            // 마지막에 h1태그 하나 추가하기
+            // document.body.innerHTML += '<h1>HEADER</h1>'
+            var tagAppend = document.createElement('h1');
+            var ment = document.createTextNode('HEADER');
+            tagAppend.appendChild(ment);
+            div.appendChild(tagAppend);
+            // h1태그 뒤에 # 추가
+            // var header = div.getElementsByTagName('h1'); // 모든 h1태그를 배열형태 객체로 반환
+            var header = document.querySelectorAll('h1'); // h1 태그를 CSS선태자로 선택하여 모든 선택자를 배열형태 객체로 반환
+            for(let idx =0;idx <header.length-1;idx++){
+                header[idx].innerHTML += '<span>#</span>';
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="wrap" class="content" name="name">
+        <button onclick="removeAll()">h1태그 싹 다 제거하기</button>
+        <button onclick="remove()">h1 첫 태그 하나 지우기</button>
+        <button onclick="append()">h1태그 끝에 추가하기</button>
+        <h1>HEADER</h1>
+        <h1>HEADER</h1>
+        <h1>HEADER</h1>
+        <h1>HEADER</h1>
+    </div>
+</body>
+</html>

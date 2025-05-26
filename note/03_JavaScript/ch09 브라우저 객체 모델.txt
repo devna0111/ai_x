@@ -1,0 +1,41 @@
+ch09 브라우저 객체 모델
+
+window.open('url', 'name', '사이즈,위치')
+name.close() 
+on~~~~ 여러 종류 기능이 있음.
+
+보통 body 속 이미지 등에 onclick="작동할 함수명", onmouseover ='작동할 함수명' 등 활용.
+예시)
+스크립트
+        const openWin= function(){
+            // childWin라는 이름의 새창을 열기
+            let child = open('http://wwww.daum.net','childWin','width=700,height=500');
+            if(!child){
+                alert('팝업을 해제해 주세요');
+            }
+
+바디
+<a href="http://wwww.daum.net" target="childWin">다음</a>
+
+
+
+예시 2
+    <script>
+        // 새창 열기
+        let child;
+        function openChild(){
+            child = open('4_child(large).html','','width=450,height=600,left=150px,top=100px',);
+            if(!child){
+                alert('팝업 차단 해지가 필요합니다!');
+            }
+        };
+        // 열린 창 닫기
+        function closeChild(){
+            child.close()
+        };
+    </script>
+</head>
+<body>
+    <h2>작은 그림의 parent창</h2>
+    <img src="img/small.jpg" alt="작은그림" title="작은그림" onmouseover="openChild()" onmouseout="closeChild()"/>
+</body>

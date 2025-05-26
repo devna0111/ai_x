@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style></style>
+    <script>
+        window.onload = () => {
+            //id로 가져오기 document.getElementById(ID명) : Element 1개 return
+            //class로 가져오기 document.getElementsByClassName(CLASS명) : 배열형태의 객체를 return
+            var clock1 = document.getElementsByClassName('clock1');
+            clock1[0].innerHTML = new Date().toLocaleDateString();
+            clock1[1].innerHTML = '<b>' + new Date().toLocaleTimeString() +'</b>';
+            var clock2 = document.getElementsByClassName('clock2')[0];
+            clock2.value = new Date().toLocaleTimeString(); // 태그 사용 불가 : html이 아니라 value
+            // clock2.style = 'font-weight : bold;'
+            clock2.style.fontWeight = 'bold';
+        };
+    </script>
+</head>
+<body>
+    <h1 class="clock1 clockh1">오늘 날짜</h1>
+    <p class="clock1 clockp">열린 시간</p>
+    <input type="text" class ='clock2'>
+</body>
+</html>

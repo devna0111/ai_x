@@ -1,0 +1,56 @@
+ch11 이벤트 처리
+
+1. 인라인 이벤트 모델 : <div onclick="작동할 함수명">으로 작성하고 함수를 script 속 window.onload = function(){}에 정의해두기
+
+2. 기본 이벤트 모델 : <div id='header'> 로 정의하고 
+window.onload = ()=>{ var header = document.getElementById('header') ; header.onclick = finction(){} } 로 이벤트 속성에 부여하기
+
+3. 표준 이벤트 모델  : <h1 id="header">로  정의하고
+window.onload = ()=>{var h1 = document.getElementById('header'); h1.addEventListener('click', function(){ 작동할 내용 }); } 으로 기능만 부여하기
+
+4. 이벤트 강제 발생 : 표준이벤트모델의 경우 click사용(click은 강제로 이벤트를 발생시키는 거라 어떤 경우에도 기능이 미리 할당되어있으면 가능)
+	다른 함수 호출할 때 리스너함수를 호출해서 강제로 기능하게끔 설계.
+        window.onload = function(){
+            var btnA = document.getElementById('btnA');
+            var btnB = document.querySelector('button#btnB');
+            var countA = document.getElementById('countA');
+            var countB = document.querySelector('span#countB');
+            btnA.onclick = ()=>{
+                countA.innerHTML = Number(countA.innerHTML) + 1;
+                // btnB를 강제 클릭 이벤트 발생
+                ★★★★ btnB.onclick(); ★★★★
+            };
+            btnB.onclick = ()=>{
+                countB.innerHTML = Number(countB.innerHTML) + 1; 
+            }
+        };
+
+5. 이벤트 제거 : 객체.이벤트속성 = null; => 다시 살리는 방법은 없음. 필요 시 상황을 고려하여 재정의 로직을 추가해야함.
+
+	만약 리스너 함수(표준이벤트) 만든다면 기존에 addEventListener('상황', 함수) 에서 함수를 따로 할당하여서 사용하며 this.removeEventListener('click',handler)
+
+	let handler = function(){ // 아래와 같이 제거의 경우를 미리 선언해야 한다. 재귀함수 형태...
+                this.innerHTML += '<span>♥</span>';
+                cnt++;
+                if(cnt>=7){
+                    this.removeEventListener('click',handler);
+                }
+            };
+
+6. 이벤트 제한
+	1. 함수 정의 후 return false
+	2. 표준 이벤트(addEventListner) 사용시 return 대신 매개변수에 e를 넣고 e.preventDefault()
+
+7. 키보드 눌렀을 때 => window.keyup = ()=>{ key = event.keyCode // 누르는 키보드 위치마다 코드가 따로 있음!}
+	=> 알파벳의 경우 String.fromCodePoint(key)로 반환이 가능함! 알파벳만 가능함! 숫자는 keyCode - 0의 코드 를 통해 사용해라!
+
+8. 클릭했을 때 좌표 따기 : window.onclick = ()=>{ let x = event.offsetX; let y = event.offsetY; } // offsetX, Y는 브라우저의 좌표를 number 형태로 반환.
+	=> 절대좌표로 이미지 지정 후 img.style.left = event.offsetX + 'px' ; img.style.top = event.offsetY 로 이동시키면서 사용이 가능하다.
+
+**** img의 경우 onmouseover 등으로 다른 이미지를 처리할 때
+	this.src=소스주소
+	를 사용하면 정말 간편하다.
+
+**** 그리고 배열형태 객체로 반환받으면 ex) var imgs = document.getElementsById('img)
+	for-of문을 사용하면 작동안하는 경우가 허다하다. => 정 쓰고싶으면 querySelectorAll을 써라 차라리
+	for(idx=0;idx<imgs.length;idx++)문을 사용하도록 하자.

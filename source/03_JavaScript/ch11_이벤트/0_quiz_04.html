@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz04</title>
+    <style>
+        div{width:300px; margin:0 auto; border:1px solid blue; text-align:center;}
+    </style>
+    <script>
+        window.onload = function(){
+            var urls = ['http://www.naver.com',
+            'http://www.daum.net',
+            'http://www.google.com',
+            'http://www.youtube.com'
+            ];
+            var btns = document.getElementsByTagName('button');
+            // for(let idx in btns){
+            //     btns[idx].onclick=()=>{open(urls[idx],'','')}
+            // }
+            for(let idx in btns){ // var로 선언하게 되면 idx가 for문이 종료후에도 값이 유효하게 되며 작동하지 않게 됨. 스코프 문제
+                btns[idx].onclick=()=>{
+                    location.href = urls[idx]
+                }
+            }
+            }
+    </script>
+</head>
+<body>
+    <div>
+        <h3>quiz.4 메뉴</h3>
+        <p>
+            <button>네이버</button>
+            <button>다음</button>
+            <button>구글</button>
+            <button>유튜브</button>
+        </p>
+    </div>
+</body>
+</html>

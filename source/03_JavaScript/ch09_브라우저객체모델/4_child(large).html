@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+        body{background-image: url(img/large.jpg);background-size : 100%;background-repeat: no-repeat;text-align: center;}
+    </style>
+    <script>
+        time_limit = 4 ;
+        setInterval(()=>{
+            document.body.innerHTML = '<h2>'+time_limit-- +'초 뒤에 꺼집니다'+'</h2>';
+        },1000);
+        setTimeout(()=>{close()},5000);
+    </script>
+</head>
+<body>
+    <h2>5초 뒤에 꺼집니다</h2>
+</body>
+</html>

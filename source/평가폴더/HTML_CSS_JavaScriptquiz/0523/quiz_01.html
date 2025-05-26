@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://127.0.0.1:5500/0_quiz_1.html -->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>quiz_01</title>
+    <style>
+        table {width:280px; height: 100px; margin: 10px auto;} h3{text-align:center;}
+        td{border: 1px solid gray;}
+    </style>
+    <script>
+        var colors = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple', 'white']
+        window.onload = ()=>{
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple']
+            var tds = document.querySelectorAll('td');
+            for(idx=0;idx<tds.length;idx++){
+                tds[idx].style.backgroundColor = colors[idx];
+            }
+        }
+        function bgcolorChange(i){
+            var bgcolor = ['red', 'orange', 'yellow', 'green', 'blue','navy','purple', 'white']
+            document.body.style.backgroundColor = bgcolor[i];
+            }
+    </script>
+</head>
+<body style="background-color: white;">
+    <center><h1>quiz1 : 마우스를 올리면 바탕화면도 해당색상으로</h1></center><table> 
+        <tbody><tr onmouseout="bgcolorChange(7)"><!-- tr에서 마우스를 빼면 바탕화면이 하얀색-->
+            <td onmouseover="bgcolorChange(0)" style="background-color: red;"></td>
+            <td onmouseover="bgcolorChange(1)" style="background-color: orange;"></td>
+            <td onmouseover="bgcolorChange(2)" style="background-color: yellow;"></td>
+            <td onmouseover="bgcolorChange(3)" style="background-color: green;"></td>
+            <td onmouseover="bgcolorChange(4)" style="background-color: blue;"></td>
+            <td onmouseover="bgcolorChange(5)" style="background-color: navy;"></td>
+            <td onmouseover="bgcolorChange(6)" style="background-color: purple;"></td>
+        </tr>
+    </tbody></table>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

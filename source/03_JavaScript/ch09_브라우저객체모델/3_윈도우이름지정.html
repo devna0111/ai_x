@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <script>
+        const openWin= function(){
+            // childWin라는 이름의 새창을 열기
+            let child = open('http://wwww.daum.net','childWin','width=700,height=500');
+            if(!child){
+                alert('팝업을 해제해 주세요');
+            }
+        };
+    </script>
+</head>
+<body>
+    <button onclick="openWin()">새창열기</button>
+    <br>
+    <a href="http://wwww.daum.net" target="childWin">다음</a>
+</body>
+</html>

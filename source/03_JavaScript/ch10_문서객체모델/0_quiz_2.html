@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>quiz_02</title>
+    <style>
+        div{width:300px; margin:0 auto; border:1px solid blue; text-align:center;}
+        button{margin-bottom : 10px};
+    </style>
+    <script>
+        urls = ['http://www.naver.com',
+            'http://www.daum.net',
+            'http://www.google.com',
+            'http://www.youtube.com'
+        ];
+        moveSite = i=> {
+            open(urls[i],'',)
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h2>quiz2. 메뉴</h2>
+        <button onclick="moveSite(0)">네이버</button> <!-- 인라인 방식으로 이벤트를 활성화했다 -->
+        <button onclick="moveSite(1)">다음</button>
+        <button onclick="moveSite(2)">구글</button>
+        <button onclick="moveSite(3)">유튜브</button>
+    </div>
+    <!-- <a href="http://www.naver.com">네이버바로가기</a><br>
+    <a href="http://www.naver.com"><button>네이버바로가기</button></a> -->
+</body>
+</html>
