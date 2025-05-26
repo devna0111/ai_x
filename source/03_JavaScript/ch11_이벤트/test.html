@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>test</title>
+    <style>
+        h1{cursor: pointer;width: 150px;}
+        img{display: none;position: absolute;}
+    </style>
+    <script>
+        var cnt = 0;
+        window.onload = () => {
+            let h1 = document.querySelector('h1');
+            let p = document.querySelector('p');
+            h1.onclick = function(){
+                cnt++;
+                for(let idx=0;idx<150;idx++){
+                    h1.click();
+                }
+                p.innerHTML = cnt + "번 클릭하였습니다."
+            };
+            h1.onmouseover = function(){
+                this.innerHTML = '클릭하게?';
+                this.style.color = 'aqua';
+            };
+            h1.onmouseout = function(){
+                this.innerHTML = '클릭해봐';
+                this.style.color = 'black';
+            }
+            h1.onmousedown = function(){
+                this.innerHTML = '클릭 중';
+                this.style.color = 'yellow';
+                this.style.fontWeight = 'bold';
+            };
+            h1.onmouseup = function(){
+                this.innerHTML = '클릭해봐';
+                this.style.color = 'black';
+            };
+        };
+        window.onkeyup=()=>{
+            let key = event.keyCode;
+            if(key){
+                alert('키보드 누르면 안되요')
+            }
+        };
+        // window.onclick=()=>{
+        //     let img = document.querySelector('img');
+        //     let x = event.offsetX;
+        //     let y = event.offsetY;
+        //     img.style.display = 'block'
+        //     img.style.left = x-25 +'px';
+        //     img.style.top = y-25 +'px';
+        //     img.style.zIndex = -1;
+        // };
+        window.onmousemove = ()=>{
+            let img = document.querySelector('img');
+            let x = event.offsetX;
+            let y = event.offsetY;
+            img.style.display = 'block'
+            img.style.left = x-25 +'px';
+            img.style.top = y-25 +'px';
+            img.style.zIndex = -1;
+        };
+    </script>
+</head>
+<body>
+    <h1>클릭해봐</h1>
+    <img src="img/fire.gif">
+    <p></p>
+</body>
+</html>
