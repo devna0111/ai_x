@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>html_val</title>
+    <style></style>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+    <script>
+    $(document).ready(function(){
+        /* $(선택자).함수(); 
+        val(내용) : 내용을 작성,갱신하기 val() : 기존 태그 속 value를 return
+        html(내용) : 내용을 작성, 갱신하기 html() : 기존 태그 속 innerHTML을 return
+        text(내용) : 내용을 작성, 갱신하기 text() : 기존 태그 속 text를 return
+        */
+        $('p#msg').html('<h1>Hello, jQuery<!/h1>');
+        // $('p#msg').text('<h1>hello, jQuery</h1>');
+        $('input[name="msg"]').val("Hello, jQuery!").css('font-weight','bold');
+        // button을 클릭하면 input의 value를 p에 출력
+        $('button').click(()=>{
+            // let msg = $('p#msg').text();
+            // alert(msg);
+            let msg = $('input[name="msg"]').val();
+            $('p#msg').text(msg).css('font-weight','bold')
+        });
+    });
+    </script>
+</head>
+<body>
+    <p id="msg"></p>
+    <p>메세지 : <input type="text" name='msg' class='msg'></p>
+    <button>msg 경고창</button>
+</body>
+</html>

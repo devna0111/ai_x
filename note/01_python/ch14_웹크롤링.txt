@@ -1,0 +1,4 @@
+ch14_웹크롤링
+-크게 2개 분류 : 정적/동적
+- 정적 : BeautifulSoup (bs4 통칭) 활용 => 
+- 동적 : Solenium

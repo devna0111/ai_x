@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>html_text</title>
+    <style>
+        
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){ // DOM트리를 만든 뒤에 바로 수행해라(태그 노드 트리)
+            //jQuery 소스 : $(선택자).action() action함수의 경우 jQuery에서 제공하는 함수
+            $('p#p1').click(function(){
+                // p#p1 선택자가 선택되었고 click 했을 때
+                $(this).html('<b>태그 내용이 html에 적용되서 바뀜<b>')
+                // $(this).text('<b>태그 내용 안에 text 삽입</b>');// text()함수는 태그 적용이 안되고 텍스트 전체 포함
+                $(this).css('background-color','red')
+                        .css('color', 'yellow')
+            });
+        });
+        $(function(){
+            // jQuery 소스
+        });
+    </script>
+</head>
+<body>
+    <p id="p1">click 해 봐</p>
+</body>
+</html>

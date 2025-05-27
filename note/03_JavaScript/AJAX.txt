@@ -1,0 +1,42 @@
+AJAX
+AJAX = 비동기 + 서버 통신 + 화면 일부 업데이트 하는 기술
+
+1. jQuery : 스크립트 src를 구글에서 검색해서 CDN( Content Delivery Network)방식으로 연결시킨 후
+
+2. 지금까지 사용하던 document.querySelector() 방식을
+	$(CSS선택자).이벤트함수(콜백함수) 형태로 활용이 가능하다.
+
+3. jQuery에는 AJAX방식을 사용할 수 있는 함수가 몇 갈래 주어지는데
+	$.get(), $.post(), $.ajax() 방식이 그러하다.
+	1) $.get(요청경로(xx?id=aa), callback(data, status){ //2개의 필수 인자.
+        	// data : 요청경로를 수행한 "결과"
+        	// status : success / fail 반환
+		    });
+	2) $.post(요청경로(xxx), 요청파라미터값의 객체({id:'aa'}), callback(data, status));
+		post방식의 경우 DBMS와 연결해서 사용할 수 있으며
+		현재의 진도 수준에서 post 방식은 구현에 어려움.
+		향후 flask 혹은 django, fastAPI를 공부하면서 체크
+
+	3) $.ajax({  // ajax는 객체를 매개변수로 받는다.
+		url:'요청경로(xx?id=aa / xx)', // ★★★필수기입
+    		type: 'get'이나 'post'이나 없거나, 기본 get
+    		data: 요청파라미터와 값 'id=aaa'이나 {id:'aaa'},
+    		dataType : 기본 'html'이나 'json' 요청한 경로로 실행한 결과 타입,
+    		success : 요청경로 성공 시 수행할 콜백함수, // ★★★필수기입
+    		error : 요청경로 실패 시 수행할 콜백함수,
+   		 })
+	
+4. 바닐라JavaScript에서 fetch()함수를 활용해서 ajax를 구현하기
+	=> fetch(url, {method:'get')
+		.then(response =>{ // response : fetch의 url에 요청한 작업의 결과물(XX.html?id=id 같은요청)
+			if(! response.ok){
+				throw new Error('에러메세지 뿌릴거')
+			}
+			return response.text() // response가 정상이면 그 중 텍스트만
+		})
+		.then(data => { //data => response가 정상이면 그 중 텍스트만
+			data를 가지고 할 것, 콜백함수
+		})
+		.catch(error =>{ // response.ok 절에서 true가 나온, 에러객체가 발생 시
+			error가지고 할 콜백함수
+		})
