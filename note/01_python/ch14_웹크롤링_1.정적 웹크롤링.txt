@@ -1,0 +1,30 @@
+ch14_웹크롤링_1.정적 웹크롤링
+html, xml 에서 사용이 원활한 방법. 태그를 사용하여 용이함
+
+방법 1) requests모듈의 get 활용
+	1. 원하는 주소를 체크
+		-import requests
+		- from bs4 import BeautifulSoup
+	2. response = requests.get(url주소)
+	3. soup = BeautifulSoup(response.content, 'html.parser')
+		=> soup을 selcet와 find로 잘 다듬으면 됨
+
+방법 2) urllib.request모듈의 urlopen 활용
+	1. 원하는 주소 체크
+	-from urllib.request import urlopen
+	- from bs4 import BeautifulSoup
+	2. response = urlopen(url주소)
+	3. soup = BeautifulSoup(response, 'html.parser')
+		=> soup을 select와 find로 잘 다듬으면 됨
+
+	=> 접근이 제한되면
+		1. 원하는 주소 체크
+		-from urllib.request import urlopen, Request
+		- from bs4 import BeautifulSoup
+		headers = {'user-agent' : '내 컴퓨터의 User-agent'}
+		2. request = Request(url, headers = headers)
+		3. response = urlopen(request)
+		4. soup = BeautifulSoup(response, 'html.parser')
+			=> soup을 select와 find로 잘 다듬으면 됨
+
+
