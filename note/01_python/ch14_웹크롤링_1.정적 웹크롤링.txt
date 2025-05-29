@@ -1,7 +1,7 @@
 ch14_웹크롤링_1.정적 웹크롤링
 html, xml 에서 사용이 원활한 방법. 태그를 사용하여 용이함
 
-방법 1) requests모듈의 get 활용
+방법 1) requests모듈의 get 활용 => requests모듈에는 .json()이 있어서 아주 편리하다. json 모듈을 안써도 된다.
 	1. 원하는 주소를 체크
 		-import requests
 		- from bs4 import BeautifulSoup
@@ -9,7 +9,20 @@ html, xml 에서 사용이 원활한 방법. 태그를 사용하여 용이함
 	3. soup = BeautifulSoup(response.content, 'html.parser')
 		=> soup을 selcet와 find로 잘 다듬으면 됨
 
+=> 접근이 제한되면(~/robots.txt 페이지 체크 : 사이트 마다 크롤링 허용 범위가 나와있음)
+		1. 원하는 주소를 체크
+			-import requests
+			- from bs4 import BeautifulSoup
+			headers = {'user-agent' : '내 컴퓨터의 User-agent'} # 개발자 도구 => 네트워크 탭 => 아무 요소나 클릭해서 체크 가능
+		2. response = requests.get(url주소, headers = headers)
+		3. soup = BeautifulSoup(response.content, 'html.parser')
+			=> soup을 selcet와 find로 잘 다듬으면 됨
+
+
 방법 2) urllib.request모듈의 urlopen 활용
+	=>> 이 방법의 경우 한글이 주소창에 활용이 불가능하여
+		word = urllib.parse.quote("url의 한글부분") 를 통해 바이너리타입으로 전환하면서 사용이 가능
+
 	1. 원하는 주소 체크
 	-from urllib.request import urlopen
 	- from bs4 import BeautifulSoup
@@ -17,14 +30,20 @@ html, xml 에서 사용이 원활한 방법. 태그를 사용하여 용이함
 	3. soup = BeautifulSoup(response, 'html.parser')
 		=> soup을 select와 find로 잘 다듬으면 됨
 
-	=> 접근이 제한되면
+	=> 접근이 제한되면(~/robots.txt 페이지 체크 : 사이트 마다 크롤링 허용 범위가 나와있음)
 		1. 원하는 주소 체크
 		-from urllib.request import urlopen, Request
 		- from bs4 import BeautifulSoup
-		headers = {'user-agent' : '내 컴퓨터의 User-agent'}
+		headers = {'user-agent' : '내 컴퓨터의 User-agent'} # 개발자 도구 => 네트워크 탭 => 아무 요소나 클릭해서 체크 가능
 		2. request = Request(url, headers = headers)
 		3. response = urlopen(request)
 		4. soup = BeautifulSoup(response, 'html.parser')
 			=> soup을 select와 find로 잘 다듬으면 됨
 
 
+
+** url에 여러 패러미터가 들어가면 params = { "파라미터이름" : "파라미터값" , ... } 형태로 넣은 다음 response = requests.get(url, params=params)
+
+json 형태 str => 
+import json
+data = json.loads(데이터)

@@ -24,7 +24,7 @@ soup = BeautifulSoup(response.text, "html.parser') # parsing을 위한 Beautiful
 	2. .select(선택자) => 1번 사항의 단일객체들을 리스트로 반환
 		=> select는 원하는 선택자를 단일 스트링 속에 모두 포함시켜서 가져올 수 있음.
 			ex) soup.select('h1.css, span')
-	3. .find(태그, 속성)
+	3. .find(태그, 속성) 속성은 { '속성종류' : '속성이름' } 로 기입.
 	3. .find_all(태그, 속성) => 만약에 속성이 같다면,
 		find_all(['h1', 'span'], {'class': 'css'}) 형태로 모두 가져올 수 있음.
 => 없는 엘리먼트를 찾으면 리스트를 반환하는 경우 빈리스트로.

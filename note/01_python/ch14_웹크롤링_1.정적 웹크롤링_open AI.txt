@@ -1,0 +1,19 @@
+ch14_웹크롤링_1.정적 웹크롤링_open Api
+
+1. 우선 key 발급 먼저 하기. 시간이 얼마나 소요될 지 모름.
+2. key 값은 .env 파일에 올려두기
+3. key값 로드를 위해 아래와 같이 실행(dotenv 모듈이 없으면 다운로드 하기)
+	# 환경변수 가져오기
+	from dotenv import load_dotenv
+	import os
+	load_dotenv() # dotenv_path=".env" 기본값
+	# print(os.getenv('Client_ID')) # 잘 작동하는 지 체크
+	# print(os.getenv('Client_Secret'))
+
+4. 필요한 API 코드는 보통 documents에 샘플이 있으며 이에 따라 코드 작업을 진행해야함.
+
+=> 보통 xml 혹은 json 파일로 반환하는데
+	json의 경우 BeautifulSoup객체에서 선택자 활용이 불가능함.
+	따라서 반환된 파일을 response라고 할 때,
+	json모듈의 loads함수를 사용해서 딕셔너리 구조 데이터를 만들어서 정형하던가
+	requests모듈의 get 함수를 사용했다면 .json()함수를 통해 정형해서 활용을 함.	
