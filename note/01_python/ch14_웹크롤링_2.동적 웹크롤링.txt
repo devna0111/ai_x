@@ -1,1 +1,26 @@
 ch14_웹크롤링_2.동적 웹크롤링
+1. selenium 라이브러리를 사용한다.
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time # 여기까지가 기본 세팅
+
+driver = webdriver.Chrome()
+driver.get(주소)
+elem = driver.find_element('By.NAME, 'q')
+elem.click()
+elem.clear()
+elem.send_keys('입력할문자열')
+elem.send_keys(Keys.RETURN)
+... 등등
+
+# 탐색 결과를 list로 받아서 활용하기는 아래와 같이 시행
+result_list = driver.find_elements(By.CSS_SELECTOR, 'li > h3 > a')
+ex) [<selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.48")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.49")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.50")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.51")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.52")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.53")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="4ecf0790491b498b049f79e4648392d4", element="f.9E8387CC95F1FC44F49D52A60859731D.d.9057F0BB5FC06042E103AC3A10D0A5CF.e.54")>,] 형태로 저장되며 text가 필요하면 .text, 속성값이 필요하면 .get_attribute('href')형태 활용
