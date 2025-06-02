@@ -1,0 +1,32 @@
+ch02_ Oracle ; SELECT문 (oracle ex sys pw : 1234)
+특정 열만 출력 : SELECT 열이름 FROM 테이블명
+특정 행만 출력 : WHERE 절(조건절) - 비교연산자 : 같다(=), 다르다(!=, ^=, <>), <, <=, >, >=...
+	비교연산자는 숫자, 문자, 날짜형 모두 가능
+특정 행 출력 : WHERE절(조건절) - 논리연산자 : AND OR NOT
+산술연산자(SELECT절, 조건절, ORDER BY절) 
+연결 연산자 ( || ) : 필드값이나 문자를 연결 => 형 변환이 일어날 때 마다 사용해주어야함.
+ex) SELECT ENAME ||'은' ||JOB ||'이고 연봉은' || ((SAL*12)+NVL(COMM,0)) ||'이다' FROM EMP;
+중복제거 ( DISTINCT )
+
+** 날짜형을 활용할 때 세팅을 바꾸는 방법
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+위 날짜형에 따라서 날짜형을 문자형과 크기 비교 할 일이 있으면
+TO_CHAR(날짜형데이터컬럼명, 원하는 문자열 형태) 를 사용하자.
+
+** NULL이 있을 수 있을 때 산술연산을 하면 NULL을 반환할 수 있다. 이럴 때
+NVL(NULL일수도있는데이터,대체값)을 활용한다.
+** 주의사항 : NULL일수도 있는 데이터와 대체값의 데이터타입이 같아야 한다.
+
+SQL 연산자
+1. BETWEEN A AND B; -- 순서가 중요하다
+	=> SELECT SAL FROM EMP WHERE SAL BETWEEN 1500 AND 3000; 1500이상 3000이하
+2. 필드명 IN (값1, 값2, 값3, .... 값N)
+3. 필드명 LIKE 패턴 : 패턴1 % : 0개 이상의 문자, 패턴2 : _ 1개 문자
+EX) -- EX3. 급여(SAL)가 5로 끝나는 사원의 모든 필드
+        SELECT * FROM EMP WHERE SAL LIKE '%5';
+4. 필드명 IS NULL : 필드명이 NULL이냐 아니냐
+
+ORDER BY 기준이 될 필드들.
+-> 기준값이 같으면 후보 값들을 비교하게끔 기준을 명시하는 방법.
+기본은 오름차순(ASC), 내림차순(DESC)

@@ -1,0 +1,24 @@
+DB와 DBMS( oracle ex sys pw : 1234)
+1. DB 특징 : 보안성, 무결성, 중복의 최소화, 공유, 독립성
+2. DBMS의 기능 : 정의(Definition), 조작(Manipulate), 제어(Control)
+			DDL, 			DML, 		DCL => DBA용 언어
+
+# 실습 전 할 일 => system계정 접속 후 scott 계정 생성 권한 부여
+-1. oracle setup 후 cmd창에서 oracle 접속 후 다음을 실행
+-2. C:\Users\Admin> sqlplus system/비밀번호
+				sqlplus "/as sysdba  => 비밀번호를 모를 때
+-3. SQL> createe user soctt identified by tiger; => scott 계정 생성
+-4. SQL> grant dba to scott; => 최고권한을 scott에게 부여(dba)
+-5. SQL> exit;
+-6. C:\Users\Admin> sqlplus scott/tiger => scott 계정 접속 후 데이터 확인
+-7. SQL> select * from TAB; => 소유 테이블 확인
+-8. SQL> @C:\ai_x\lecNote\04_DBMS\demo.sql;  =>소유테이블이 비어있어 수업에 쓸 데이터 demo를 넣어줌
+		@아래의 파일을 실행시키는 명령어
+-9. C:\Users\Admin> sqlplus scott/tiger => scott 계정 접속후
+-10. SQL> select * from TAB; => 소유 테이블 확인
+-11. SQL> select * from DEPT;
+
+=> CMD에서 다루기에는 가독성이 떨어지고 사용성이 현저히 떨어짐. 이를 개선하기 위해
+Oracle Developer tool => sql developer 다운로드하여 사용. 사용 시 Java17 여부 체크해야함
+
+=> sql developer 실행 후 scott 등록
