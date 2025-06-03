@@ -1,0 +1,23 @@
+ch04_DDL,DML,DCL
+DDL  :  Data Definition Language ; 데이터와 그 구조를 정의, 트랜잭션 명령어
+	CREATE TABLE table_name (column_name  data_type expr, …); : 데이터 베이스 객체 생성
+	DROP TABLE table_name : 데이터 베이스 객체를 삭제
+	ALTER : 데이터 구조를 변경 혹은 수정
+	 1. ALTER TABLE TABLE_NAME DROP FIELD_NAME; : ALTER 구문을 통해 특정 필드 삭제
+	 2. ALTER TABLE TABLE_NAME ADD FIELD_NAME DATA_TYPE_EXPR; ALTER구문을 통해 필드 추가
+	 3. ALTER TABLE TABLE_NAME ADD FIELD_NAME DATA_TYPE_EXPR NULL, FIELD_NAME DATA_TYPE_EXPR NULL
+		=> 위 형태로 여러 필드 추가 가능
+
+DML : Data Manipulation Language ; 데이터 검색, 수정 등
+	INSERT INTO table_name (column_name, ..) VALUES (column_values, …);: 데이터베이스 객체에 데이터를 입력
+	DELETE FROM table_name WHERE conditions ; : 데이터베이스 객체에 데이터를 삭제
+	UPDATE table_name SET column_name1=value1, column_name2 = value2, … : 
+						기존에 존재하는 데이터베이스 객체 안의 데이터수정
+	SELECT table_filed FROM table_name : 데이터베이스 객체로부터 데이터를 검색
+
+DCL : Data Control Language ; 데이터베이스 사용자의 권한 제어
+	GRANT : 데이터 베이스 객체에 권한 부여
+	REVOKE : 이미 부여된 데이터베이스 객체의 권한을 취소
+	COMMIT : 트랜잭션 확정 (TCL)
+	ROLLBACK : 트랜잭션 취소 (TCL)
+
