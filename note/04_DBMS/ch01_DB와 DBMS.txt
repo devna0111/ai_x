@@ -22,3 +22,13 @@ DB와 DBMS( oracle ex sys pw : 1234)
 Oracle Developer tool => sql developer 다운로드하여 사용. 사용 시 Java17 여부 체크해야함
 
 => sql developer 실행 후 scott 등록
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'YY/MM/DD'; -- 날짜 포멧 변경 방법    
+
+DBMS에서 "" => ALIAS, '' => 문자형
+
+TO_CHAR(날짜형 데이터, 'YY/MM/DD HH111111;MI:SS')
+TO_CHAR(숫자형 데이터, '99,999.99')
+
+데이터 테이블 관계도 : ERD
+ERD 작성 -> DDL

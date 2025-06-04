@@ -19,5 +19,15 @@ DCL : Data Control Language ; 데이터베이스 사용자의 권한 제어
 	GRANT : 데이터 베이스 객체에 권한 부여
 	REVOKE : 이미 부여된 데이터베이스 객체의 권한을 취소
 	COMMIT : 트랜잭션 확정 (TCL)
-	ROLLBACK : 트랜잭션 취소 (TCL)
+	ROLLBACK : 트랜잭션 취소 (TCL) => DML만 취소
 
+제약조건
+	1. PRIMARY KEY(필드명)
+	2. FOREIGN KEY(필드명) REFERENCES 테이블명(필드명)
+	3. NOT NULL => CREATE 중 필드명 데이터타입 제약조건 순으로 작성하여 부여
+	4. UNIQUE(필드명)
+	5. CHECK(조건)
+	참고 : DEFAULT 기본값
+
+- 참조하는 모든 부모 자식 테이블 지우기
+DROP TABLE 부모테이블 CASCADE CONSTRAINTS;
