@@ -1,0 +1,11 @@
+ch05_Sequence
+
+CREATE SEQUENCE 시퀀스명
+	MAXVALUUE 999 -- 최대값 999
+	NOCYCLE -- 999 이후 종료
+	NOCACHE; -- 실행할 때 마다 1씩 증가시키겠다.
+
+DUAL : ORACLE에 존재하는 더미 데이터로, 현재의 시퀀스가 몇번째인 지 체크 등에 활용
+SELECT 시퀀스명.CURRVAL FROM DUAL : 현재의 시퀀스 숫자
+SELECT 시퀀스명.NEXTVAL FROM DUAL : 다음의 시퀀스 숫자 => 1이 증가하므로 주의할 것
+

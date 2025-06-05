@@ -1,0 +1,50 @@
+ch06. MySql (MySql Root Password : mysql)
+=> 설치시 full버젼으로, 중간 계정 만들기는 필요하면 실행.
+=> full버젼 설치하면 WorkBench가 자동으로 설치됨.
+
+DCL => DB에 접근하지 않고도 작동하는 명령어(계정생성,권한박탈,권한생성,트랜잭션 명령어 등)
+DDL, DML => DB 속 정보를 접근해야하여 무조건 우선 DB에 접근 필요
+
+오라클과는 다르게 데이터베이스에 접근할 때 전체 데이터베이스에서 하위 데이터베이스로 접근을 따로 해주어야함.
+=> 스키마 영역에서 가능
+
+SHOW DATABASES; == (오라클)SELECT * FROM TAB 과 같이 현존하는 DATABASE를 보여줌
+				그러나 정확히는 DB 접근 후 SHOW TABLES
+
+데이터베이스 접근 방법 : 스키마 창에서 더블클릭하거나 USE 데이터베이스명 사용
+
+CREATE USER USER01 IDENTIFIED BY 'PASSWORD'; => PASSWORD에 무조건 ' 를 사용해서 구분 필요
+GRANT ALL PRIVILEGES ON *.* TO USER01; 권한 부여 방법
+=> 오라클에서는 GRANT DBA TO USER01;
+REVOKE ALL privileges ON *.* FROM USER01; 권한 박탈 방법
+
+주석 : 오라클 --, MYSQL -- (SPACE 하나 필요)
+오라클과 다른 명령어, 기능
+오라클 SYSDATE <=> MYSQL NOW(), sysdate()
+오라클 SEQUENCE 정의, SEQUENCE.NEXYVAL <=> MYSQL AUTO_INCREMENT
+오라클 ||(연결연산자) <=> MYSQL CONCAT()함수
+오라클 DUAL은 MYSQL에서 필요 없음 (SELECT 1 허용)
+
+오라클 NUMBER <= > MYSQL INT
+오라클 VARCHAR2 <= > MYSQL VARCHAR
+오라클 DATE <=> MYSQL DATETIME 
+오라클 SUBSTR <=> MYSQL SUBSTRING
+오라클 CLOB <=> MYSQL TEXT 시리즈 가능
+
+오라클 IF ... THEN ... END IF;(IF문) <=> MySQL은 세미콜론 처리 주의
+오라클 CASE WHEN ... THEN ... END(조건문) 동일
+오라클 NVL(필드명,대체값) <=> MYSQL IFNULL(필드명,대체값) 혹은 IF()등 MySql은 데이터타입이 달라도 정상 작동
+!! 왜냐면 data_format 만 신경쓰기 때문
+
+오라클 SEQUENCE 정의, SEQUENCE.NEXYVAL <=> MYSQL AUTO_INCREMENT
+시퀀스가 없어서 quto_increment의 속성을 set을 통해 설정해야함. 그리고 int형만 사용이 가능하다
+set @@auto_increment_increment = 10; 이런 식으로
+set @@auto_increment_offset = 10; => 10이상은 오류가 남
+
+-- 오라클 (+)처럼 outer join 작동 안함
+-- 이 경우 left join, right join, outer join을 활용 => 오라클에서도 left/right outer join ~~ on 작동!
+select * 
+	from student s
+	left outer join major m
+    	on s.mcode = m.mcode;
+
