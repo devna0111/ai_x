@@ -1,0 +1,39 @@
+ch01_DeepLearning 기초
+머신러닝은 크게 지도학습과 비지도 학습으로 나눠진다. 
+지도 학습의 경우 분류, 회귀 모델이 대표적이고 
+비지도 학습의 경우는 군집(clustering) 모델이 있다.
+
+회귀는 단일 값을 반환하고 => 정답을 뽑아내야 하는 수학 문제에 용이
+분류는 특징을 수치화 해서 각 분류의 대표적인 특성을 따라서 분류와 신뢰도를 나타낸다.
+=> 위 두 모델은 라벨링을 통해 input과 output을 주어야 한다 
+
+군집의 경우 1집단, 2집단 등 집단을 데이터셋의 특징에 따라 분류구성한다.
+=> 비지도 학습으로 스스로 카테고리를 나눠낸다. 자율학습
+
+학습은 회귀 => 분류 => 군집 3단계로 걸쳐 실시
+
+** 집에서 tensorflow 사용 시
+import tensorflow as tf
+print(tf.__version__)
+tf.config.list_physical_devices('GPU') # => 이 문장을 활용해서 사용하자
+
+머신러닝의 기본 프로그래밍 프로세스
+```
+1. 데이터 확보 및 생성 
+2. 데이터 전처리 : 
+    스케일 조정
+    훈련데이터(학습데이터셋) + 검증용데이터셋 + 테스트데이터셋 분할
+3. 모델 구성
+4. 모델 학습 과정 설정
+5. 모델 학습
+6. 모델 평가(시험 데이터 셋(테스트 데이터 셋) 활용)
+    <모델 저장>
+7. 모델 사용(입력 값이 주어지면 예측 값 받기)
+
+ML/DL 시 반드시 필요한 라이브러리들
+from tensorflow.keras.utils import to_categorical # 분류분석시 원핫인코딩
+from tensorflow.keras.models import Sequential # 모델 생성
+from tensorflow.keras.layers import Dense, Input # 레이어쌓기
+from tensorflow.keras.models import save_model # 모델 저장하는 함수
+import numpy as np # 넘파이 없으면 값 대입 자체가 불가
+import matplotlib.pyplot as plt # 데이터 시각화용

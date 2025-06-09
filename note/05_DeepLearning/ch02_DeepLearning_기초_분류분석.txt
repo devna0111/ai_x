@@ -1,0 +1,87 @@
+ch02_분류분석 : classification
+
+입력값에 따라 그룹을 알아맞추는 방식. cats_vs_dogs 데이터셋 방식
+필요 라이브러리
+from tensorflow.keras.utils import to_categorical # 분류분석시 원핫인코딩
+from tensorflow.keras.models import Sequential # 모델 생성
+from tensorflow.keras.layers import Dense, Input # 레이어쌓기
+import numpy as np
+
+** 지도학습에서의 ML, DL 프로그래밍 방식
+1. 데이터 셋 확보(input입력변수, output종속변수)
+    원본 데이터 및 시뮬레이션을 통해 데이터 생성
+2. 전처리
+    스케일 조정
+    훈련 데이터 + 시험 데이터 + 검증 데이터 = 6:2:2 / 7:2:1 등
+    학습 및 평가 가능한 포맷으로 변환(2차원 numpy, DataFrame)
+3. 모델 구성
+    model = Sequential() 객체 생성 후 필요한 층을 add()함수로 Dense 추가
+4. 모델 학습 과정 설정 
+    compile() 함수 이용, loss손실함수, optimizer, metrics평가지표 설정 => 평가지표 종류 많으나 당분간 acc(정확도)만 사용
+5. 모델 학습(학습 과정 확인하기)
+    model.fit(input, output, epoch) - 훈련셋입력=독립변수, 훈련셋타겟=종속변수, epoch=학습회수, 검증셋
+6. 모델 평가
+    테스트(시험) 데이터셋을 인자로 넣은 evaluate()함수 이용, 그래프
+7. 모델 사용 및 저장
+    model.predict() 이용. 입력데이터는 2차원
+    save()함수 이용해서 저장. 저장된 모델은 load_model()함수를 이용해서 불러올 수 있음
+
+## 문자 데이터 라벨링
+from sklearn.preprocessing import LabelEncoder => 문자마다 숫자 라벨링 해주는 객체
+le = LabelEncoder()
+# le.fit(data)
+# labeled_data = le.transform(data)
+labeled_data = le.fit_transform(data)
+print('라벨인코딩된 데이터 :',labeled_data) 
++ 원핫인코딩을 통해 그룹 간 차별화 ( 확률형태로 변환. 예를들어 0 1 2 3 의 경우 0은 [1,0,0,0]으로 0일 확률이 100%라고 알림(to_categorical)
+
+** 실습 
+x_train = np.array([1,2,3,4,5,6,7,8,9]*10) 
+y_train = np.array([2,4,6,8,10,12,14,16,19]*10) # 그룹 10종, 현재 상태에서는 선형회귀형태로, 원핫인코딩이 필수.
+# 원핫인코딩 : 3 => [0,0,0,1] 형태로 변수를 확률분포로 변환
+
+# 분류분석을 위한 target변수 라벨링 전환 ( = 원핫인코딩 )
+Y_train = to_categorical(y_train,19)
+Y_val = to_categorical(y_val)
+Y_test = to_categorical(y_test)
+
+# 3. 모델 구성
+model = Sequential()
+model.add(Input(shape=(1,))) # 입력층
+model.add(Dense(units=38, activation='sigmoid' ))  # units 출력수, activation 활성화 함수 : relu, tanh... 등
+# 교안50p, 은닉층에서 값을 세분하게 나눴다가 합치는 게 맞출 확률이 높아짐
+model.add(Dense(units=64, activation='elu' ))
+model.add(Dense(units=64, activation='elu' ))
+model.add(Dense(units=19, activation = 'softmax'))
+# softmax : 모든 출력 결과의 합이 1. 분류분석 마지막 layer(출력층)에서 activation으로 사용
+
+#4. 모델 학습과정 설정
+model.compile(loss = 'categorical_crossentropy', # 분류분석에서 사용하는 손실함수(원핫인코딩 실시 후)
+            	  optimizer = 'sgd', # sgd, gd, rmsprop, adam, nag ... => adam이랑 sgd 추천
+            	  metrics=['accuracy']) # 평가지표 : accuracy 신뢰도
+
+#5. 모델 학습시키기
+hist = model.fit(x_train, Y_train, 
+                 epoch=300, # 학습 회수 : 300번
+                 batch_size = 10, # batch_size : 학습에 사용할 데이터의 규모 : 10개를 한번에 확인하고 가중치를 조정                 		 verbose=2 , # 학습결과 출력 옵션 : 0 -> 출력없음, 1 -> 기본값, 2 -> epoch별 로그 메세지를 상세출력
+                 validation_data = (x_val, Y_val) # batch사이즈 만큼 체크하고 검증데이터로 검증해라
+)
+
+# 6. 모델 평가하기 => 그래프화 + test셋을 통해 evaluate 실시
+score = model.evaluate(x_test,Y_test, batch_size=1, verbose=2)
+
+# 7. 모델 사용하기
+H = model.predict(np.array([[2]]))
+# 분류분석의 예측은 predict결과를 argmax함수를 사용해서 활용
+model.predict(np.array([[2]])).argmax()
+# 4를 몇 % 확률로 예측했는지
+H[0, H.argmax()] * 100
+
+# 8. 모델저장하기
+# model.save('model/02_deep.h5')
+from tensorflow.keras.models import save_model
+save_model(model,'model/02_deep.h5')
+
+# 저장된 모델 불러오기
+from tensorflow.keras.models import load_model
+model2 = load_model('model/02_deep.h5')

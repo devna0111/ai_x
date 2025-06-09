@@ -1,0 +1,58 @@
+ch01_ 선형회귀분석
+
+# linear regression 모델 실습
+
+# 3. 모델 구성
+from tensorflow.keras.models import Sequential # 모델 생성용 클래스
+from tensorflow.keras.layers import Dense, Input # 입력값과 출력값으로 Layer 층 지정
+
+model = Sequential()
+# model.add( Input( shape=(1,) ) ) # 입력값
+# model.add(Dense(1)) # 출력층
+model.add(Dense(units = 1, # 타겟(종속) 변수의 갯수 => 분류 분석 : 덥다, 안덥다 = 2개 경우
+                input_shape=(1,)# 입력(독립) 변수의 shape
+                )) 
+
+참고사항 : optimizer
+
+Optimizer	학습률 조절	모멘텀	적응형 학습률	일반 사용 용도
+SGD		고정		      선택 가능		❌		단순 모델 실험
+Adam	자동 조절		   ✅			✅		대부분의 딥러닝
+RMSprop	자동 조절		   ✅			✅		RNN, 시계열 데이터
+Adagrad	자동 조절		   ❌			✅		희소 데이터
+Adadelta	자동 조절		   ✅			✅		Adagrad 보완
+
+# 4. 모델 학습과정 설정
+model.compile(loss='mse', # 손실 함수 : 오차의 제곱을 통해 loss 구하겠다 - 모델 학습 중 오차를 최소화 하기 위해 사용
+             optimizer = "rmsprop", #옵티마이저 : 경사 선택 보폭
+             metrics=['mae'], # 평가지표
+
+모델의 저장 : .save(경로/파일이름.h5)
+
+모델의 학습 : model.fit(scaled_data_C, # 입력 변수(훈련데이터)
+                 scaled_data_F, # 타겟 변수(훈련데이터)
+                epochs = 1000, # 학습 회수
+                verbose = 2 # 학습 시 출력 여부(0: 출력X, 1 : 간단한 출력, 2 : 깊은 출력)
+                )
+
+# 5. 모델 학습 - 1번만 실행
+hist = model.fit(scaled_data_C, # 입력 변수(훈련데이터)
+                 scaled_data_F, # 타겟 변수(훈련데이터)
+                epochs = 1000, # 학습 회수
+                verbose = 2 # 학습 시 출력 여부(0: 출력X, 1 : 간단한 출력, 2 : 깊은 출력)
+                )
+
+# 6. 모델 평가(그래프를 통해 loss와 metrics값의 추이, 평가함수)
+hist.history => 딕셔너리 형태로 loss와 metrics값 변화 체크 가능
+plt.plot(hist.history.get('loss'), color='r', label='loss')
+plt.plot(hist.history.get('mae'), color='b', label='mae')
+plt.legend() # 범례 추가
+plt.xlabel('Epoch')
+plt.ylabel('value')
+plt.title('Model loss & MAE over Epoch')
+plt.show()
+
+# 7. 모델 사용 및 저장
+# 학습 후 예측
+print(model.predict(np.array([[0], # 반드시 2차원으로 대입하여야함
+                              [0.01]])))
