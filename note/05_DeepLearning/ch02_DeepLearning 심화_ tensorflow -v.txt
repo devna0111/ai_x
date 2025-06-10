@@ -1,0 +1,95 @@
+ch02_DeepLearning 심화_ tensorflow -v1
+=> tensorflow의 작동 원리를 익히기 위함
+tensor : 여러 데이터 타입을 취할 수 있는 객체. 휘발성 데이터타입
+목표 : loss를 줄여서 accuracy를 올리자
+
+# 1. tensorflow v2.xx 에서 v1 사용하기.
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
+# 2. 문법
+node에 변수, 상수, 연산자 등을 담아서 Session객체로 전원을 키고 run으로 결과를 반환하는 방식
+# 간단한 연산 tensor 그래프
+node1 = tf.constant(10, dtype = tf.float16)
+node2 = tf.constant(20, dtype = tf.float16)
+node3 = tf.add(node1, node2)
+sess = tf.Session()
+print(sess.run(node3))
+# 타입 변경
+node1 = tf.constant(np.array([1,2,3]), dtype=tf.int16)
+node2 = tf.cast(node1, dtype = tf.float32)
+sess = tf.Session()
+sess.run([node1, node2])
+# 평균값 계산 : tf.reduce_mean()
+data = np.array([1,2,3.,])
+tensor = tf.reduce_mean(data) # sess.run 하면 평균값을 계산할 예정이다
+sess = tf.Session()
+sess.run(tensor)
+# random값을 갖는 tensor
+tensor = tf.random_normal([2]) # 평균이 0, 표준편차가 1인, 난수 실수 2개(정규분포를 이루는 난수)
+a = tf.random_normal([1]) # 평균이 0, 표준편차가 1인, 난수 실수 1개(정규분포를 이루는 난수)
+b = tf.random_normal([1]) # 평균이 0, 표준편차가 1인, 난수 실수 1개(정규분포를 이루는 난수)
+sess = tf.Session()
+sess.run([a,b])
+# sess.run(tensor)
+# 변수 설정 방법
+w = tf.Variable(tf.random_normal([1])) # 학습에 따라 변화하는, 변수로 가중치 설정
+sess = tf.Session()
+sess.run(tf.global_variables_initializer()) # w 변수의 난수 초기화
+sess.run(w)
+
+# 3. 작동원리
+x = np.array([1,2,3])
+y = np.array([2,3,4])
+# weight와 bias(처음에는 랜덤값으로 셋팅, 학습과정에서 변경)
+w = tf.Variable(tf.random_normal([1]), name = 'weight')
+b = tf.Variable(tf.random_normal([1]), name = 'bias')
+# Hypothesis : 예측값(가설)
+H = w*x + b
+# cost function(손실함수 : loss, mse; 최소제곱법)
+cost = tf.reduce_mean(tf.square(H-y))
+'''
+학습 목적 : cost가 최소가 되는 w, b를 찾아내는 것
+cost는 2차 함수이므로 곡선그래프. 곡선위 미분값이 줄어드는 방향으로 학습(경사하강;Gradient descent Optimizer)
+'''
+optimizer = tf.train.GradientDescentOptimizer(learning_rate = 0.01) # 미분값
+train = optimizer.minimize(cost)
+# Session생성
+sess = tf.Session()
+# w,b 변수 노드의 초기화
+sess.run(tf.global_variables_initializer())
+# 학습 5000번(v2에서 fit함수)
+for step in range(1,5001):
+    _, cost_val, w_val, b_val = sess.run([train, cost, w, b])
+    if step%200 == 0 :
+        print(f'{step}번째 cost : {cost_val}, w : {w_val}, b : {b_val}')
+# predict함수 생성
+def predict(int_x) :
+    return w_[0]*int_x + b_[0]
+
+# 편리한 predict로 사용하기 위한 방법
+# data placeholder 설정
+# H = 2x + 1
+x_data = [1,2,3,5,8]
+y_data = [3,5,7,11,17]
+x = tf.placeholder(tf.float32) 
+y = tf.placeholder(tf.float32) 
+# 가중치 설정
+w = tf.Variable(tf.random.normal([1]))
+b = tf.Variable(tf.random.normal([1]))
+# 가설 설정
+H = w*x + b
+# 손실함수
+cost = tf.reduce_mean(tf.square(H-y))
+# 경사하강법
+optimizer = tf.train.GradientDescentOptimizer(learning_rate = 0.01)
+train = optimizer.minimize(cost)
+# 학습
+sess = tf.Session()
+sess.run(tf.global_variables_initializer()) # w, b 초기화
+for step in range(5001) :
+    _, cost_val, w_val, b_val = sess.run([train, cost, w, b] , feed_dict={x : x_data, y : y_data})
+    if step%200 == 0 :
+        print(f'{step}번째 : cost : {cost_val}, w : {w_val}, b : {b_val}')
+# 예측하기
+sess.run(H, feed_dict = {x:np.array([5,6,7]})

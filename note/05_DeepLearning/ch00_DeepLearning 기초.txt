@@ -37,3 +37,36 @@ from tensorflow.keras.layers import Dense, Input # 레이어쌓기
 from tensorflow.keras.models import save_model # 모델 저장하는 함수
 import numpy as np # 넘파이 없으면 값 대입 자체가 불가
 import matplotlib.pyplot as plt # 데이터 시각화용
+
+- 스케일 조정 => Local Minima에 갖춰있을 수도 있어서 체크가 필요 => 우리가 찾는 것은 Global Minima
+- normalization(정규화) : 데이터를 0 ~ 1 로 조정
+                      X - Xmin
+    normalization = ---------------------------------------------
+                      Xmax - Xmin
+                  * 위의 식을 써도 되지만 라이브러리를 씀(sklearn.preprocessing.MinMaxScaler 이용)
+                  
+- standardization(표준화) : 평균 0, 표준편차 1로 조정
+                        X - Xmean(평균)
+    standardization = ------------------------------------------------ 
+                        Xstd(표준편차)
+                  * 위의 식을 써도 되지만 라이브러리를 씀(sklearn.preprocessing.StandardScaler 이용)
+
+## 데이터가 2차원 np.array여야만 가능하다
+# 라이브러리 쓰고 정규화 (MinMaxScaler 이용)
+from sklearn.preprocessing import MinMaxScaler
+x_data = np.array([1,2,5,8,10]).reshape(-1,1)
+y_data = np.array([3,15,68,80,95]).reshape(-1,1)
+# np.column_stack([x_data,y_data])
+scaler_x = MinMaxScaler() # x데이터를 정규화 시킬 객체(2차원만 가능)
+scaler_y = MinMaxScaler() # y데이터를 정규화 시킬 객체
+# scaler_x.fit(x_data)
+# scaled_x_data = scaler_x.transform(x_data)
+scaled_x_data = scaler_x.fit_transform(x_data)
+scaled_y_data = scaler_y.fit_transform(y_data)
+np.column_stack([x_data,y_data,scaled_x_data,scaled_y_data])
+
+- 라벨인코딩
+from sklearn.preprocessing import LabelEncoder => 문자마다 숫자 라벨링 해주는 객체
+(보통 단일 숫자로는 가중치가 생겨버리기에 + 원핫인코딩을 추가하여 처리한다)
+- 원핫인코딩
+from tensorflow.keras.utils import to_categorical # 분류분석시 원핫인코딩

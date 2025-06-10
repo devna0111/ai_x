@@ -85,3 +85,16 @@ save_model(model,'model/02_deep.h5')
 # 저장된 모델 불러오기
 from tensorflow.keras.models import load_model
 model2 = load_model('model/02_deep.h5')
+
+# 모델을 함수화 해서 사용하기
+def predict_classes(model, data) :
+    predictions = model.predict(data)
+    return predictions.argmax(axis=-1)
+
+import tensorflow as tf
+# tensor 객체 : 차원을 가지고 있는 데이터 객체
+# 조금 더 빠른 형태
+@tf.function(reduce_retracing=True)
+def predict_classes(model, data) :
+    predictions = model(data, training=False)
+    return tf.argmax(predictions, axis = -1)
