@@ -70,3 +70,6 @@ from sklearn.preprocessing import LabelEncoder => 문자마다 숫자 라벨링 
 (보통 단일 숫자로는 가중치가 생겨버리기에 + 원핫인코딩을 추가하여 처리한다)
 - 원핫인코딩
 from tensorflow.keras.utils import to_categorical # 분류분석시 원핫인코딩
+# 혹은 sklearn꺼 이용
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+# 혹은pd.get_dummies() 이용

@@ -48,7 +48,8 @@ Y_test = to_categorical(y_test)
 # 3. 모델 구성
 model = Sequential()
 model.add(Input(shape=(1,))) # 입력층
-model.add(Dense(units=38, activation='sigmoid' ))  # units 출력수, activation 활성화 함수 : relu, tanh... 등
+model.add(Dense(units=38, activation='sigmoid' ))  
+# units 출력수, activation 활성화 함수 : relu, tanh,sigmoid,softmax... 등
 # 교안50p, 은닉층에서 값을 세분하게 나눴다가 합치는 게 맞출 확률이 높아짐
 model.add(Dense(units=64, activation='elu' ))
 model.add(Dense(units=64, activation='elu' ))
