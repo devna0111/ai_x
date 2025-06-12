@@ -1,0 +1,33 @@
+ch00_ 혼동행렬(교차표,성능분석표)
+Recall을 높이는 방법 : 사기 확률이 낮아도 사기라고 답변하면.. 
+precision을 높이는 방법 : ...
+
+		예측 0 	예측 1
+실제0		   TN		   FP
+실제1		   FN		   TP
+
+# 라이브러리로 그리기
+pd.crosstab(y_test, # 실제값 1차원
+            y_hat.reshape(-1), # 예측값 1차원
+            rownames=['실제값'],
+           colnames=['예측값'])
+
+from sklearn.metrics import confusion_matrix
+confusion_matrix(y_test,
+                y_hat.reshape(-1))
+
+accuracy(정확도) = (TN+TP)/(TN+TP+FN+FP)
+precision(정밀도) = (TP)/(TP+FP) # 예측을 1이라고 한 것 중 맞춘 거 / 예측값 기준
+y_hat = (model.predict(X_test)>0.5).astype(float) => 기준을 0.5가 아니라 0.9로 높이면 FP가 낮아짐
+
+recall(재현율) = TP/(FN+TP) # 실제값이 1인데 맞춘 거 비중 / 실제값 비중
+y_hat = (model.predict(X_test)>0.2).astype(float) => 기준을 0.5가 아니라 0.2로 낮추면 FN이 낮아짐
+
+precision과 recall은 반비례관계 : 기준을 0.5에서 움직이게끔 => 두 상관계수를 비교하기 용이하기 위해
+조화 평균 f1 score 개념이 나옴
+
+f1 score = recall과 precision의 조화 평균
+	2 * (precision * recall) / (precision + recall)
+
+precision : 진짜 사기꾼을 탐지 못하는 문제
+recall : 죄다 사기꾼이라고 탐지하는 문제

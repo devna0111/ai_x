@@ -70,6 +70,7 @@ hist = model.fit(x_train, Y_train,
 
 # 6. 모델 평가하기 => 그래프화 + test셋을 통해 evaluate 실시
 score = model.evaluate(x_test,Y_test, batch_size=1, verbose=2)
+=> list 반환, [0]에 손실, [1]에 metrics[0]
 
 # 7. 모델 사용하기
 H = model.predict(np.array([[2]]))

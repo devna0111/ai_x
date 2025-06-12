@@ -1,0 +1,38 @@
+ch00_참고사항_과적합방지
+1. 🛠 딥러닝에서 과적합 방지 방법 7가지
+전략	설명
+1. 조기 종료 (EarlyStopping)	검증 성능이 더 이상 개선되지 않으면 학습을 조기 종료
+2. 드롭아웃 (Dropout)	학습 중 일부 뉴런을 랜덤으로 꺼서 과적합 방지 => 레이어 추가
+3. 정규화 (L1/L2 Regularization)	큰 가중치를 억제하여 일반화 성능 향상
+4. 데이터 증강 (Data Augmentation)	학습 데이터를 변형해 다양성 확보 (주로 이미지/텍스트)
+5. 모델 구조 단순화	층 수나 노드 수 줄이기, 과도한 복잡도 제한
+6. 배치 정규화 (BatchNormalization)	학습 안정화 및 일반화에 도움
+7. 학습 데이터 증가	데이터가 많을수록 과적합 위험 ↓ (가능하면 최고의 방법)
+
+2. 드롭아웃 사용 방안
+from tensorflow.keras.layers import Dropout
+model = Sequential()
+model.add(Input(shape=(8,)))
+model.add(Dense(units=32, activation = 'relu'))
+model.add(Dropout(0.2)) # 과적합을 해결하고자 파라미터를 두루뭉실하게 넘김, 20퍼센트는 drop => 0.49까지 실용성
+model.add(Dense(units=64, activation = 'relu'))
+model.add(Dense(units=16, activation = 'relu'))
+model.add(Dense(units=8, activation = 'relu'))
+model.add(Dense(units=2, activation = 'softmax'))
+model.summary()
+
+3. 학습 데이터 층화추출(sklearn.model_selection import train_test_split)
+: 데이터가 작을 때, 비중이 다른 데이터로 분할 할 수도 있음 : train_test_split에서 무작위 출력
+
+teacher_X_train,teacher_X_test,teacher_y_train, teacher_y_test = train_test_split(scaled_X_data,
+                                                                                  y_data,
+                                                                                 test_size=0.3,
+                                                                                  random_state=7, # random.seed 설정
+                                                                                 stratify=y_data, # 층화추출
+                                                                                 )
+
+recall이랑 precision 구하기 귀찮으면?
+from tensorflow.keras import metrics
+model.compile(loss='binary_crossentropy', optimizer = 'adam', metrics = ['binary_accuracy',
+                                                                         metrics.Recall(), # 재현율 : 실제값 대비
+                                                                         metrics.Precision()]) # 정밀도 : 예측값 대비
