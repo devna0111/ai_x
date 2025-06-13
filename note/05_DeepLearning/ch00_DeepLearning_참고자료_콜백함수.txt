@@ -1,0 +1,58 @@
+ch00_DeepLearning_참고자료_콜백함수 => ch08참고
+**
+from tensorflow.keras.callbacks import Callback, EarlyStopping, ModelCheckpoint
+
+# 매 epoch마다 로그출력을 하면 지저분해 질 수 있으니 특정 epoch 마다 로그 출력하도록 제한
+Callback 사용 : 
+
+class CustomHistoy(Callback) :
+    def __init__(self) : # 생성자 함수
+        self.epoch=0
+    def on_epoch_end(self, batch, logs={}): # 1 epoch마다 자동 실행되는 함수
+        self.epoch +=1 # epoch마다 self.epoch값을 1씩 증가
+        if self.epoch % 10 == 0 :
+            print('epoch : {}, loss : {}, acc : {}, val_loss : {}, val_acc:{}'.format(self.epoch,
+												logs.get('loss', '-'),
+												logs.get('accuracy', '-'),
+	                                                                                        logs.get('val_loss', '-'),
+												logs.get('val_accuracy', '-')))
+
+customHistoy = CustomHistoy()
+hist = model.fit(train_X, train_Y,
+                epochs=50,
+                batch_size=100,
+                validation_data=(val_X, val_Y),
+                verbose=0,
+                callbacks=[customHistoy])
+
+EarlyStopping 사용 :
+
+earlystopping = EarlyStopping(monitor = 'val_accuracy', patience=2)
+hist = model.fit(train_X, train_Y,
+                epochs=500,
+                batch_size=100,
+                validation_data=(val_X, val_Y),
+                verbose=1,
+                callbacks=[earlystopping])
+
+ModelChceckpoint 사용 :
+
+import os
+model_save_folder = './model08/'
+if not os.path.exists(model_save_folder) : # 폴더가 경로에 없으면 폴더 생성
+    os.mkdir(model_save_folder)
+file = model_save_folder + 'mnist-{epoch:03d}-val{val_accuracy:.4f}.h5' # f스트링 작동 안함
+
+checkpoint = ModelCheckpoint(filepath=file, # 저장경로
+                             monitor = 'val_accuracy', # 모니터할 지표
+                             save_best_only=True, # 모니터링 지표가 개선된 경우만 저장
+                             mode = 'max', # 값이 클수록 저장 -> 기본값 auto라서 건드리지 않아도...
+                             verbose = 1, # 저장 시 로그 출력
+                            )
+
+hist = model.fit(train_X, train_Y,
+                epochs=500,
+                batch_size=100,
+                validation_data=(val_X, val_Y),
+                verbose=1,
+                callbacks=[earlystopping, checkpoint])
