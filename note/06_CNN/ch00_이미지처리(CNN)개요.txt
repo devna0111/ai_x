@@ -1,0 +1,13 @@
+ch00_이미지처리(CNN)개요
+
+기존 DNN은 1차원으로 이미지를 바꿔서 학습했으나
+CNN은 각 요소의 벡터 성분을 분석하는 형식.  
+
+DNN은 Deep Neural Network -> Dense를 쌓아서 hidden layer를 깊게 쌓아서 학습하는 인공 네트워크
+CNN은 Convolutional Neural Network -> 합성곱 인공 네트워크
+-> 요소를 겹쳐서 곱셈을 진행, 이후 합하여 벡터의 성분을 저장
+-> 필터를 겪고 특성을 도드라지게 만들어서 종속변수를 저장하는 방식 
+-> 이미지 사이즈는 필터의 크기만큼 작아지나 데이터는 늘어남 => 사이즈 유지하려면 제로패딩 실시
+* 맥스풀링, 에버리지풀링 등
+-> convolution -> max-pooling -> convolution -> max-pooling ... => 이후 flatten() : 다차원 -> 1차원
+-> 1차원 내용물을 DNN을 통해 학습
