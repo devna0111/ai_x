@@ -1,0 +1,29 @@
+ch02_ 자연어처리_한글
+
+** 생성형 AI는 자연어를 이해하지 않는다 -> 감정을 분석하지 않고 내용만 봄
+- 자연어 : 일상적인 언어 (cf. 인공어 : Python, Java 등 프로그래밍 언어)
+1. 자연어 처리란
+
+자연어 : 일상적인 언어
+자연어 처리 분야 :
+자연어 이해 : 형태소 분석 -> pos-tag(postagging) -> 의미 분석, 시각화
+자연어 생성 : RNN, LSTM, GRU, ...., encoder-decoder 알고리즘 -> 트랜스포머 알고리즘
+활용분야 : 트랜드 분석, 탐색적 분석, 맞춤법 검사기, 번역기, 챗봇, .....
+
+2. 자연어 이해 처리 절차
+
+전처리 : 단어, 어절 추출
+분석 후보 생성 : 형태소 분리, 품사태깅(pos-tag)
+제약 조건(불용어 처리) : 규칙 확인
+분석 : 시각화(워드클라우드), 연관분석, RNN, LSTM, GRU, ....
+
+3. 한글 형태소 분석 엔진(Konlpy,.....)
+공통기능 : morphs(형태소 나누기), nouns(명사추출), pos(형태소로 나눈 후 품사 태그, ntags=[9,22] 중 선택)
+from konlpy.tag import Hannanum
+hannanum = Hannanum(jvmpath=None, # JAVA_HOME 설정 안하면 이거 매번 설정..
+                   max_heap_size=1024, # 기본값 1024, 형태소 분석 시 JVM이 많은 데이터를 처리=> 필요한 메모리를 						    Heap에서 할당하여 효율적으로 데이터를 저장하고 계산
+                   )
+
+hannanum.morphs(text)
+hannanum.nouns(text)
+hannanum.pos(text)

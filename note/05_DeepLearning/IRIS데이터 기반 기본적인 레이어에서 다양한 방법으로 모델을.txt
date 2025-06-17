@@ -23,9 +23,37 @@ IRIS데이터 기반 기본적인 레이어에서 다양한 방법으로 모델�
 	다양한 특성을 동시에 학습할 수 있어 모델 성능을 향상시킬 수 있습
 	from tensorflow.keras.layers import concatenate # 병렬처리시
 
+# 병렬처리
+# 4 -> 160(50,80,30로 병렬처리) -> 32 -> 3
+input_ = Input(shape=(4,))
+dense1 = Dense(units=50, activation='relu')(input_)
+dense2 = Dense(units=80, activation='relu')(input_)
+dense3 = Dense(units=30, activation='relu')(input_)
+x = concatenate([dense1, dense2, dense3]) # x = Dense(units=160, activation = 'relu')(input_) 과 동일하나, 병렬처리 => 속도의 향상효과
+dense4 = Dense(units=32, activation='relu')(x)
+output_ = Dense(units=3, activation = 'softmax')(dense4)
+
+model = Model(inputs = input_, outputs = output_)
+model.summary()
+
 레지듀얼블록(Residual Block) : 모델의 성능을 높이려고 -> 자연어처리, 이미지 처리
 	잔차 연결(residual connection)을 의미하며, 깊은 신경망에서 정보 손실을 줄이고 학습을 안정화
 	기울기 소실(gradient vanishing) 문제를 완화
 	역전파(Backpropagation) 과정에서 기울기(Gradient)가 점점 작아져서 거의 0에 가까워지는 현상
 	초기 층(입력층에 가까운 층)의 가중치가 제대로 학습되지 않는 문제
 	from tensorflow.keras.layers import Dense, Input, add # add :레지듀얼블록 
+
+# 레지듀얼 블록(Residual Block) : 딥러닝에서 딥한 네트워크가 학습이 잘 되지 않을 때
+# 4 -> 50 -> 50 -> (레지듀얼) -> 3
+input_ = Input((4,))
+dense1 = Dense(50, 'relu')(input_)
+dense2 = Dense(50, 'relu')(dense1)
+# 레지듀얼 블록
+dense3 = add([dense1, dense2])
+output_ = Dense(3, 'softmax')(dense3)
+
+model = Model(inputs = input_, outputs = output_)
+model.summary()
+
+model.compile(loss = 'sparse_categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+model.fit(train_X, train_y, epochs=500, validation_split=0.2)

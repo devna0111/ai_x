@@ -1,0 +1,24 @@
+ch00_ 자연어처리
+-> 한글의 경우 Java와 C++기반으로 처리되므로 사용하기 위해선 두 언어 설치가 필수적임
+Java => 1.8 (8이라고도 부름) / 17(가장 많이 사용하는 버젼)
+=> 환결설정 필수
+
+자바 설치 폴더(C:\Program Files\Java\jdk-17)를 시스템 환경 변수(JAVA_HOME) 폴더로 등록
+
+0. 내pc-> 우측 마우스 클릭 -> 속성 탭 -> 고급 시스템 설정 -> 환경변수 -> 시스템변수 -> 등록
+(시스템 환경 변수 탭 들어가서 환경변수에서 시스템 변수 등록)
+1. 시스템변수 JAVA_HOME(C:\Program Files\Java\jdk-17)
+2. Path 변수에 아래의 폴더 추가
+	%JAVA_HOME%\bin
+	%JAVA_HOME%\bin\server
+
+# 자연어처리에 필요해 설치한 것
+pip install nltk==3.7 # 영어권 자연어 처리
+# 아래는 한국어 자연어 처리를 위해 설치
+pip install konlpy # 한국에서 만든 정교함 ! JAVA 반드실 필요. 환경설정까지.
+pip install python-mecab-ko # C++ 중심의 빠른 실행능력
+pip install wordcloud # 한국어 처리에 가장 중요
+
+nltk의 품사 체크 가능 홈페이지
+https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html 
+https://dbrang.tistory.com/1139 

@@ -1,0 +1,56 @@
+ch01_자연어처리_nltk_
+영어 자연어처리 라이브러리 1등 패키지 nltk
+
+0. 문장단위로 분리
+- from nltk.tokenize import sent_tokenize
+	=> 문장 단위로 분리
+	(sent_tokenize(문단, 맥락 등)
+
+1. 단어 토큰으로 분리
+
+- from nltk.tokenize import word_tokenize
+	=> 단어토큰으로 나눠서 분리
+	(word_tokenize(문장, 문단 등)
+
+- from nltk.tokenize import RegexpTokenizer
+	=> 정규표현식으로 나눠서 분리
+	digitRet = RegexpTokenizer('\d+')
+	digits = digitRet.tokenize(sent_tokens[0])
+
+	
+2. 형태소 분석
+
+- from nltk.stem import PorterStemmer
+pst = PorterStemmer()
+[ pst.stem(word) for word in [단어들의 리스트] ]
+
+- from nltk.stem import LancasterStemmer # 가장 빈도 높게 사용
+lst = LancasterStemmer()
+[ lst.stem(word) for word in [단어들의 리스트] ]
+
+# 어간 추출(3) : RegexpStemmer 정규표현식에 해당하는 부분을 제외한 어간 추출
+from nltk.stem import RegexpStemmer
+rst = RegexpStemmer('ing')
+[ rst.stem(word) for word in [단어들의 리스트] ]
+
+
+3. 품사 태깅
+
+from nltk.tag import pos_tag
+tagged_list = pos_tag(word_tokenize(sent_tokens[0]))
+print(word_tokenize(sent_tokens[0]))
+print('품사 태깅한 결과 :',tagged_list)
+
+
+### 시각화
+
+1. 최빈단어 시각화
+import matplotlib.pyplot as plt
+from nltk import Text
+emma_text = Text(pos)
+plt.figure(figsize=(15,2))
+emma_text.plot(20)
+plt.show()
+
+2. 특정 키워드 글 속 등장 빈도 시각화
+emma_text.dispersion_plot(['Emma','Jane']) # 글의 시작과 끝에서 등장하는 회수를 시각화

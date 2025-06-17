@@ -11,3 +11,5 @@ CNN은 Convolutional Neural Network -> 합성곱 인공 네트워크
 * 맥스풀링, 에버리지풀링 등
 -> convolution -> max-pooling -> convolution -> max-pooling ... => 이후 flatten() : 다차원 -> 1차원
 -> 1차원 내용물을 DNN을 통해 학습
+
+tensorflow.keras.layers 속 Conv2D, Maxpooling2D, Flatten 등 다양한 레이어를 활용하여 구축
