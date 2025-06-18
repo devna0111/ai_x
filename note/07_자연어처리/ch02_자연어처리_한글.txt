@@ -17,13 +17,90 @@ ch02_ 자연어처리_한글
 제약 조건(불용어 처리) : 규칙 확인
 분석 : 시각화(워드클라우드), 연관분석, RNN, LSTM, GRU, ....
 
-3. 한글 형태소 분석 엔진(Konlpy,.....)
+3. 한글 형태소 분석 엔진(Konlpy)
 공통기능 : morphs(형태소 나누기), nouns(명사추출), pos(형태소로 나눈 후 품사 태그, ntags=[9,22] 중 선택)
+3-1 Hannanum
 from konlpy.tag import Hannanum
 hannanum = Hannanum(jvmpath=None, # JAVA_HOME 설정 안하면 이거 매번 설정..
                    max_heap_size=1024, # 기본값 1024, 형태소 분석 시 JVM이 많은 데이터를 처리=> 필요한 메모리를 						    Heap에서 할당하여 효율적으로 데이터를 저장하고 계산
                    )
 
-hannanum.morphs(text)
-hannanum.nouns(text)
-hannanum.pos(text)
+hannanum.morphs(text) # 형태소(의미가 있는 가장 작은 단위)단위
+hannanum.nouns(text) # 명사단위
+hannanum.pos(text,ntags=[9,22]) # 품사
+
+3-2 Kkma
+from konlpy.tag import Kkma
+# 기본값 활용
+kkma = Kkma(jvmpath=None,
+            max_heap_size=1024) # '4m' , '4g'
+
+print(kkma.morphs(text)) # 형태소 분석
+kkma.nouns(text) # 명사 추출
+# 품사 태깅
+kkma.pos(text,# 파이썬에서는 ntags = 56일 때 만 기능을 제공(자바에서는 다른 값도 가능 : 자바 기반 패키지!)
+         join=False, # If True, returns joined sets of morph and tag. => ('아름답', 'VA') => '아름답/VA'
+        flatten=True # If False, preserves eojeols. # 2차원 리스트 반환
+        ) 
+
+3-3 Komoran => Kkma와 동일한 파라미터 사용
+from konlpy.tag import Komoran
+komoran = Komoran()
+
+komoran.morphs(text) # 형태소 분석
+komoran.nouns(text) # 명사 추출
+komoran.pos(text) # 품사 태깅
+
+3-4 Okt(Open Korean Text)
+from konlpy.tag import Twitter, Okt
+# okt = Twitter()
+# print('구 추출 :',okt.phrases(text)) # 경고메세지 "Twitter" has changed to "Okt" since KoNLPy v0.4.5.
+
+okt = Okt()
+
+print('구 추출 :',okt.phrases(text)) # 구 추출
+print('형태소 추출 :',okt.morphs(text)) # 형태소 추출
+print('명사 추출 :',okt.nouns(text)) # 명사 추출
+print('품사 태깅 :',okt.pos(text)) # 품사 태깅
+
+4. 한글 형태소 분석 엔진(python-mecab-ko)
+from mecab import MeCab
+mecab = MeCab() # 힙메모리 지정 X -> C++기반의 언어로 메모리 소요가 작고 속도가 빠름
+
+print('형태소 추출 :',mecab.morphs(text)) # 형태소 추출
+print('명사 추출 :',mecab.nouns(text)) # 명사 추출
+tagged_text = mecab.pos(text) # ntags 조정 불가(ntags = 43 고정)
+print('품사 태깅을 이용한 명사 추출 :',
+     [token for token, tag in tagged_text if tag.startswith('N')])
+print('품사 태깅 :',tagged_text) # 품사 태깅
+
+5. 워드클라우드(pip install wordcloud)
+자료는 str의 한 개의 문단은 있어야함
+
+mask = np.array(Image.open( 사용할 이미지 주소).convert('RGB))
+
+wordcloud = WordCloud(
+    font_path='font/BAUHS93.TTF',
+    width = 600, # 생성 이미지 가로(픽셀)
+    background_color='white', # 배경색
+    max_words=300, # 표시될 단어의 최대 개수
+    relative_scaling=0.5, # 단어 빈도에 따른 크기 차이 조정
+    colormap='YlGn', # matplotlib colormap
+    max_font_size=1000, # 글씨 최대 사이즈
+    min_font_size= 10, # 글씨 최소 사이즈
+    mask = mask5, # 1차원 결과물에서는 의미가 없음
+    contour_color='red', # mask의 외곽선을 그려줌
+    contour_width=1
+)
+wordcloud.generate(emma_noun)
+plt.figure(figsize=(10,8))
+plt.imshow(wordcloud)
+plt.axis(False)
+plt.show()
+
+5-1 불용어 처리
+- 불용어 지정
+- 불용어 사전
+-> stopwords = set() 속성을 WordCloud 속성에 추가
+
+** 필요 시 빈도수 시각화 -> source 속 단어의 빈도수 시각화 파일 참조

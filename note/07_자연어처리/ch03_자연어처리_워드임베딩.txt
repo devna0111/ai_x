@@ -1,0 +1,13 @@
+ch03_ 자연어처리_워드임베딩
+단어 간 벡터를 계산, 유사성을 도출
+pip install gensim
+
+from gensim.models import Word2Vec
+model = Word2Vec(news, # 학습 데이터 2차원
+                window = 10, # 각 단어의 앞뒤 10개 단어를 학습 컨텐츠로 사용
+                 min_count = 2, # 학습 데이터에서 2회 이상 등장 시 학습.
+                 workers = -1, # 병렬처리 코어core 수. -1 : 모든 가용 코어 사용
+                )
+
+model.wv.most_similar('이') # 학습 데이터에 있는 단어와 벡터 거리를 고려해서 정보를 반환
+model.wv.most_similar('아파트',topn=3) # topn = 3 : 가장 가까운 표현 3개만 출력

@@ -32,3 +32,4 @@ pip install nltk==3.7 # 영어권 자연어 처리
 pip install konlpy # 한국에서 만든 정교함 ! JAVA 반드실 필요. 환경설정까지.
 pip install python-mecab-ko # C++ 중심의 빠른 실행능력
 pip install wordcloud # 한국어 처리에 가장 중요
+pip install gensim # 워드 임베딩용
