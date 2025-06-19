@@ -18,6 +18,9 @@ pip install nltk==3.7 # 영어권 자연어 처리
 pip install konlpy # 한국에서 만든 정교함 ! JAVA 반드실 필요. 환경설정까지.
 pip install python-mecab-ko # C++ 중심의 빠른 실행능력
 pip install wordcloud # 한국어 처리에 가장 중요
+pip install gensim
+pip install python-dotenv # env파일 읽어들이기(강추)
+pip install python-decouple # env파일 읽어들이기(주피터환경에서는 안될 수 도 있으며 django에서 보통 활용)
 
 nltk의 품사 체크 가능 홈페이지
 https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html 

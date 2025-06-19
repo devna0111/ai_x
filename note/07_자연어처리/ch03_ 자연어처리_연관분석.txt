@@ -1,0 +1,48 @@
+ch03_ 자연어처리_연관분석
+조건과 결과를 체크 : 조건(left hand side) -> 결과(right hand side)
+필요 라이브러리 :
+pip install apyori
+
+- 데이터들 사이에 자주 발생하는 속성을 찾고 그 속성들 사이에 연관성이 어느 정도 있는 지 분석
+- 활용분야 : 이벤트 미리 감지(사기 적발..), 신상품 카테고리 구성
+- 용어사전
+    예시와 함께 설명, 보조자료 'data/cf_basket.csv' 체크
+    [조건 : left hand side as lhs] 오렌지주스 => [결과 : right hand side as rhs] 와인
+    - 연관분석과 관련된 지표
+    1. 지지도(support) : 얼마나 자주 함께 나타나는 지
+        (lhs와 rhs)의 항목수 / 전체 항목수 = 0.2
+        
+    2. 신뢰도(confidence) : 조건이 오면 결과가 얼마나 자주 나타나는 지
+        (lhs -> rhs)의 항목수 / lhs가 포함된 항목수 = 0.5
+        
+    3. 향상도(lift) : 우연히 발생한 규칙은 아닌 지 확인
+        (lhs -> rhs)의 지지도 / (lhs의 지지도) * (rhs의 지지도)
+            => 0.2 / (0.4 * 0.6) = 0.2 / 0.24 =0.8333...
+            향상도 < 1 기대가 낮음(없음)
+            향상도 > 1 기대가 높음(있음)
+
+사용 방법
+from apyori import apriori
+rules = apriori(transaction, # 2차원 데이터
+                min_support = 0.15,
+               min_confidence = 0.1,
+               ) # 매개변수 : min_support min_confidence min_lift max_length 
+# len(list(rules)) # 18개 규칙이 생성
+rules = list(rules)
+import pandas as pd
+rules_df = pd.DataFrame(None, columns=['lhs','rhs','지지도','신뢰도','향상도'])
+
+i = 0
+for rule in rules :
+    support = rule[1]
+    order_st = rule[2]
+    
+    for item in order_st :
+        lhs = [i for i in item[0]]
+        rhs = [i for i in item[1]]
+        confidence = item[2]
+        lift = item[3]
+        if lift > 1 :
+            rules_df.loc[i] = [' '.join(lhs),' '.join(rhs),support,confidence,lift]
+            i +=1
+rules_df.sort_values(by=['향상도','신뢰도'], ascending=False)
