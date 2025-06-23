@@ -1,0 +1,40 @@
+시계열 분석은 크게 statsmodel, prophet를 사용한다.
+ 
+statsmodel
+DOCS : https://www.statsmodels.org/stable/index.html
+
+propher
+DOCS : https://facebook.github.io/prophet/
+
+pip install statsmodels==0.13.5 # 주기적인 데이터 트랜드 추이 분석 목표
+pip install prophet # facebook에서 개발한 시계열 예측 라이브러리
+
+시계열 데이터의 구조를 분해해 주는 도구
+# 시계열 데이터의 구조를 분해해 주는 도구
+from statsmodels.tsa.seasonal import seasonal_decompose
+result = seasonal_decompose(ts['미세먼지농도(㎍/㎥)'],
+                           model = 'additive', # 실제 값의 추세, 계절성, 잔차를 덧셈으로 분석
+                           period=30, # 30일(1개월) 단위로 계절성을 분석
+                           )
+# result : 분석결과
+# result.observed : 실제 데이터
+# result.trend    : 데이터의 장기적인 변화, 전반적으로 감소 증가
+# result.seasonal : 주기적인 계절성 패턴
+# result.resid    : 잔차, noise
+
+# 분석이 아니라 예측하기
+prophet 사용하기
+*** 반드시 입력값의 컬럼명을 일시를 ds, 측정 예상 값은 y로 설정 (ds 중요, datetime형태 정보에)
+from prophet import Prophet
+m = Prophet()
+m.fit(df_flt2)
+# 모델 m을 이용해서 30일 이후 데이터 예측
+# 1. 날짜 만들기
+future = m.make_future_dataframe(periods=30)
+future
+# 2. future를 통해 예측하기
+forecast = m.precidt(future)
+# 3. 그래프
+m.plot(forecast)
+# 트랜드와 휴일효과 그래프
+f2 = m.plot_components(forecast) 
