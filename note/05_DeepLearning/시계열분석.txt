@@ -38,3 +38,13 @@ forecast = m.precidt(future)
 m.plot(forecast)
 # 트랜드와 휴일효과 그래프
 f2 = m.plot_components(forecast) 
+
+
+어텐션 -> 기존 LSTM이나 GRU로 인코더, 디코더를 사용하면 결국 기존 RNN처럼 장기 기억에 대한 문제가 발생함(좀 나은 정도)
+=> 이를 해결하기 위해 컨텍스트 벡터를 사용해서 단어 별 중요도를 따로 저장해서 디코더 출력값에 더해 연산
+
+=> LSTM에서 return_sequences로 결과값들을, return_state는 state_h(값), state_c(속성)을 추출해서 Attention 층을 만들어서 대입해 사용함.
+
+=> LINK층을 만들어서 Input을 2개 넣어서 사용
+
+=> 구조도를 보면서 만들어야 가능할 것
