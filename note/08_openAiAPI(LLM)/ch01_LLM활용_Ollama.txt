@@ -1,0 +1,150 @@
+ch01_LLM활용_Ollama
+
+ollama.com에서 ollama 프로그램을 다운로드
+
+ollama models 체크 사용할 모델 설정
+
+cmd 혹은 powershell에서 ollama pull 모델이름:버젼 => 모델 다운로드
+
+DOCS : https://python.langchain.com/api_reference/core/documents/langchain_core.documents.base.Document.html
+
+Python에서 활용
+from langchain_ollama import ChatOllama
+llm = ChatOllama(model="deepseek-r1:1.5b") # model = 원하는모델이름 => 한글을 사용하려면 eaxone을 사용하는 게...
+result = llm.invoke('한국의 수도는 어디에요?') # invoke(질문 등)
+result # 추론모델 <thinking>
+result.content
+
+# invoke의 인자는 str, PromptValue, list of BaseMessages 3타입 가능
+## 1. 기본 프롬프트 템플릿 사용 => PromptTemplate 속 인자가 전부 PromptValue
+from langchain_core.prompts import PromptTemplate
+from langchain_ollama import ChatOllama
+llm = ChatOllama(model='llama3.2:1b')
+prompt_template = PromptTemplate(
+    template = "What is the capital of {country}?", # {}안의 값에 새로운 값을 대입하여 사용
+    input_variables = ['country']
+)
+prompt = prompt_template.invoke({'country':'Korea'})
+print(prompt)
+llm.invoke(prompt)
+
+## 2. 메세지 기반 프롬프트 작성
+# BaseMessage 상속 받은 클래스 : AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+
+message_list = [
+    SystemMessage(content = "You're a expert of Republic of Korea!"),
+    HumanMessage(content = "What is the capital of Italy?"),
+    AIMessage(content="The capital of Italy is Rome."),
+    HumanMessage(content = "What is the capital of Korea?"),
+    AIMessage(content="The capital of Italy is Seoul."),
+    HumanMessage(content = "What is the capital of France?")
+]
+llm.invoke(message_list) # 그런데 이렇게 작성하면 Langchain은 불가하다.
+
+# 보통 아래와 같이 작성
+from langchain_core.prompts import ChatPromptTemplate
+
+chat_prompt_template = ChatPromptTemplate.from_messages([
+    ("system", "You're an expert of History of Korea!"),
+    ("human", "What is the capital of Italy?"), # human 대신 user 가능
+    ("ai", "The capital of Italy is Rome."),
+    ("human", "What is the capital of Korea?"),
+    ("ai", "The capital of Korea is Seoul."),
+    ("human", "What is the capital of {country}?")
+])
+
+prompt = chat_prompt_template.invoke({'country': 'R.O.K'})
+print(prompt)
+llm.invoke(prompt)
+
+# 웹서비스로 사용할 때는 json 형태로 받아 주로 사용한다.
+이를 위해선 .content가 아니라 StrOutputParser를 이용해서 결과를 받아주어야 전처리가 줄어든다.
+
+
+# 문자열 출력 파서
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import PromptTemplate
+# 명시적인 지시사항이 포함된 프롬프트
+# PromptTemplate(변수설정) => ChatPromptTemplate(변수설정, system, user, ai 지정을 통한 모범답안 지정 가능)
+
+chat_prompt_template = ChatPromptTemplate.from_messages([
+    ("system", "You are helpful assistant. Return the name of the city only."),
+    ("human", "What is the capital of Italy?"), # human 대시 user도 가능
+    ("ai", "Rome."),
+    ("human", "What is the capital of Korea?"),
+    ("ai", "Seoul."),
+    ("user", "What is the capital of {country}?")
+])
+country = input('어느 나라의 수도가 궁금하세요? : ')
+prompt = chat_prompt_template.invoke({'country': country})
+output_parser.invoke(llm.invoke(prompt)) # 한글은 조금 모자라네
+# 프롬프트 템플릿에 값 주입
+result = llm.invoke(prompt) # AIMessage객체
+print('LLM 결과 :', type(result), result.content)
+# 문자열 출력 Parser를 이용해서 LLM 응답을 단순 문자열로 변환
+output_parser = StrOutputParser()
+print("parser 결과 :",output_parser.invoke(result))
+
+
+# json 출력 파서 : 이래도 가끔 prompt가 안먹혀서 고생하니까 Template 확실하게 조져놓기
+
+from langchain_core.output_parsers import JsonOutputParser
+count_detail_prompt = PromptTemplate(
+                                    template="""Give following information about {country}
+                                    - Capital
+                                    - Population
+                                    - Language
+                                    - Currency
+                                    return it is JSON format and return JSON dictionary only""",
+                                    input_variables=['country']
+                                    )
+prompt = count_detail_prompt.invoke({'country':'Korea'})
+print(type(prompt))
+
+ai_message = llm.invoke(prompt)
+print(type(ai_message))
+
+json_output_parser = JsonOutputParser()
+data_dict = json_output_parser.invoke(ai_message)
+
+print(data_dict, type(data_dict))
+
+# 위 방법에서 자꾸 에러를 내니 객체로 받아서 사용하는 것이 안정적이다
+# Pydantic 모델을 사용하여 LLM 출력을 구조화된 형식으로 받기(JsonOutputParser 보다 훨씬 안정적)
+#Pydantic : 데이터 유효성 검사, 설정관리를 간편하게 해주는 라이브러리
+
+from pydantic import BaseModel
+
+count_detail_prompt = PromptTemplate(
+                                    template="""Give following information about {country}
+                                    - Capital
+                                    - Population
+                                    - Language
+                                    - Currency
+                                    return it is JSON format and return JSON dictionary only""",
+                                    input_variables=['country']
+                                    )
+
+class CountryDetail(BaseModel) : # description : 더 정확한 출력을 유도
+    capital : str = Field(description="the capital of the country")
+    population : int = Field(description="the population of the country")
+    language : str = Field(description="the language of the country")
+    currency : str = Field(description="the currency of the country")
+
+# 출력 형식 파서 + LLM : llm.with_structured_output(CountryDetail)
+Structuredllm = llm.with_structured_output(CountryDetail)
+
+info = Structuredllm.invoke(count_detail_prompt.invoke({'country':'korea'}))
+type(info), info.capital, info.population, info.language, info.currency
+
+print('info를 json :',info.model_dump_json())
+print('info를 dict :',info.model_dump())
+
+
+
+
+
+
+

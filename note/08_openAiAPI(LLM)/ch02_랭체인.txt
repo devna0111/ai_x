@@ -1,0 +1,12 @@
+ch02_랭체인
+
+대화의 흐름을 만들어서 원하는 정보값을 반환하기에 좋게 만드는 과정, 랭귀지 체인
+# 간단한 체인 구성 : pipe 연산자 (|) 사용
+
+# prompt => llm => output_parser 연결하는 체인 생성
+capital_chain = prompt_template | llm | output_parser
+
+# 생성된 체인 invoke
+capital_chain.invoke({'country':'Korea'})
+
+=> 위 내용을 합쳐서 Korea를 넣으면 수도 인구 통화 음식 등을 유추하는 게 이번 강의 목적

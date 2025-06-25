@@ -1,0 +1,21 @@
+Lanchain이란
+
+LangChain은 다양한 회사의 언어 모델(LLM)을 통합적으로 사용할 수 있도록 설계된 프레임워크예요. 단순히 OpenAI의 GPT만 지원하는 게 아니라, 다음과 같은 여러 벤더의 모델들을 선택해서 사용할 수 있어요:
+- OpenAI (ChatGPT, GPT-4 등)
+- Anthropic (Claude)
+- Google (Gemini, Vertex AI)
+- Microsoft Azure OpenAI
+- Cohere
+- Hugging Face
+- AWS Bedrock
+- Mistral, Groq, Fireworks, NVIDIA, Databricks 등
+LangChain은 이런 모델들을 ChatOpenAI, ChatAnthropic, ChatGoogleGenerativeAI, ChatHuggingFace 같은 클래스로 래핑해서, 공통된 인터페이스로 쉽게 교체하거나 비교할 수 있게 해줘요. 예를 들어, 아래처럼 모델만 바꾸면 동일한 코드 구조로 다양한 모델을 실험할 수 있죠:
+
+from langchain.chat_models import ChatOpenAI, ChatAnthropic
+
+chat = ChatOpenAI()  # 또는 ChatAnthropic(), ChatGoogleGenerativeAI() 등
+response = chat.invoke(messages)
+
+
+이런 유연성 덕분에 LangChain은 모델 벤더에 종속되지 않고, 프로젝트에 가장 적합한 모델을 선택하거나 교체할 수 있는 큰 장점이 있어요.
+혹시 특정 모델을 LangChain에서 어떻게 쓰는지 궁금하다면, 예제도 보여줄게요!

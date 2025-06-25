@@ -1,0 +1,38 @@
+※ 가상환경 만들기(ml-dl-nlp / llm-lab) => llm용
+
+(현재 존재하는 가상환경 목록 확인) conda env list
+(가상환경 생성:-n은 --name을 의미) conda create -n llm python=3.10 
+
+참고 (파이썬으로 가상환경 만들기) python -m env llm
+
+(생성한 가상환경으로 전환) conda activate llm
+(pip 최신버전으로 업데이트) python.exe -m pip install --upgrade pip 
+
+(특정 패키지 설치 확인 ) conda list | findstr jupyter
+                                pip show 패키지명
+
+(가상환경에서 Jupyter를 설치해야 함) conda install ipykernel
+(가상환경을 Jupyter에서 선택 가능한 커널로 등록) python -m ipykernel install --user --name llm --display-name "llm" 
+
+(가상환경 등록 확인 : jupyter kernelspec list)
+(삭제된 가상환경 jupyter 커널 목록에서 삭제 하기 : jupyter kernelspec remove 가상환경이름)
+(가상환경 지우기 : conda env remove --name 가상환경이름 )
+
+
+※ ollama 로컬 model들 사용_ 내 컴퓨터 용량을 잡아먹는..
+pip install langchain-ollama # ollama model 사용을 위함
+pip install langchain-openai # gpt model 사용을 위함
+pip install python-dotenv # .env파일 load
+pip install langchain-anthropic # claude model
+
+ollama 사용법 : 명령 프롬포트에서 ollama 명령어 사용
+1. ollama list
+- 현재 갖고있는 모델 출력
+2. ollama rm <모델이름>
+- 현재 갖고 있는 모델 삭제
+3. ollama pull <모델이름>
+- 모델이름에 해당하는 모델 다운로드
+4. ollama run <모델이름>
+- 모델이름에 해당하는 모델 실행
+5. ollama help
+- 지금처럼 명령어 모르겠을 때 사용
