@@ -10,3 +10,15 @@ capital_chain = prompt_template | llm | output_parser
 capital_chain.invoke({'country':'Korea'})
 
 => 위 내용을 합쳐서 Korea를 넣으면 수도 인구 통화 음식 등을 유추하는 게 이번 강의 목적
+
+=> 랭체인 생성
+from langchain_core.runnables import RunnablePassthrough
+
+# chain을 여러개 만들어서 체인으로 묶는다
+# 이 때, 입력 변수가 하나라면 첫 인자에 {'information':RunnablePassthrough()}를 사용해서 
+# invoke 시 귀찮지 않게 정보만 입력하면 된다
+
+final_chain = {'information':RunnablePassthrough()}|{'country':country_chain}|capital_chain
+final_chain.invoke("This country is very famous for its soju")
+
+변수가 두개라면 불가능하다ㅠㅠ

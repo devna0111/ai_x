@@ -36,3 +36,6 @@ ollama 사용법 : 명령 프롬포트에서 ollama 명령어 사용
 - 모델이름에 해당하는 모델 실행
 5. ollama help
 - 지금처럼 명령어 모르겠을 때 사용
+
+pip install openai
+pip install streamlit
