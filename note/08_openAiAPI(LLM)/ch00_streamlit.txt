@@ -1,1 +1,11 @@
 ch00_streamlit
+
+st.title() 등 여러 기능이 있고
+
+이건 Docs 가서 체크하면서 사용할 것.
+
+.py 파일로 만들고
+
+def main() : 으로 정리해서
+
+터미널환경에서 streamlit run 파일이름.py로 사용

@@ -39,3 +39,9 @@ ollama 사용법 : 명령 프롬포트에서 ollama 명령어 사용
 
 pip install openai
 pip install streamlit
+
+없으면 아래 다 설치할 것
+pip install pillow
+pip install scipy
+pip install matplotlib
+pip install sounddevice scipy
