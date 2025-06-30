@@ -3,6 +3,7 @@ from scipy.io.wavfile import write # mp3는 스트리밍이 안되어 wav로 스
 from dotenv import load_dotenv
 from openai import OpenAI, OpenAIError
 import os
+import time
 
 fs = 16000 # 샘플레이트 16kHz
 seconds = 5 # 음성 녹음 길이 5초
@@ -33,7 +34,7 @@ print('실시간 녹음 변환된 텍스트 : ', live_transcript)
 summary = client.chat.completions.create(
     model = 'gpt-4.1-nano',
     messages=[
-        {'role':'system','content':"넌 무엇이든지 3줄로 요약하는 요약쟁이야. 항상 한국어로 답변하지."},
+        {'role':'system','content':"넌 무엇이든지 4글자로 줄이는 줄임쟁이야. 항상 한국어로 답변하지. 아래 내용을 4글자로 줄여서 반환해줘"},
         {'role':'user','content':live_transcript}],
     temperature=2,
     frequency_penalty=0
@@ -49,6 +50,7 @@ AI_message = client.audio.speech.create(
 file_name = 'data/ch00_TEST.mp3'
 with open(file_name,'wb') as file :
     file.write(AI_message)
+    time.sleep(5)
 
 
 os.system(f'start {file_name}')

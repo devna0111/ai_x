@@ -1,0 +1,46 @@
+ch07_function calling 
+function calling : Rag 이전 날씨 등 기타 정보가 필요할 때 활용하기 좋은 도구모음
+
+서울과 날씨의 의미를 모두 아는데 서울 날씨를 예측할 수 없음 => 학습되지 않음
+이를 해결하기 위한 함수를 내가 만들어서 기능을 부여
+# tools 먼저 사용
+
+tools = [{
+    "type" : "function",
+    "function" : {
+        "name" : "get_weather", # 사용할 함수. 이 함수를 llm이 결과를 도출하는 데 사용 => 1번 사용하면 파라미터만, 2번 사용이 필수
+        "description" : "저장된 좌표의 현재 온도를 섭씨 단위로 return합니다.",
+        'parameters' : {
+            "type" : "object",
+            "properties" : {
+                'latitude' : {'type' : "number"},
+                'longitude' : {'type' : "number"},
+                           }, # properties
+            "required":["latitude","longitude"], # 필수 파라미터
+            "additionalProperties":False # 지정된 properties 외에는 추가 허용 안함
+        } # parameters
+    },# function
+    "strict" : True # schema에 정확하게 맞는 경우만 함수 호출
+}] # tools
+
+#메세지 생성
+messages = [{'role':'user', 'content':'오늘 서울 날씨 어때요?'}]
+
+# 메세지 전달
+completion = client.chat.completions.create(
+    model = 'gpt-4.1-nano',
+    messages=messages,
+    tools = tools
+) # completion.create
+
+# 메세지 추가하여 확인
+messages.append(completion.choices[0].message)
+messages.append({
+    'role' : 'tool', # ToolMessage의 정체
+    'tool_call_id':tool_call.id,
+    'content':str(result)
+})
+print(messages)
+
+# completion 절대로 두번 실행하면 안됨. 같은 code로 요청하면서 코드가 쌓이는 이상한 현상이 발생. 파이썬의 이상한 del 구조가 여기서 발목을 잡는듯.
+참조하는 채널(client가 살아있으니 원)이 있으면 변수가 사라지지 않는데 여기서 발생하는 오류라고 생각

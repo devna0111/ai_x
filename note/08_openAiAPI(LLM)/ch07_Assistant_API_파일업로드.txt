@@ -1,0 +1,53 @@
+ch07_ 파일 첨부
+
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+# 1. client 객체 생성
+load_dotenv()
+client = OpenAI()
+
+# 2. 코드 인터프리터(Code Interpretter) 기능을 갖춘 어시스턴트 생성
+code_assistant = client.beta.assistants.create(
+    name = 'DataAnlyzer',
+    instructions="당신은 데이터 분석의 전문가입니다. Python 코드를 작성하여 사용자의 요청을 해결하세요",
+    model = 'gpt-4o-mini',
+    tools=[{
+        'type':"code_interpretter", # 코드 인터프리터를 활성화
+    }],
+)
+
+# 3. 파일 업로드용 파일 객체
+file_obj = client.files.create(
+    file = open('data/data.csv', 'rb'),
+    purpose="assistants"
+)
+
+# 4. 쓰레드 시작 -> 쓰레드에 사용자 메세지 추가(파일 첨부하여 질문)
+thread = client.beta.threads.create()
+question = "첨부된 파일의 모든 숫자를 더하는 파이썬 코드를 작성하고 실행한 뒤,코드와 결과를 모두 보여주세요"
+client.beta.threads.messages.create(
+    thread_id= thread.id,
+    content = question,
+    role = "user",
+    attachments = [{
+        'file_id':file_obj.id,
+        'tools': [{'type': 'code_interpreter'}] # 여기서 에러 자주 일으킴
+    }]
+    
+)
+
+# 5. 어시스턴트 실행(llm 요청)
+client.beta.threads.runs.create_and_poll(
+    thread_id=thread.id,
+    assistant_id=assistant.id
+)
+
+# 6. 실행한 후 어시스턴트 답변 확인
+messages = client.beta.threads.messages.list(thread_id=thread.id)
+
+assistant_reply = messages.data[0]
+result = assistant_reply.content[0].text.value
+
+print(result)

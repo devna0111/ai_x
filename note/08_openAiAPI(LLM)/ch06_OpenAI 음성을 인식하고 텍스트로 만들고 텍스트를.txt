@@ -1,0 +1,43 @@
+ch06_OpenAI 음성을 인식하고 텍스트로 만들고 텍스트를 음성으로
+
+# 음성을 텍스트로
+from dotenv import load_dotenv
+from openai import OpenAI, OpenAIError
+load_dotenv()
+client = OpenAI()
+
+# 1. 음성 파일 열기
+audio_file = open('data/ch5_sage_ko.mp3', 'rb') => with 문으로 만들고 try 예외 처리
+
+# 2. whisper API에 음성 필사 요청
+response = client.audio.transcriptions.create(
+    file = audio_file,
+    model = 'whisper-1',
+    response_format = 'text', # 텍스트만 반환
+)
+
+# 3. 변환된 텍스트 출력
+print(response)
+audio_file.close()
+
+# 텍스트를 음성으로
+from dotenv import load_dotenv
+import openai
+load_dotenv()
+client = openai.OpenAI()
+
+# 변환할 텍스트
+text = "Hello, OpenAI! This is a text to speach test"
+
+# 텍스트-음성변환 요청
+response = client.audio.speech.create(
+    model = 'tts-1', # 기본 TTS 모델
+    voice = 'nova', # 음성 목소리 선택(https://platform.openai.com/docs/guides/text-to-speech)
+    input = text,
+    speed = 0.7 # 속도를 빠르게 하거나 느리게 할 수 있음
+)
+
+audio_data = response.content
+print(f'생성된 오디오 데이터 크기 :', len(audio_data),'바이트')
+with open('data/ch5_onyx.mp3','wb') as f :
+    f.write(audio_data)
