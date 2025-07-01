@@ -1,0 +1,55 @@
+ch02_함수 생성_3
+# 엑셀작업 + 함수화
+
+import datetime
+import shutil # 파일 및 디렉토리 작업 도와주는 lib
+
+def handle_init_sheet(file_path, wb) :
+    # 2. 백업(파일명 : genai_rpa2507011258.xlsx)
+    timestamp = datetime.datetime.now().strftime("%y%m%d%H%M")
+    backupfilename = f"genai_rpa{timestamp}.xlsx"
+    shutil.copy(file_path,backupfilename)
+    print("백업 파일 생성 완료",backupfilename)
+    # 3. 'prev_list' 시트를 삭제
+    sheet_names = [s.name for s in wb.sheets]
+    if 'prev_list' in sheet_names :
+        wb.sheets['prev_list'].delete()
+        print("prev_list 시트 삭제 완료")
+    else :
+        print("prev_list 시트가 존재 하지 않아 삭제하지 못함")
+    # 4. 'now_list' 시트를 복사하고 그 이름을 'prev_list'로 수정
+    if 'now_list' in sheet_names :
+        now_sheet = wb.sheets['now_list']
+        prev_sheet = now_sheet.copy(after=now_sheet) # 깊은복사
+        prev_sheet.name = "prev_list"
+        print("now_list 시트를 prev_list 시트로 복사 완료")
+    else :
+        print("now_list 시트가 존재하지 않아 작업 중단")
+        return
+
+# 파일 백업 후, 기존의 now_list 시트를 prev_list로 하고 now_list에 네이버 쇼핑목록 업데이트
+from naverOpenai import get_naver_api_data, str_json_dataframe
+import xlwings as xw
+from handle_sheet import handle_init_sheet
+
+def main() :
+    # 1. genai_rap.xlsx 파일 열기
+    file_path = "genai_rpa.xlsx"
+    wb = xw.Book(file_path)
+    # 2 ~ 4 함수 호출
+    handle_init_sheet()
+    # 5. 네이버 api 쇼핑목록 데이터 가져오기(json타입str -> dict -> DataFrame) 
+    str_data = get_naver_api_data('shop','포켄스')
+    df_data = str_json_dataframe(str_data)
+    # 6. 'now_list' 시트에 df_data 내용을 A1 셀에 업데이트
+    now_sheet = wb.sheets['now_list']
+    now_sheet.clear()
+    now_sheet.range('A1').value = df_data
+    print("now_list 업데이트 완료")
+    # 7. 파일 저장 후 닫기
+    wb.save(file_path)
+    wb.close()
+    print('workbook 저장 및 닫기 완료')
+
+if __name__ == '__main__' :
+    main()

@@ -1,0 +1,32 @@
+ch01_자동화
+
+목표 : 일일 동향 보고서를 작성한다.
+
+1_ 오픈마켓 검색 결과 변동사항 체크
+2_주요 뉴스
+....
+
+위 내용을 openAI API를 통해 요약해서 작성.
+
+특정 시간대 Windows Scheduler를 사용해서 특정 시간대 마다 자동으로 실행하게끔 세팅
+
+지난 주와 이번 주 (어제와 오늘)의 동향을 체크해서 알려주도록 세팅
+- 실행파일생성
+- 반복(batch) 처리
+
+=> 각각의 필요한 함수를 .py로 만들어서 자동화를 위해 함수를 호출하는 방법을 사용할 예정
+
+가상환경 세팅
+python -m venv .venv # .venv 라는 이름의 가상환경 설정
+.venv\Scripts\activate # 가상환경 접속
+
+python.exe -m pip install --upgrade pip
+pip install jupyter numpy==1.23.5 pandas==1.5.3
+pip install xlwings # excel용
+pip install python-decouple python-dotenv
+pip install openai
+pip install pyinstaller # py파일을 exe  실행파일로 바꿀 때 필요한 라이브러리
+
+pip freeze > requirements.txt # 현재 가상환경 라이브러리 목록 다운로드
+ 
+pip install -r requirements.txt # 주어진 환경에 맞춰서 세팅하는 방법

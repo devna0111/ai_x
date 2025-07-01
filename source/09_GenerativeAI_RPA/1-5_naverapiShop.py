@@ -1,0 +1,58 @@
+# 네이버 쇼핑목록 데이터프레임으로
+import os
+import sys
+import urllib.request
+from dotenv import load_dotenv
+import json
+import pandas as pd
+
+def get_naver_api_data(media, word) :
+    '''
+    네이버 오픈API 검색기능을 활용해 word에 대해 media 검색한 결과의 str을 return
+    media = "shop" or "news" 
+    '''
+    load_dotenv()
+    client_id = os.getenv('Client_ID')
+    client_secret = os.getenv('Client_Secret')
+    encText = urllib.parse.quote(word)
+    # media = "news"
+    url = f"https://openapi.naver.com/v1/search/{media}?display=20&sort=date&query={encText}" # JSON 결과
+
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id",client_id)
+    request.add_header("X-Naver-Client-Secret",client_secret)
+    response = urllib.request.urlopen(request)
+    rescode = response.getcode()
+    if(rescode==200):
+        response_body = response.read()
+        # print(response_body.decode('utf-8'))
+        # data = json.loads(response_body.decode('utf-8'))
+        # pd.DataFrame(data.get('items'))
+        return response_body.decode('utf-8')
+    else:
+        print("Error Code:" + rescode)
+        pass
+
+def str_json_dataframe(str_json_result) :
+    """Json 스타일의 str을 DataFrame으로 return"""
+    if isinstance(str_json_result, str) :
+        json_result = json.loads(str_json_result)
+        
+    else :
+        json_result = dict()
+    # 딕셔너리 => DataFrame으로
+    items = json_result.get("items",[])
+    df = pd.DataFrame(items)
+    df['순위'] = range(1, len(df)+1)
+    df.set_index("순위", inplace=True)
+    return df
+
+def main() :
+    ''' 네이버 api 쇼핑목록 데이터 가져오기(json타입str -> dict -> DataFrame) '''
+    str_data = get_naver_api_data('shop','포켄스')
+    # print(str_data)
+    df_data = str_json_dataframe(str_data)
+    return df_data
+
+if __name__ == '__main__' :
+    main()

@@ -47,4 +47,3 @@ for msg in sorted_messages :
     dateStyle_str = time.strftime('%Y-%m-%d %H:%M:%S',dateStyle)
     print("{:^9}({}) : {}".format(msg.role, dateStyle_str ,msg.content[0].text.value))
 
-function call => 날씨 등을 물을 때 도구를 쥐어준다고 생각. RAG 이전 단계
