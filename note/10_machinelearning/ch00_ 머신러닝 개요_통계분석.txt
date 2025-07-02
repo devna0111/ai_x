@@ -1,0 +1,117 @@
+ch00_ 머신러닝 개요_ 통계분석
+
+# 통계요약 : 중심위치 측도(평균, 중위값, 최빈값) 및 산포 측도 체크하기
+import numpy as np
+from scipy.stats import kurtosis, skew
+
+data = np.random.normal(loc = 0, scale = 1.0, size=10000000 )
+
+# 분포도 (histogram)
+import matplotlib.pyplot as plt
+plt.figure(figsize=(5,1))
+plt.hist(data, bins=150)
+plt.show()
+
+print('평균:',  np.mean(data))
+print('중앙값:' , np.median(data))
+print('분산:' , np.var(data))
+print('표준편차:' , np.std(data))
+
+# 왜도(skewness) : 0 대칭 , 음수 좌측의 긴 꼬리(우편향), 양수 우측의 긴 꼬리 편향(좌편향)
+print("왜도(치우친 정도) :",skew(data))
+print("첨도(뾰족한 정도) :",kurtosis(data))
+
+from seaborn import load_dataset
+iris = load_dataset('iris')
+iris.describe(include = "all") # include = 'all' : 수치형 범주형
+
+iris['species'].nunique() # 범주형 데이터의 데이터 종류수
+iris['species'].unique() # 데이터 종류수(범주형, 수치형)
+iris['species'].value_counts()
+
+## 2.4 데이터 가속화
+```
+pip install dataprep : EDA를 쉽게 lib
+```
+dataprep.eda안의 주요 함수
+- plot() : 각 변수의 분포 그래프, 파이그래프, 산점도 등 표시
+- plot_correalation() : 각 변수들 사이의 상관계수 히트맵
+- plot_missing() : 결측치 데이터 분포를 쉽게 확인
+
+from dataprep.eda import plot, plot_correlation, plot_missing
+plot(iris) # Show Stats and Insights 버튼 클릭 시 데이터 통계량과 insight
+plot(iris, 'petal_length', config = {'hist.bins':150})  # 부분만 보는 방법
+plot_correlation(iris)
+plot_missing(iris)
+
+# 상관관계 분석
+iris.corr(numeric_only=True) => pandas 기능으로 체크하기 method 선택해서 체크 가능(spearman, pearson
+
+from scipy.stats import pearsonr
+corr, p_value = pearsonr(iris.petal_length, iris.petal_width)
+print('corr :', round(corr,6))
+print('p_value :', round(p_value,6)) # p_value가 0.05 이하면 믿을 만 하다 표현
+
+# corr과 p-value를 체크하기
+from scipy.stats import pearsonr, spearmanr
+corr, p_value = pearsonr(iris.petal_length, iris.petal_width)
+print('corr :', round(corr,6))
+print('p_value :', round(p_value,3)) # p_value가 0.05 이하면 믿을 만 하다 표현
+
+# 연구가설 (다르다) : p_value가 0.05미만이면 유의미하다 => 유의 확률. 우연히 이 값이 나올 가능성을 구하는 것
+
+# 독립성 검정
+## 피셔의 검정 : 데이터 수가 제한적, 적을 때
+data = pd.DataFrame({'대서양' : [8, 2],
+                    '인도양' : [1, 5],},
+                   index = ['고래', '상어'])
+
+# 대서양에 고래가 많고 인도양에 상어가 많다고 할 수 있는 지 검정
+from scipy.stats import fisher_exact
+
+## 맥니마 검정 => 쿠폰을 뿌렸을 때 상태가 변하는 지 안 변하는 지
+data = pd.DataFrame({'치료후음성' : [59,16,75],
+                    '치료후양성' : [6,80,86]},
+                   index = ['치료전양성','치료전음성','계'])
+data['계'] = data['치료후음성'] + data['치료후양성']
+table = np.array(data.iloc[:2, :2])
+table
+
+# 치료가 음성과 양성에 영향을 미치는 지 검정
+from statsmodels.stats.contingency_tables import mcnemar
+result = mcnemar(table,
+                 exact = True, # True인 경우 이산형 데이터이거나 데이터가 작을 때, False인 경우 연속형이거나 데이터가 크거나
+                 correction = True)
+result.statistic, result.pvalue # (6.0, 0.052478790283203125)
+
+### 다차원 척도법
+seaborn.pairplot(iris)
+# or
+g = sns.PairGrid(iris)
+g.map_diag(sns.kdeplot) # 대각선 영역 그래프
+g.map_lower(sns.scatterplot) # 대각선 아래는 산점도
+g.map_upper(sns.regplot) # 대각선 위는 회귀선을 포함한 산점도
+
+# scaling : MinMaxScaler, StandardScaler, RobustScaler, Normalizer
+# encoding : label / one-hot 2종
+			one-hot : OneHotEncoder  LabelBinarizer to_categorical get_dummies
+		=> 평균값 인코딩이 필요할 수도 있음 => 굳이..?
+
+## df.pivot_table : 통계요약용으로 맛깔나게 쓰기
+
+	# pivot_table
+df = pd.DataFrame({"A": ["foo", "foo", "foo", "foo", "foo",
+                         "bar", "bar", "bar", "bar"],
+                   "B": ["one", "one", "one", "two", "two",
+                         "one", "one", "two", "two"],
+                   "C": ["small", "large", "large", "small",
+                         "small", "large", "small", "small",
+                         "large"],
+                   "D": [1, 2, 2, 3, 3, 4, 5, 6, 7],
+                   "E": [2, 4, 5, 5, 6, 6, 8, 9, 9]})
+
+df.pivot_table(columns=['C'],
+              index='B',
+              values = "D",
+#               aggfunc='sum')
+              )

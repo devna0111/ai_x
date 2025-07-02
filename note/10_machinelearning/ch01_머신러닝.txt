@@ -1,0 +1,25 @@
+ch01_머신러닝
+
+모형 생성 => sklearn에서 제공하는 클래스는 분류/회귀모형, 군집분석 등의 모형 생성 클래스를 활용
+클래스를 통해 모델 객체를 생성하고 우리는 데이터를 분할해서 활용만 하면 가능
+
+ex) 의사결정나무 : DecisionTreeClassifier
+## 랜덤포레스트 => 의사결정나무를 모아서 포레스트로 만들겠다는 의미..
+
+# 의사결정나무 : DecisionTreeClassifier를 통한 모형
+from sklearn.tree import DecisionTreeClassifier
+dt_model = DecisionTreeClassifier(random_state=1)
+dt_model.fit(train_X, train_y)
+
+# 위 내용 모델 생성 끝
+pred = dt_model.predict(test_X)
+pd.crosstab(test_y, pred, rownames=['실제값'],colnames=['예측값'])
+
+dt_model.score(test_X,test_y) # accuracy
+
+# 다중신경망 모델?
+mlp_model = MLPClassifier(hidden_layer_sizes=(50,50,20),
+                         max_iter=500,
+                         random_state=1)
+mlp_model.fit(train_X, train_y)
+# 이렇게 하면 끝
