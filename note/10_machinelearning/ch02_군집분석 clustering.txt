@@ -1,0 +1,85 @@
+ch02_군집분석 clustering
+=> 데이터를 받았을 때 2진분류를 하기에 데이터량의 양극화가 극단 적일 때 활용하기도 함.
+ex) 보험사기꾼 2 : 정상인 998 일 때, 위험군을 고위험군, 중위험군 등으로 나눠서 사용하기도..
+
+#1. KMeans 클러스터링
+- 가장 단순하고 빠른 클러스터링 알고리즘
+- 클러스터의 중심을 찾아가는 알고리즘
+
+from sklearn.cluster import KMeans
+model = KMeans(n_clusters=2, # 타겟변수 군의 개수 : 2개군으로 분류
+              init = 'k-means++', # 첫 clustering point를 어떻게 잡을 것인가에 대한 지시. random : 중심점 랜덤, k-means++ : 초기 중심을 서로 멀리 초기화
+              n_init = 10, # 초기 중심점을 10번 잡아 시도해서 가장 괜찮은 모델을 사용한다. 'auto' => 스스로 제일 괜찮은 곳을 찾아서 실행하겠다
+              max_iter=300, # 각 실행을 300번 반복 중심옮기기
+              )
+model.fit(X)
+
+한계점 : 군의 크기, 밀도, 비 구형의 경우 + 이상치 발생 시 정확도 격하
+=> 실루엣을 부여해서 나눠서 사용
+
+#2. Hierarchical 클러스터링(계층적 군집)
+- 군끼리 묶으면서 최종적으로 하나의 군집이 될때까지 군을 묶는 클러스터링 알고리즘
+- 군집의 수를 미리 정해주지 않음
+- 군집간의 거리 기반으로 클러스터링
+
+from scipy.cluster.hierarchy import linkage
+# method : 거리 계산을 어떻게 할지
+# method = 'complete' : 두 클러스터에서 가장 먼 거리를 이용 => 가장 보편적
+# method = 'single' : 두 클러스터에서 가장 가까운 거리를 이용
+# method = 'average' : 두 클러스터 내의 각 점에서 다른 클러스터의 모든 점 까지의 평균거리 이용
+cluster_model = linkage(iris, method = 'complete')
+
+from scipy.cluster.hierarchy import dendrogram
+dendrogram(cluster_model, labels=iris.index)
+plt.savefig('data/ch2_iris.png', dpi = 300, bbox_inches = 'tight')
+plt.show()
+
+from scipy.cluster.hierarchy import fcluster # dendrogram을 보고 군집화
+fcluster(cluster_model,
+         t=4, # t : dendrogram의 y 값
+         criterion = 'distance', # 군집화 기준
+        )
+# criterion = 'distance' 일 때 t 값은 dendrogram의 y축 값
+
+fcluster(cluster_model,
+        t=3,
+        criterion='maxclust') # 이 때 t 값은 클러스터의 개수 => 3개 군집화 하겠다
+
+# 3. DBSCAN 클러스터링
+- 실무에서 사용세가 적은 편
+- 연결 기반 (밀도 기반) 군집화 알고리즘 => 이상치를 자동 감지
+- 단점 : 클러스터의 밀도가 일정하지 않으면 성능 저하
+
+from sklearn.cluster import DBSCAN
+# 반경 0.3 이내에 최소 10개는 있어야 군집 시작
+db = DBSCAN(eps=0.25, min_samples=10)
+db.fit(data[:,:2])
+
+labels = db.labels_ # 모델이 군집화한 결과 (-1은 이상치 인식)
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0) # 클러스터 수
+n_noise_ = list(labels).count(-1)
+print('이상치를 제외한 클러스터 수 :', n_clusters_)
+print('이상치 개수 :',n_noise_)
+
+# 모형 성능 평가
+- score 메소드를 통해 예측 모형을 평가(분류, 회귀) => 군집모형에서는 활용하지 않음
+- metrics 모듈의 메소드를 통해 모형 평가
+
+# 클러스터가 3개인 경우 평가 => sklearn.metrics 속 함수들로 진행하며, 필요한 거 체크하면서 진행할 수 있도록 한다.
+from sklearn.metrics import adjusted_rand_score # 두 군집 라벨의 쌍 일치 정도 (1: 완벽, 0: 랜덤, 음수: 역상관)
+adjusted_rand_score(iris_y, pred3)
+
+## 실루엣 계수
+from sklearn.metrics import silhouette_score
+range_n_clusters = [i for i in range(2,11)]
+for n_clusters in range_n_clusters :
+    model = KMeans(n_clusters=n_clusters,
+                  n_init = 10,
+                  random_state=2)
+    model.fit(data[:,:2])
+    pred = model.labels_
+    score = silhouette_score(X = data[:,:2],
+                            labels = pred)
+    print(f"클러스트수 : {n_clusters}, 실루엣 계수 : {score}")
+
+??? 그냥 for-문을 돌려서 이걸 다 체크해서 좋은 걸 쓰라고??

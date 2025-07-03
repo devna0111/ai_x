@@ -23,3 +23,5 @@ mlp_model = MLPClassifier(hidden_layer_sizes=(50,50,20),
                          random_state=1)
 mlp_model.fit(train_X, train_y)
 # 이렇게 하면 끝
+
+=> 저장은 joblib으로 하는게 빠르고 좋음
