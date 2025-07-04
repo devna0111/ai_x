@@ -1,0 +1,76 @@
+CH03: 분류분석 정리
+1. 분류분석이란?
+**지도학습(Supervised Learning)**의 한 종류
+
+타겟 변수(종속 변수)가 범주형(Categorical)
+
+예: 고양이/개/토끼, 스팸/햄, 합격/불합격 등
+
+2. 분류 모델의 유형
+(1) 확률적 모형 (Probabilistic Models)
+클래스별 확률을 추정하여 예측
+
+종류:
+
+확률적 생성 모형
+
+각 클래스의 데이터 분포 자체를 추정
+
+대표: 나이브 베이즈(Naive Bayes)
+
+수식 기반: 베이즈 정리
+
+확률적 판별 모형
+
+결정 경계(판별식)를 통해 직접 클래스 구분
+
+대표: 로지스틱 회귀(Logistic Regression), 신경망(DNN)
+
+(2) 판별 모형 (Discriminative Functions)
+**경계면(Decision Boundary)**를 기반으로 클래스를 구분
+
+각 샘플이 경계로부터 얼마나 떨어져 있는지를 판단
+
+확률값은 계산되지 않음
+
+대표: SVM(Support Vector Machine) 등
+
+3. 최근 추세: 앙상블 기반 모델
+개별 약한 분류기를 조합해 성능을 끌어올림
+
+대표 모델:
+
+Random Forest
+
+XGBoost
+
+LightGBM
+
+이들은 대부분 결정 트리 기반이지만, 성능/속도/메모리 면에서 최적화됨
+
+4. 추가 정보: 특성 중요도 해석
+비록 예측 자체는 앙상블이나 딥러닝을 사용하더라도,
+여전히 의사결정트리 기반의 Feature Importance 분석은 널리 사용됨
+
+특히 설명 가능한 AI(Explainable AI) 측면에서 중요
+
+# 분류모형 성능평가
+- 혼동행렬(교차표)
+- score 함수(f1, recall, precision, accuracy 등...) => fbeta_score
+- ROC커브 - roc 커브 영역 확인
+
+교차표에서
+# real False => pred True : 1종 오류
+# real True => pred False : 2종 오류
+
+위양성율? : 실제론 False인데 예측이 True, 오탐한 비중 FP/FP+TN
+특이도 : TN/TN+FP
+	(일반인  중 일반인으로 예측한 것)
+fbeta_score : recall과 precision 중 원하는 수치에 가중하여 조화평균을 냄.
+fbeta_score(result.y_true, result.y_pred, beta=2, # beta = 2 : recall의 가중치를 높게, precision 비중을 낮게, 보통 0 ~ 2 사이 수 활용
+
+★ ROC커브 => 각종 score에서 체크해서 비등한 모델이라면 마지막에 체크
+machine learning model에서 decision_function이 있거나 predict_proba가 있다면 1일 확률로 그래프를 그리고 auc를 구해서 평가가 가능
+ROC그래프의 가로축 위양성율 (fprate : False Positive rate), 세로축 recall값
+AUC가 높아야(그래프 아래 면적이 넓을 때) 좋은 모델
+

@@ -48,7 +48,14 @@ pip freeze > requirements.txt
 notepad requirements.txt
 pip install -r requirements.txt #requirements.txt 에 있는 라이브러리들 설치
 
+의사결정나무모형 트리 구조 보기
+중요한 변수가 뭔지 뽑아낼 때 활용
 
+conda install -c conda-forge graphviz(의사결정나무 그래프를 생성하는 도구)
+pip install pydot( Graphviz의 .dot 데이터를 이미지로 변환하는 라이브러리)
 
+=> 두 lib install 상태 체크 dot -V
 
-
+가상환경 세팅(vscode를 통해 폴더마다 가상환경 설정하는 방법
+python -m venv .venv # .venv 라는 이름의 가상환경 설정
+.venv\Scripts\activate # 가상환경 접속

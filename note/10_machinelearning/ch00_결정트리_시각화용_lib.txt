@@ -1,0 +1,9 @@
+conda install -c conda-forge graphviz(의사결정나무 그래프를 생성하는 도구)
+
+pip install pydot( Graphviz의 .dot 데이터를 이미지로 변환하는 라이브러리)
+
+=> 가상환경에서는 에러가 많이 일어남
+=> 실행이 잘 안되면 Base 환경에서 해보
+
+conda install graphviz
+pip install pydot
