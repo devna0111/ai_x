@@ -56,6 +56,20 @@ pip install pydot( Graphviz의 .dot 데이터를 이미지로 변환하는 라�
 
 => 두 lib install 상태 체크 dot -V
 
-가상환경 세팅(vscode를 통해 폴더마다 가상환경 설정하는 방법
+가상환경 세팅(vscode를 통해 폴더마다 가상환경 설정하는 방법)
 python -m venv .venv # .venv 라는 이름의 가상환경 설정
 .venv\Scripts\activate # 가상환경 접속
+
+# 자료 불균형 처리(smote)과 앙상블 알고리즘 다운
+conda install -c conda-forge imbalanced-learn=0.9.1 #smote
+# conda-forge에서 받으면 충돌 경우의 수를 줄일 수 있다, 다만 시간이 오래 걸리는....
+
+# 설치 전 의존성 확인
+pip install --dry-run xgboost==1.7.3
+# 의존성 확인에서 문제가 없으면 설치
+pip install  xgboost==1.7.3
+
+pip install lightgbm
+
+pip install --dry-run catboost==1.7.3
+pip install catboost==1.2
