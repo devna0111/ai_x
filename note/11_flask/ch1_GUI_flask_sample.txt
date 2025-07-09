@@ -1,0 +1,60 @@
+# 회귀모델을 사용한다면 반드시 model = statsmodel.OLS(y, X).fit( ) ; model.summary() 해서 
+R-squared : 독립변수 X가 타겟변수 t를 설명해 주는 수치(설명도)
+Adj. R-squared : 수정된 R-squared (설명도)
+Durbin-Watson : (자기 상관이 있는 지 수치 : 이상치는 2, 2에 가까울 수록 좋은 형태)
+coef : 가중치와 상수를 체크할 수 있음
+P값 체크 : 0.05보다 낮으면 의미가 있다. 유의확률
+Skew 왜도
+Kurtosis: 첨도
+Prob (F-statistic), 
+등  체크
+
+GUI로 활용하려면 tkinter 라이브러리를 사용한다
+아래 예시 :
+
+def on_submit(event=None) :
+    '''입력된 건축 년도, 전용 면적, 층수를 예측한 결과 출력'''
+    year = int(year_entry.get())
+    square = int(square_entry.get())
+    floor = int(floor_entry.get())
+    model = joblib.load('../model/ex1_apt_price_regression.joblib')
+    result = round(model.predict([[year, square, floor, 1]])[0])
+    result_message = f"예상 금액 : {result} 만원 입니다."
+    pred_label.configure(text = result_message)
+    print(result_message)
+    
+    # 예상 금액 출력 후 입력값 비우고 year_entry에 자동 포커싱
+    year_entry.delete(0,len(year_entry.get())) # 비추
+    square_entry.delete(0, tk.END) # 추천
+    floor_entry.delete(0, tk.END) # 추천
+    year_entry.focus_set() 
+
+root = tk.Tk()
+root.geometry("500x300")
+
+year_label = tk.Label(root, text = '건축년도')
+year_label.pack()
+year_entry = tk.Entry(root)
+year_entry.pack(pady=5) # pady : padding y, y축 여백 지정
+
+square_label = tk.Label(root, text = '전용면적')
+square_label.pack()
+square_entry = tk.Entry(root)
+square_entry.pack(pady=5) # pady : padding y, y축 여백 지정
+
+floor_label = tk.Label(root, text = '층 수')
+floor_label.pack()
+floor_entry = tk.Entry(root)
+floor_entry.pack(pady=5) # pady : padding y, y축 여백 지정
+
+submit_button = tk.Button(root, text='예측',
+                         command = on_submit,
+                         )
+submit_button.pack(pady=15)
+
+pred_label = tk.Label(root, text = "예측 금액 출력 예정")
+pred_label.pack(pady=10)
+
+year_entry.focus_set() # GUI차이 포커싱되면 year_entry에 자동 포커싱
+root.bind('<Return>', on_submit)
+root.mainloop()
