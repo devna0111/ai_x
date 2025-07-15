@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Welcome</title>
+    <style>
+        body {background-color: #37373796; color : whitesmoke}
+    </style>
+    <link href="{{url_for('static', filename='flask.png')}}" rel="icon">
+    <link href="{{url_for('static', filename='file.css')}}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <h1>{{member.name}}님, {{member.id}}로 회원가입 완료입니다. {{member.addr}}의 정보를 잘 찾아볼게요!</h1>
+    <h2>ID : {{member.id}}</h2>
+    <h2>PW : {{member.pw | mask_pw}}</h2>
+    <h2>주소: {{member.addr}}</h2>
+    <!-- <form action="" method="patch"></form> 에러 발생 : form 태그는 get과 post 만  -->
+    <p><input type="text" id = "name" value="{{member.name}}"></p>
+    <p><input type="number" id = "id"value="{{member.id}}"></p>
+    <p><input type="password" id = "pw" value="{{member.pw}}"></p>
+    <p><input type="text" id = "addr" value="{{member.addr}}"></p>
+    <p>
+        <button id="update">수정</button>
+        <button id="delete">삭제</button>
+    </p>
+    <p id="result"></p>
+</body>
+</html>
+    <script>
+    // button#update click 할 때 #name, #id, #pw, #addr "/update/name/id/pw/addr"을 patch방식 요청
+    document.getElementById("update").addEventListener("click", ()=>{
+        let name = document.getElementById("name").value;
+        let id = document.getElementById("id").value;
+        let pw = document.getElementById("pw").value;
+        let addr = document.getElementById("addr").value;
+        name = encodeURIComponent(name); // 한글 이름을 인코딩 처리
+        addr = encodeURIComponent(addr); // 한글 주소를 인코딩 처리
+        // url = "/update/" + name + "/" + id + "/" + pw + "/" + addr; // 아래 방식을 사용하지 않으면 이처럼 작성
+        fetch(`/update/${name}/${id}/${pw}/${addr}`, {method:"PATCH"}) // '' 가 아니라 ``(틸드)
+        .then(response => {
+            if(!response.ok){
+                alert("수정이 실패하였습니다.");
+                return;
+            }
+            return response.text();
+        }).then(data=>{
+            alert(data);
+            document.getElementById("result").innerHTML = data;
+        })
+    }); 
+    // button#delete click 할 때 #name, #id, #pw, #addr "/delete/name/id/pw/addr"을 patch방식 요청
+    document.getElementById("delete").addEventListener("click", ()=>{
+        let name = document.getElementById("name").value;
+        let id = document.getElementById("id").value;
+        let pw = document.getElementById("pw").value;
+        let addr = document.getElementById("addr").value;
+        name = encodeURIComponent(name); // 한글 이름을 인코딩 처리
+        addr = encodeURIComponent(addr); // 한글 주소를 인코딩 처리
+        // url = "/update/" + name + "/" + id + "/" + pw + "/" + addr; // 아래 방식을 사용하지 않으면 이처럼 작성
+        fetch(`/delete/${name}/${id}/${pw}/${addr}`, {method:"PATCH"}) // '' 가 아니라 ``(틸드)
+        .then(response => {
+            if(response.ok){
+                alert("삭제가 완료되었습니다.");
+                location.href = "/";    
+            }
+            else{
+                alert("삭제를 실패하였습니다.");
+            }
+        });
+    }); 
+    </script>
