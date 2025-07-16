@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <title>Welcome</title>
     <style>
-        body {background-color: #37373796; color : whitesmoke}
+        body {background-color: #37373796; color : black}
     </style>
     <link href="{{url_for('static', filename='flask.png')}}" rel="icon">
     <link href="{{url_for('static', filename='file.css')}}" rel="stylesheet" type="text/css">
@@ -46,28 +46,22 @@
             }
             return response.text();
         }).then(data=>{
-            alert(data);
             document.getElementById("result").innerHTML = data;
         })
     }); 
-    // button#delete click 할 때 #name, #id, #pw, #addr "/delete/name/id/pw/addr"을 patch방식 요청
-    document.getElementById("delete").addEventListener("click", ()=>{
-        let name = document.getElementById("name").value;
-        let id = document.getElementById("id").value;
-        let pw = document.getElementById("pw").value;
-        let addr = document.getElementById("addr").value;
-        name = encodeURIComponent(name); // 한글 이름을 인코딩 처리
-        addr = encodeURIComponent(addr); // 한글 주소를 인코딩 처리
-        // url = "/update/" + name + "/" + id + "/" + pw + "/" + addr; // 아래 방식을 사용하지 않으면 이처럼 작성
-        fetch(`/delete/${name}/${id}/${pw}/${addr}`, {method:"PATCH"}) // '' 가 아니라 ``(틸드)
+    // button#delete click 할 때 #name, #id, #pw, #addr "/delete/id"을 delete방식 요청
+    document.getElementById("delete").addEventListener("click", ()=>{ // 삭제 버튼 클릭 시
+        let id = document.getElementById("id").value; // id 값 추출
+        fetch(`/delete/${id}`, {method:"DELETE"}) // '' 가 아니라 ``(틸드)
         .then(response => {
-            if(response.ok){
-                alert("삭제가 완료되었습니다.");
-                location.href = "/";    
-            }
-            else{
+            if(!response.ok){
                 alert("삭제를 실패하였습니다.");
+                return;
             }
+            return response.text();
+            }).then(data => {
+                alert(data);
+                location.href = "/"; // get 요청을 통해 다시 홈페이지로 이동
+            });
         });
-    }); 
     </script>

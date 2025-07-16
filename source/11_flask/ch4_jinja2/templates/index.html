@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>INDEX</title>
+    <link href={{ url_for('static', filename='flask.png') }} rel="icon">
+    <link href ={{ url_for('static', filename='file.css') }} rel="stylesheet">   
+</head>
+<body>
+    <h1>이름을 입력해주세요.</h1>
+    <form action="/" method="post">
+        <input type="text" name="name" placeholder="이름을 입력해 주세요" 
+        value = "{%if name%}{{name|trim|capitalize}}{%endif%}" onfocus="this.value = ''";>
+        <input type="submit" value="전송">
+    </form>
+    {% if name_len and name_len%2 == 0 %}
+        <h1>이름의 길이가 짝수입니다 : {{name|trim}}({{name | length}} 글자)</h1>
+    {% elif name_len%2 != 0 %}
+        <h1>이름의 길이가 홀수입니다 : {{name|trim}}({{name | length}} 글자)</h1>
+    {% else %}
+        <h1>이름이 입력되지 않았습니다.</h1>
+    {%endif%}
+
+    <p>이름들</p>
+    {% if names_list %}
+    <ul>
+        {% for names in names_list %}
+        {% if loop.last %}
+            <li><b>{{loop.index}}/{{names_list|length}}번째 저장된 이름 : {{names}}</b></li>
+        {%else%}    
+            <li>{{loop.index}}/{{names_list|length}}번째 저장된 이름 : {{names}}</li>
+        {%endif%}
+        {% endfor %}
+    </ul>
+    {%else%}
+    <p>추가된 이름이 없습니다.</p>
+    {%endif%}
+    <h2> 가격 : {{'{:,}'.format(price)}}원 </h2>
+</body>
+</html>

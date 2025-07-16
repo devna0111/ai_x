@@ -34,5 +34,10 @@ def update(name, id, pw, addr) :
     print("update 왔다")
     return f"{name}님 정보가 수정되었습니다."
 
+@app.route("/delete/<id>", methods=["DELETE"])
+def delete(id):
+    # delete from 테이블명 where id = id를 DBMS에 전송
+    return f"{id}번 삭제되었습니다."
+
 if __name__ == "__main__":
     app.run(debug=True)
