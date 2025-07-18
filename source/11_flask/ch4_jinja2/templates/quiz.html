@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>QUIZ</title>
+    <link href="{{ url_for('static', filename='flask.png')}}" rel="icon">
+    <link href ="{{ url_for('static', filename='file.css')}}" rel="stylesheet">
+    <style>
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <h1>구구단을 외자</h1>
+    <h2>원하는 구구단을 입력하세요.</h2>
+    <form action="/" method="post">
+        <input type="number" name="numb" placeholder="원하는 구구단을 입력하세요." required=true value="{%if numb%}{{numb}}{%endif%}">
+        <input type="submit" value="구구단 확인하기">
+    </form>
+    {# 주석테스트 #}
+    {% if numb %}
+        {%for i in range(1,10)%}
+            {{numb}} X {{i}} = {{numb*i}} <br>
+        {%endfor%}
+        </form>
+    {%else%}
+        <h2> 아직 구구단 수 입력 전 </h2>
+    {%endif%}
+    <a href="/">최초화면으로</a>
+</body>
+</html>

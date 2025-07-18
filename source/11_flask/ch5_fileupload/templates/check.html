@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{%block title%}Check{%endblock%}
+{%block content%}
+<body onload="onload()">
+    {# bootstrap 5.2 의 jumbotron 페이지 사용 #}
+    <div class="container py-4">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">파일 업로드</h1>
+                <hr style="color:red"/>
+                <h1> 파일이 정상적으로 서버에 업로드 되었습니다.</h1>
+                <img src = "{{url_for('static', filename='img/check.png')}}" width="90" alt = "check">
+                <!-- <h3 class="display-5 fw-bold">업로드 파일 정보</h3>
+                <p>업로드 파일 이름 : {{upload_filename}}</p>
+                <p>서버 저장 파일 이름 : {{save_filename}}</p> -->
+                {{fileinfo['ctime'].strftime('%Y-%m-%d %H:%M:%S')}} 생성됨
+                사이즈 : {{fileinfo['size']}}
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+function onload() {
+    setTimeout(()=>{
+        location.href = "/"
+    }, 3000);
+    alert("업로드 파일이 정상적으로 서버에 업로드 되었습니다.")
+}
+</script>
+{%endblock%}
