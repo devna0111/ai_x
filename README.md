@@ -2,7 +2,7 @@
 
 
 
-\# 공부 일지 내용
+# \공부 일지 내용
 
 <img width="628" height="893" alt="Image" src="https://github.com/user-attachments/assets/67a500be-543f-452e-8f98-f5214cee4fa7" />
 
