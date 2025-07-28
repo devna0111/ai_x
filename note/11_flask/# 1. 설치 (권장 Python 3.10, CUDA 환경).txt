@@ -1,0 +1,16 @@
+# 1. 설치 (권장: Python 3.10, CUDA 환경)
+git clone https://github.com/haotian-liu/LLaVA.git
+cd LLaVA
+conda create -n llava python=3.10
+conda activate llava
+pip install -r requirements.txt
+
+# 2. 모델 다운로드(7B 예시)
+python download.py --model-path liuhaotian/llava-v1.5-7b
+
+# 3. CLI에서 테스트
+python -m llava.serve.cli --model-path liuhaotian/llava-v1.5-7b \
+    --image-file "your_img.png" \
+    --query "이 표를 데이터프레임 형태로 모두 추출해줘"
+
+데이터 인프라/플랫폼 => AI => DataScience => Data Governance&Strategy
