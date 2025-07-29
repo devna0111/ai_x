@@ -1,0 +1,62 @@
+ch03_RAG_chunks_spkit
+
+tiktoken 활용 토큰단위로 구분하여 문서를 쪼개기 사용
+혹은
+문서의 맥락별로(\n\n, 1. 가. 등 구분자 활용) 문서를 chunk화
+
+임베딩은 코드로 진행할 수 도 있으며
+chromadb의 경우 객체로 임베딩할 수 있는 것을 넣으면
+알아서 임베딩을 진행한다고 함
+
+%pip install chromadb
+
+import chromadb
+chroma_client = chromadb.Client()
+
+# collection은 RDB에서의 Table 개념
+collection_name = "tax_collection"
+
+# 임베딩 객체
+from dotenv import load_dotenv
+from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
+import os
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+openai_embedding = OpenAIEmbeddingFunction(
+    model_name = "text-embedding-3-large",
+    api_key=api_key,
+)
+
+# chroma db에 collection 생성
+# tax_collection = chroma_client.create_collection(collection_name) # 컬렉션 이름만 지정
+# chroma_client.delete_collection(collection_name)
+tax_collection = chroma_client.get_or_create_collection(
+    name = collection_name,
+    embedding_function=openai_embedding
+) 
+
+# collection에 입력할 때 사용할 id들 : 문자
+ids = [str(id) for id in range(len(chunk_list))]
+print(ids)
+
+tax_collection.add(documents=chunk_list,
+                  ids=ids)
+
+query = "연봉 5천만원인 직장인의 소득세는 얼마인가요?"
+retrieved_doc = tax_collection.query(query_texts=query,
+                                    n_results=3, # 기본은 유사도가 높은 10개 추출
+                                    )
+
+retrieved_doc['documents'][0] # 중첩list
+
+from openai import OpenAI
+client = OpenAI()
+response = client.chat.completions.create(
+    model = 'gpt-4o-mini', # tiktoken.encoding_for_model()에 전달한 model을 사용하면 더 좋은 결과 확인 가능
+    messages=[
+        {'role' : "system", "content":f"""당신은 한국 소득세 전문가입니다. 
+        아래의 내용을 참고해서 사용자 질문에 답변해주세요.{retrieved_doc['documents'][0]}"""},
+        {"role" : "user", "content" : query}
+    ]
+)

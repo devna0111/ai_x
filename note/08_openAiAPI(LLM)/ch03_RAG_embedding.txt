@@ -1,0 +1,26 @@
+ch03_RAG_embedding
+기본적인 툴
+1. file load => chunks split + overlap => embedding => vector db(chroma, pinecorn
+2. query => dembedding => find similarity (cos) => return vector => change to text
+3. shot the text of vector and wellmade-prompt : base on text, .... => result
+
+영-영 방식이면 openai의 embeddings 모델을 사용하고
+한글이 포함되어있다면 upstage의 embeddings 모델을 활용
+
+방법은 각 홈페이지 docs를 확인
+
+# upstage 기준 활용 방법
+from openai import OpenAI # openai==1.52.2
+from dotenv import load_dotenv
+import numpy as np
+import os
+
+# UPSTAGE_API_KEY = os.getenv(".env속 저장한 단어)
+UPSTAGE_API_KEY = os.getenv("UPSTAGE_API_KEY")
+
+upstage_client = OpenAI(api_key=UPSTAGE_API_KEY, base_url="https://api.upstage.ai/v1" )
+upstage_king_response = upstage_client.embeddings.create( input="king",
+                                                         model="embedding-query" )
+up_king_vector = np.array(upstage_king_response.data[0].embedding)
+print(up_king_vector.shape)
+print(up_king_vector)
