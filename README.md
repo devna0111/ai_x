@@ -2,7 +2,7 @@
 
 
 
-\# 공부 일지 내용
+# 공부 일지 내용
 
 <img width="628" height="893" alt="Image" src="https://github.com/user-attachments/assets/67a500be-543f-452e-8f98-f5214cee4fa7" />
 
@@ -57,7 +57,7 @@
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
  </div>
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=comlec&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=devna0111&show_icons=true&theme=radical)
 
 
 
