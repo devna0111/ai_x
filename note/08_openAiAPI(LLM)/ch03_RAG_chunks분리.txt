@@ -1,0 +1,6 @@
+ch03_RAG_chunks분리
+
+https://python.langchain.com/v0.2/docs/how_to/recursive_text_splitter/#splitting-text-from-languages-without-word-boundaries
+위 주소 참고
+
+=> chunks split을 토큰단위로 할 것인가 아니면 의미있는 맥락 단위로 할 것이냐에 대해 고민 필요
