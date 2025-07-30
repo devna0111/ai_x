@@ -4,3 +4,117 @@ https://python.langchain.com/v0.2/docs/how_to/recursive_text_splitter/#splitting
 위 주소 참고
 
 => chunks split을 토큰단위로 할 것인가 아니면 의미있는 맥락 단위로 할 것이냐에 대해 고민 필요
+
+[ RAG 구현 절차 ]
+
+1.    문서의 내용을 읽는다(document_loader를 이용)
+    (1) https://python.langchain.com/v0.2/docs/integrations/document_loaders/ 
+    (2) https://python.langchain.com/v0.2/docs/integrations/document_loaders/microsoft_word/
+    %pip install --upgrade --quiet  docx2txt
+
+2.    문서를 쪼갠다(한번에 이해하고 처리할 수 있는 입력+출력 토큰수가 제한)
+    (1) https://python.langchain.com/v0.2/docs/how_to/recursive_text_splitter/#splitting-text-from-languages-without-word-boundaries 
+    %pip install -qU langchain-text-splitters
+
+3.    쪼갠 문서를 임베딩하여 vector database에 넣음
+    (1) OpenAIEmbeddings나 UpstageEmbeddings이용해서 임베딩
+    (2) https://python.langchain.com/v0.2/docs/integrations/vectorstores/chroma/  
+    %pip install –q langchain-chroma
+
+4.    질문을 이용해 유사도 검색
+
+5.    유사도 검색한 문서를 LLM에 질문으로 전달하여 답변 얻음(제공되는 Prompt활용)
+    (1) https://python.langchain.com/v0.2/docs/tutorials/rag/
+    %pip install –q langchain langchainhub
+
+https://smith.langchain.com 에서 key 생성 .env key 추가
+
+#1 문서를 쪼개면서 읽기
+%%time
+import time
+start = time.time() # currentsecond
+from langchain_community.document_loaders import Docx2txtLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+loader = Docx2txtLoader('./tax_docs/소득세법(법률)(제20615호)(20250701).docx')
+text_splitter = RecursiveCharacterTextSplitter( # 문서를 문자 단위(수)로 쪼갬
+    chunk_size = 1500, # 문서를 쪼갤 때, 1500 토큰이 아니라 1500 글자씩 쪼개기
+    chunk_overlap=200, # 200글자씩 겹치게 만들기
+    
+)
+# 1번째 chunk : 0 ~ 1500글자
+# 2번째 chunk : 1300 ~ 2800 글자
+# 3번째 chunk : 2600 ~ 4100 글자.... 
+document = loader.load_and_split(text_splitter)
+end = time.time()
+runtime = end - start
+print("문서를 나누는 데 걸린 시간은",runtime,"초 입니다.")
+
+# 2. embedding 모델 설정하기
+
+from dotenv import load_dotenv
+import os
+from langchain_openai import OpenAIEmbeddings
+
+load_dotenv()
+
+embedding = OpenAIEmbeddings(
+    model = "text-embedding-3-large"
+)
+
+# 3. Vector DB에 저장
+%%time
+from langchain_chroma import Chroma
+# 데이터를 처음 저장할 때 아래처럼 세팅
+database = Chroma.from_documents(
+#     documents: 'list[Document]',
+    documents= document,
+    
+#     embedding: 'Optional[Embeddings]' = None,
+    embedding = embedding,
+    
+#     ids: 'Optional[list[str]]' = None, # 지정안하면 자동으로 인덱스 부여
+    
+#     collection_name: 'str' = 'langchain',
+    collection_name = "tax-collection", # 생략시 이름 랜덤
+    
+#     persist_directory: 'Optional[str]' = None,
+    persist_directory = "./chroma", # 생략 시 로컬 데이터 베이스에 저장 안됨. 프로그램 종료 시 db 삭제
+    
+#     host: 'Optional[str]' = None,
+#     port: 'Optional[int]' = None,
+#     headers: 'Optional[dict[str, str]]' = None,
+#     chroma_cloud_api_key: 'Optional[str]' = None,
+#     tenant: 'Optional[str]' = None,
+#     database: 'Optional[str]' = None,
+#     client_settings: 'Optional[chromadb.config.Settings]' = None,
+#     client: 'Optional[chromadb.ClientAPI]' = None,
+#     collection_metadata: 'Optional[dict]' = None,
+#     collection_configuration: 'Optional[CreateCollectionConfiguration]' = None,
+#     *,
+#     ssl: 'bool' = False,
+#     **kwargs: 'Any',
+)
+# 커널 재시작 => db체크
+
+# 4. DB에서 load
+
+from dotenv import load_dotenv
+import os
+from langchain_openai import OpenAIEmbeddings
+
+load_dotenv()
+
+embedding = OpenAIEmbeddings(
+    model = "text-embedding-3-large"
+)
+from langchain_chroma import Chroma
+database = Chroma(
+    embedding_function=embedding,
+    collection_name="tax-collection",
+    persist_directory="./chroma"
+
+# 5. 유사도 검색
+
+query = "연봉 5000만원인 거주자의 소득세는 얼마인가요?"
+retrieved_docs = database.similarity_search(query, k=3,)
+)
