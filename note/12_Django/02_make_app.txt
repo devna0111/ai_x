@@ -1,0 +1,9 @@
+02_make_app
+
+django 작동 방식
+HTTP request => urls.py => views.py => (models.py) => templates => HTTP respones
+
+위 내용에 집중해야한다.
+
+django-admin startproject myptoject 여기서 좌표를 찍지 않으면, 마지막에 . 을 찍지 않으면
+새로운 폴더를 생성하고 그 아래에 프로젝트 폴더를 생성함. => 프로젝트를 진행하려면 해당 폴더로 옮겨가야하는 귀찮음이 발생

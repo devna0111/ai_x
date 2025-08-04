@@ -1,0 +1,39 @@
+1. pip install django
+
+현재 5.2 버젼이 최신이며 2~3 버젼과 문법에 약간의 차이가 있을 수 있으니
+활용 버젼에 따라 문법을 조금씩 체크해야한다.
+
+장고는 풀 프레임 워크이기 때문에 활용을 위해선 학습이 필수적이다.
+
+작동 방식은 항상 request를 통해 reponse 객체를 생성하는 구조로, flask와 달리 request를 통해 작동하므로
+함수를 구성할 때 첫 인자는 request임을 명시해야한다. 또한 반환 시에도 request를 보내야 한다.
+
+가상환경에서 설치하더라도 라이브러리 속 settings.py를 수정해야 하는 둥의 일이 많으므로
+pip show django -> 설치 폴더를 vscode 등에서 띄워놓고 체크하면서 진행한다.
+
+최초 장고 프로젝트를 시작하면
+django-admin startproject 프로젝트이름 .
+위 코드를 터미널에서 실행해서 프로젝트를 구성한다.
+그럼 ch01 폴더와 manage.py가 생성되는 데 이를 통해 프로젝트를 진행한다.
+
+이 프로젝트의 중심이 되는 앱(기능)이 ch01이며
+여기서 settings.py와 urls.py에 원하는 기능 등을 연결하면서 사용한다.
+
+장고의 실행은 python manage.py runserver를 통해 실행한다.
+기타 명령어는 python manage.py를 통해 체크 가능하다.
+
+특정 기능, 페이지를 구성하려면 python manage.py startapp 기술명
+코드를 기입해서 새로운 기능을 추가할 수 있다.
+
+처음 프로젝트를 만들고나면 settings.py에 Secret_key가 생성되는 데 이를 .env에 담고 사용하는 게 보통이며
+decouple 라이브러리가 가벼워서 가장 유용하게 사용된다.
+
+views.py는 화면을 구현할 때 사용한다. render_template이 django에선 render로 사용됨을 잊지 말자.
+
+def home(request):
+    # return HttpResponse("<h1>Hello, world. This is Django.</h1>")
+    return render(
+                request=request,
+                template_name="home.html",
+                context ={"msg" : "Django(장고)"}
+                )
