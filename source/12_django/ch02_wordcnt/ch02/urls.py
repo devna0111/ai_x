@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from home import views
+# from wordcnt import views as wordcnt_views
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("",views.index, name="index"), # name을 왜 쓸까?
+    path("test/",views.test, name="test"), # <a href = "{% url 'test' %}">TEST_name으로 요청해보기</a> 이렇게 이동이 가능하다
+    path("showId/<int:id>/",views.showIntId, name="showIntId"),
+    path("showId/<str:id>/",views.showStrId, name="showStrId"),
+    # path("showId/문자",),
 ]

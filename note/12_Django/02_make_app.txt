@@ -7,3 +7,34 @@ HTTP request => urls.py => views.py => (models.py) => templates => HTTP respones
 
 django-admin startproject myptoject 여기서 좌표를 찍지 않으면, 마지막에 . 을 찍지 않으면
 새로운 폴더를 생성하고 그 아래에 프로젝트 폴더를 생성함. => 프로젝트를 진행하려면 해당 폴더로 옮겨가야하는 귀찮음이 발생
+
+프로젝트에 
+python manage.py startapp 기능이름
+을 통해 기능을 추가하고 나면
+
+본체 프로젝트 속 settings.py의 installed_apps 변수 속에 앱을 추가한다.
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "home",
+    "wordcnt",
+]
+
+이후에는 프로젝트 속 urls.py에서 urlpatterns에 path를 추가한다.
+
+from django.contrib import admin
+from django.urls import path
+from home import views
+# from wordcnt import views as wordcnt_views
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("",views.index, name="index"), 
+    path("test/",),
+    path("showld/숫자",),
+    path("showld/문자",),
+]
