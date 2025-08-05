@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from home import views
 # from wordcnt import views as wordcnt_views
 urlpatterns = [
@@ -24,5 +24,5 @@ urlpatterns = [
     path("test/",views.test, name="test"), # <a href = "{% url 'test' %}">TEST_name으로 요청해보기</a> 이렇게 이동이 가능하다
     path("showId/<int:id>/",views.showIntId, name="showIntId"),
     path("showId/<str:id>/",views.showStrId, name="showStrId"),
-    # path("showId/문자",),
+    path("wordcnt/",include("wordcnt.urls")),
 ]
