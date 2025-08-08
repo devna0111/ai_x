@@ -1,0 +1,5 @@
+04_orm_활용하기_shell사용을용이하게
+
+settings.py의 INSTALLED_APPS에 django_extensions 추가 # pip install django-extensions
+=> cmd에서 python manage.py shell_plus 가능 : 기존 shell보다 강화된 기능
+=> shell에서 자동으로 필요한 models를 import함

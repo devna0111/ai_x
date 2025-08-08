@@ -1,0 +1,45 @@
+03_orm_활용하기
+
+orm : django는 따로 데이터베이스를 만들어서 쿼리를 통해 작동하지 않아도
+내부 기능으로 데이터베이스를 관리한다.
+
+최초에 필요한 데이터베이스를 관리할 객체를
+해당 앱 속의 models.py에 설계해 사용할 수 있다.
+
+[예시] 
+from django.db import models
+
+# Create your models here.
+class Student(models.Model): # student_student(테이블명 : 앱명_클래스명소문자)
+    id = models.AutoField(primary_key=True) # 자동으로 생성되는 아이디
+    name = models.CharField(max_length=100, unique=True) # 이름
+    major = models.CharField(max_length=100, null=True, blank=True) # 전공, null의 default = False, blank=True : required=true 속성 삭제
+    age = models.IntegerField(default=0) # 나이
+    grade = models.CharField(default=1)
+    
+    def __str__(self): # 아이디를 출력하는 메서드
+        return "{}:{}({}, {}세 {}학년)".format(self.id, self.name, self.major, self.age, self.grade)
+
+또한 관리자 계정을 통해 내부 데이터를 체크할 수 있는데
+
+cmd를 통해
+python manage.py makemigrations # 내 앱에서 models.py를 체크하고 db에 업로드하는 로직이 migrations 폴더속에 없으면 해당 내용을 갖는 py 모듈을 생성
+python manage.py migrate : 사용자 및 그룹 테이블 생성 # migrations 폴더 속 db 테이블 만들라는 코드가 포함되어있어야 정상작동
+python manage.py createsuperuser : 관리자 계정 생성(auth_user) => 영어 잘 읽어서 작성하면 끝
+
+두 명령어로 데이터 베이스를 시작하고
+서버주소/admin url을 사용해서 admin 계정을 통해 관리가 가능하여 이용 및 유지보수에 큰 강점을 갖는다
+
+class와 데이터베이스가 연결되어 있으며
+python 명령어 만으로도 정보를 모두 체크할 수 있으므로 몹시 간단하지만
+각각의 함수 등에 대해서는 외워서 작동을 시켜야함. (Student.objects.all(), get(name='마징가'), filter(age__lt=25) 등
+qs =Student.objects.filter(age__lt=30) # 필터로 읽기
+__lt : 보다 작다
+__lte : 보다 작거나 같다
+__gt : ~보다 크다
+__gte : ~보다 크거나 같다
+__isnull : null인자료
+__contains : 특정 문자열 포함 name__contains = ‘k’
+qs = Student.objects.order_by(‘age’) # age 필터 기준으로 오름차순 정렬 가져옴
+qs = Student.objects.order_by(‘-age’) # age 필터 기준으로 내림차순 정렬 가져옴
+qs = Student.objects.get(name=‘kim’)
