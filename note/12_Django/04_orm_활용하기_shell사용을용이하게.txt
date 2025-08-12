@@ -3,3 +3,30 @@
 settings.py의 INSTALLED_APPS에 django_extensions 추가 # pip install django-extensions
 => cmd에서 python manage.py shell_plus 가능 : 기존 shell보다 강화된 기능
 => shell에서 자동으로 필요한 models를 import함
+
+models.py에 class를 만들어서 DB를 활용할 수 있음.
+
+[예시]
+from django.db import models
+
+class Post(models.Model): # blog_post(앱이름_클래스이름) 테이블 생성
+    # id = models.AutoField(primary_key=True) # PK가 없을 경우 자동 생성
+    title = models.CharField(verbose_name="제목", # 라벨
+                            max_length=100, # VARCHAR2 최대 길이
+                            )
+
+이렇게 모델을 만들고 나면
+
+python manage.py makemigrations
+python manage.py migrate
+
+를 통해 DB를 만들고
+
+admin.py 에 아래와 같이 작성
+
+from django.contrib import admin
+from blog.models import Post
+
+admin.site.register(Post) # admin 페이지에서 POST 테이블 액세스 가능하도록
+
+그러면 admin 계정에서 관리가 가능함.

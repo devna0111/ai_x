@@ -1,0 +1,16 @@
+05_ FK관리_1. 1:N 관계
+
+Post 객체의 post.id를 참조하는 테이블을 만드려면 아래와 같이 작성이 가능함
+
+class Comment(models.Model): # blog_comment 테이블 생성
+    # id = models.AutoField(primary_key=True) # PK가 없을 경우 자동 생성
+    post = models.ForeignKey(Post,
+                            on_delete=models.CASCADE, # post 내용을 delete 할 경우 자동 삭제
+                            )
+
+이렇게 작성하면 admin계정에 들어가 내용을 체크할 수 있고
+
+post.comment_set.all() 명령어를 활용해서 어떤 것들이 참조되어 있는 지도 체크가 가능함.
+(Post에 있는 컬럼의 FK키를 갖는 Comment 객체(테이블)_set을 통해 체크)
+
+위 내용을 토대로 템플릿, veiws.py를 활용해 정보를 활용 가능.
