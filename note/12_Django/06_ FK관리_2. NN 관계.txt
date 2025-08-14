@@ -1,0 +1,38 @@
+06_ FK관리_2. N:N 관계, 1:1 관계
+
+- N:N 관계는 관계도를 테이블로 갖고있어야함 : 엑셀 피벗용 데이터 처럼
+- ORM을 사용하지 않으면 테이블을 직접 만들고 로직을 구현해야함
+
+우선 2개 클래스, 테이블을 생성함
+이후 N:N 관계의 속성을 테이블에 관계없이 다 대 다라는 내용을 클래스에 명시하면 된다
+class Post(models.Model)
+tags = models.ManyToManyField(Tag, blank=True, null=True) # 태그 필드
+
+나중에 해당 데이터를 사용하려면
+post = Post.objects.get(pk=x)
+post.tags.all()
+# 위 내용 실행하면 Tag 연결된 게 모두 체크가 됨
+
+그런데 이게
+만약 1:1이면??
+post.변수명 으로 받을 수 있음
+
+보통 로그인 로직을 구현할 때 사용하는데 아래와 같이 작성(OneToOneField활용)
+from django.db import models
+from django.contrib.auth.models import User
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE, 
+# 1:1, 1:N에서는 설정하지 않으면 에러 발생. User 삭제 시 Profile도 삭제
+                                )
+    phone_number = models.CharField(max_length=20,
+                                    verbose_name="전화번호",                                    
+                                    )
+    address = models.CharField(max_length=100,
+                                verbose_name="주소",
+                                )
+    def __str__(self) :
+        return "{}({}-{})".format(self.user.username,
+                                self.phone_number,
+                                self.address)

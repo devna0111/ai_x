@@ -1,0 +1,27 @@
+07_django스럽게_구성하기
+
+html에 form 객체를 만들고 input의 타입설정, select, input, textarea 등 설정이 몹시 귀찮아짐
+=> 
+
+views.py 에서
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+
+book_list = ListView.as_view(model=Book) # generic view 활용
+# 위 코드는 아래와 동일(변수명 같아야함)
+# def book_list(request):
+#     return render(request,
+#                 "book/book_list.html",
+#                 {"book_list": Book.objects.all()},
+#                 )
+
+form 객체는 forms.py 파일을 만들고
+from django import forms
+from .models import Book
+
+class BookModelForm(forms.ModelForm): # modelform 객체 생성
+    class Meta:
+        model = Book
+        fields = ["title", "author", "publisher", "sales"]
+        # fields = "__all__" # 전체 필드 선택
+
+위 두 방식으로 설정하면 순식간에 해결

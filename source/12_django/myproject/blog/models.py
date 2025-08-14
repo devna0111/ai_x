@@ -12,7 +12,17 @@ REGION_CHOICE = (
 def lnglat_validator(value):
     if not re.match(r'(\d+\.?\d*),(\d+\.?\d*)', value):
         raise ValidationError('Invalid LngLat. ex:38, 128')
+
+class Tag(models.Model) : # blog_tag 테이블 생성
+    # id = models.AutoField(primary_key=True) # PK가 없을 경우 자동 생성
+    name = models.CharField(max_length=100,
+                            verbose_name="태그명",
+                            unique=True,
+                            )
+    def __str__(self) :
+        return self.name
     
+
 class Post(models.Model): # blog_post(앱이름_클래스이름) 테이블 생성
     # id = models.AutoField(primary_key=True) # PK가 없을 경우 자동 생성
     title = models.CharField(verbose_name="제목", # 라벨
@@ -34,6 +44,7 @@ class Post(models.Model): # blog_post(앱이름_클래스이름) 테이블 생�
                             validators=[lnglat_validator], # 위도, 경도 입력 검사
                             )
     url = models.URLField(verbose_name="URL", blank=True, null=True) # URL 필드
+    tags = models.ManyToManyField(Tag, blank=True, null=True) # 태그 필드
     def __str__(self) : 
         return "제목 : {} - {} 작성 {} 최종수정".format(self.title,
                                                 self.created_at,
@@ -64,3 +75,4 @@ class Comment(models.Model): # blog_comment 테이블 생성
                                                 self.updated_at)
     class Meta :
         ordering = ["-created_at","-updated_at"] # 정렬 옵션
+

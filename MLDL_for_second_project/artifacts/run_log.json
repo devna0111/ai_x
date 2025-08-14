@@ -1,0 +1,11 @@
+{
+  "best_params": "grid_search_used",
+  "final": {
+    "acc": 0.826530612244898,
+    "p_macro": 0.4855769230769231,
+    "p_weighted": 0.7357731554160125,
+    "tag": "Top-K 채택 (k=8, acc_floor=0.824)"
+  },
+  "acc_floor": 0.8235374149659864,
+  "seed": 42
+}

@@ -24,8 +24,9 @@
     {% for post in post_list %}
       <li>
         {% comment %} <a href="/blog/{{post.id}}/">{{post.id}}.{{post.title}}</a> {% endcomment %}
-        <a href="{% url 'blog:detail' post.id %}">{{post.id}}. {{post.title}} 
-          [<b>{{post.comment_set.all | length}}</b>]</a>
+        <a href="{% url 'blog:detail' post.id %}">{{post.id}}. {{post.title}}</a>
+          [<b>{{post.comment_set.all | length}}개 댓글</b>]
+          [{{post.tags.all | length}}개 태그]
         {{post.created_at}} [작성] {{post.updated_at|date:"y/m/d H:i"}} [최종수정]
         {{post.updated_at|date:"y/m/d a h:i"}}
       </li>
