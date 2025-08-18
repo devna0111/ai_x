@@ -47,5 +47,5 @@ class Book(models.Model): # book_book 테이블 생성
         return reverse("book:list")
     
     class Meta :
-        ordering = ["-publication_date"]
+        ordering = ["-id"]
         unique_together = (("title", "author"),) # title과 author 가 "동시에" 같으면 저장 불가

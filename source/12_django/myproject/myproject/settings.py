@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "blog",
     "accounts",
     "book",
+    "article", # 제너릭 뷰 이용 + 페이징 처리 + 파일첨부
     "django.contrib.humanize" # intcomma(세자리 마다 , 추가) 필터 사용
 ]
 
