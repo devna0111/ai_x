@@ -120,24 +120,32 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
+# settings.py
+LANGUAGE_CODE = "ko-kr"     # 또는 "ko"
+TIME_ZONE = "Asia/Seoul"    # ← 여기 고치기
 USE_I18N = True
+USE_TZ = True               # 보통 True 권장 (DB는 UTC, 표시만 KST)
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+# BASE_DIR = BASE_DIR : C:\ai_x\source\12_django\myproject
+STATIC_URL = "static/" # app에 있는 static 폴더 인식(프로젝트가 아니라 앱)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "myproject", "static"),
-]
+    os.path.join(BASE_DIR, "myproject", "static"), # 프로젝트에 있는 static 인식
+] # 여기까지 STATIC은 개발 환경에서 활용
+
+# 아래는 운영 환경에서 활용 : python manage.py collectstatic(lecnote 08.File관리.pdf 10page 참고)
+STATIC_ROOT = os.path.join(BASE_DIR, "_staticfiles") # _는 개발 소스가 아니라 운용을 위함
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# https://github.com/django/django/blob/main/django/conf/global_settings.py 기본값 세팅 정보
+# media파일의 url prefix : /media/article/noIMG.png 식으로 지정
+MEDIA_URL = "/media/" 
+MEDIA_ROOT = os.path.join(BASE_DIR, "_media") # 업로드한 파일이 저장될 폴더 
