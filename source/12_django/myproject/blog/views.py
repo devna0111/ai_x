@@ -8,9 +8,12 @@ def index(request) :
                         json_dumps_params={'ensure_ascii': False},
                         )
 
-def list(request):
+def list(request): # blog:index와 동일
+    print("request.user :", request.user) # 로그인 전이면 AnonymousUser, 로그인 후이면 User
     post_list = Post.objects.all()
-    return render(request, "blog/index.html", {"post_list": post_list})
+    return render(request, "blog/index.html", {"post_list": post_list,
+                                                # 'user': request.user, # 필요하지 않음
+                                                })
 
 def detail(request, post_id):
     # post = Post.objects.get(pk=post_id)

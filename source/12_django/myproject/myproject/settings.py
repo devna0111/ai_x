@@ -79,6 +79,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "myproject.context_processors.myproject",
             ],
         },
     },
@@ -102,18 +103,25 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", 
+    #     # 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다. 
+    # },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+            "OPTIONS" : {
+                "min_length" : 2,
+            },
+        # 비밀번호는 최소 2자 이상이어야 합니다.
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    #     # 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    #     # 숫자로만 이루어진 비밀번호는 사용할 수 없습니다.
+    # },
 ]
 
 
@@ -149,3 +157,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # media파일의 url prefix : /media/article/noIMG.png 식으로 지정
 MEDIA_URL = "/media/" 
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media") # 업로드한 파일이 저장될 폴더 
+from decouple import config
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # 테스트코드 => mail => console
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST ='smtp.gmail.com'
+EMAIL_PORT=465
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD=config("EMAIL_HOST_PASSWORD")
+EMAIL_USE_SSL=True
+# EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
